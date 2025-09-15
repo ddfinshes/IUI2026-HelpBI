@@ -1,0 +1,39 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps (if package.json exists)
+        run: |
+          if [ -f package.json ]; then
+            npm ci || npm install
+          else
+            echo 'No package.json, skip install'
+          fi
+
+      - name: Lint (if available)
+        run: |
+          if [ -f package.json ]; then
+            npm run lint --if-present
+          else
+            echo 'No package.json, skip lint'
+          fi
+
+      - name: Test (if available)
+        run: |
+          if [ -f package.json ]; then
+            npm test --if-present
+          else
+            echo 'No package.json, skip test'
+          fi
