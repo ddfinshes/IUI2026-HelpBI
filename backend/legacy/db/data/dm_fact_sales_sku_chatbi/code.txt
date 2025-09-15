@@ -1,0 +1,1 @@
+select * from dm_fact_sales_sku_chatbi where year_id='2025' and (country='Mainland' or country='Hongkong' or country='Taiwan') order by date_code desc limit 500;

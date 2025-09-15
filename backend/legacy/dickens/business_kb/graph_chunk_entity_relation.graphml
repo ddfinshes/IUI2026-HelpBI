@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d5" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d4" for="edge" attr.name="description" attr.type="string"/>
+<key id="d3" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="&quot;COMP%">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"comp stands for comparison percentage and is used when the stores have been open for at least one year with comp flag = 1."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;THE DIFFERENCE BETWEEN &quot;COMP&quot; AND &quot;YOY&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"This distinction highlights that "comp" involves specific conditions (store openness) compared to YOY, which has no such restrictions."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;WOW%">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"WOW stands for week-on-week performance, measured as the ratio of current and previous week's amounts without tax."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;VANISH&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Vanish represents a category of products within the broader apparel market."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;MOM%">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"MOM represents the percentage achieved month-over-month, calculated as amount without tax divided by last month's amount."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;HOVR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"HOVR categorizes specialized apparel or accessories, possibly for a particular audience."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;VIP JITX STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"VIP JITX STORE refers to a specific retail location under the O&amp;O category."</data>
+  <data key="d2">chunk-16d264988c190d88bf9fb81811c67a19</data>
+</node>
+<node id="&quot;JORDAN&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Jordan shares a commitment to discovery and has a significant interaction with Taylor regarding a device."</data>
+  <data key="d2">chunk-1d41e6f55521cdba4fc73febd09d2eb4</data>
+</node>
+<node id="&quot;WOMEN'S BRA &amp; FITTED BOTTOMS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"This is another organization that offers specific types of apparel products."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;CRUZ&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Cruz is associated with a vision of control, influencing the dynamics among other characters."</data>
+  <data key="d2">chunk-1d41e6f55521cdba4fc73febd09d2eb4</data>
+</node>
+<node id="&quot;FP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"FP stands for Distributor, referring to entities that distribute products.</data>
+  <data key="d2">chunk-16d264988c190d88bf9fb81811c67a19</data>
+</node>
+<node id="&quot;ARMOUR PRINT&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Armour Print is an organization specializing in producing various clothing and accessory lines."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;O&amp;O&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"O&amp;O represents Retail stores, typically found in EC stores for direct sales."</data>
+  <data key="d2">chunk-16d264988c190d88bf9fb81811c67a19</data>
+</node>
+<node id="&quot;STORE NAME&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Store Names are specific entities listed under different channels like EC- Brand SITE or VIP STORE 2."</data>
+  <data key="d2">chunk-16d264988c190d88bf9fb81811c67a19</data>
+</node>
+<node id="&quot;PROMO&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Promo represents promotional apparel or accessories designed for marketing purposes."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;EC- TMALL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"EC- TMALL is a store within the E-Commerce channel, known for its mall-like structure."</data>
+  <data key="d2">chunk-16d264988c190d88bf9fb81811c67a19</data>
+</node>
+<node id="&quot;CURRICULUMCOACHING&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Curriculumcoaching categorizes specific types of educational apparel products."</data>
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</node>
+<node id="&quot;MOM%&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"MOM represents the percentage achieved month-over-month, calculated as amount without tax divided by last month's amount."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;YOY%&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"YOY refers to year-over-year growth, calculated by comparing this period's amount without tax to last year's corresponding period."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;WOW%&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"WOW stands for week-on-week performance, measured as the ratio of current and previous week's amounts without tax."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;YOY%">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"YOY refers to year-over-year growth, calculated by comparing this period's amount without tax to last year's corresponding period."</data>
+  <data key="d2">chunk-35ed9e5ba6e30e53a46a244bb5494849</data>
+</node>
+<node id="&quot;MFO&quot;">
+  <data key="d2">chunk-e741c4ba475b9ed307101b03533869e2</data>
+  <data key="d1">"Vanish is categorized under MFO for a specific type of apparel product line."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;TAYLOR&quot;">
+  <data key="d2">chunk-1d41e6f55521cdba4fc73febd09d2eb4</data>
+  <data key="d1">"Taylor and Jordan interact directly regarding the device, leading to mutual respect and an uneasy truce."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<edge source="&quot;VANISH&quot;" target="&quot;MFO&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Vanish is categorized under MFO for a specific type of apparel product line."</data>
+  <data key="d5">"product categorization, specialized products"</data>
+  <data key="d6">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</edge>
+<edge source="&quot;JORDAN&quot;" target="&quot;TAYLOR&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Taylor and Jordan interact directly regarding the device, leading to mutual respect and an uneasy truce."</data>
+  <data key="d5">"conflict resolution, mutual respect"</data>
+  <data key="d6">chunk-1d41e6f55521cdba4fc73febd09d2eb4</data>
+</edge>
+<edge source="&quot;WOMEN'S BRA &amp; FITTED BOTTOMS&quot;" target="&quot;ARMOUR PRINT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Both are organizations that produce different lines of clothing and accessories within the apparel sector."</data>
+  <data key="d5">"clothing production, product differentiation"</data>
+  <data key="d6">chunk-e741c4ba475b9ed307101b03533869e2</data>
+</edge>
+</graph></graphml>

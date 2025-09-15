@@ -1,0 +1,760 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d5" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d4" for="edge" attr.name="description" attr.type="string"/>
+<key id="d3" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="&quot;OPEN_FLAG&quot;">
+  <data key="d0">|&gt;STRING</data>
+  <data key="d1">|&gt;"status indicator showing whether the store is open (e.g., 'open' or 'closed')"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;AMT_NET_TARGET&quot;|">
+  <data key="d0">"DECIMAL"|</data>
+  <data key="d1">|"Target net amount for current period"&lt;SEP&gt;|"Target net amount"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;DATE_CODE&quot;|">
+  <data key="d0">STRING|</data>
+  <data key="d1">|"YYYY-MM-DD"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;AO_V_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of average order value"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;KEY_STORIES&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for key category and key items"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;CHINA&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"China is the primary market where these stores operate, indicated by references to 'Mainland' in the data description."&lt;SEP&gt;"Country China is where the store operates, likely impacting its operations and data tracking."&lt;SEP&gt;"The geographic location 'CHINA' as a means of country CN."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa&lt;SEP&gt;chunk-be4ca8a12157794ad8eb91d6be0feb23&lt;SEP&gt;chunk-750d3d856be7257732dea67c2bf19bdf</data>
+</node>
+<node id="&quot;SUNRISE&quot;">
+  <data key="d0">"STORE"</data>
+  <data key="d1">"A specific store categorized under 'BH/FS' in a sample query, likely representing its type."</data>
+  <data key="d2">chunk-be4ca8a12157794ad8eb91d6be0feb23</data>
+</node>
+<node id="&quot;COUNTRY_NAME&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"country where the majority of stores are operational.</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;STORE_LOCATION_ID&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"identifier for the geographic location where the store is located."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;STATE_PROVINCE_NAME&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"name of the state or province where the store is located."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;CITY_NAME&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"name of the city where the store is situated."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;STORE_CODE&quot;">
+  <data key="d0">"UNIQUE IDENTIFIER FOR EACH STORE"</data>
+  <data key="d1">"store code used for identifying specific stores."&lt;SEP&gt;"store_code represents distinct stores in the dataset."</data>
+  <data key="d2">chunk-a232b9f6d79639653abc06e3ceef715d&lt;SEP&gt;chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;DIVISION&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a division attribute of the product, such as Apparel/Accessories/Footwear"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;DM_MEMBER_CHATBI&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"A category representing member-related chat data."</data>
+  <data key="d2">chunk-7ca2d60e7269d4663aa2fa79c9521697</data>
+</node>
+<node id="&quot;TOTALTARGETNET&quot;">
+  <data key="d0">"WEEKLY SALES TARGET AMOUNT"</data>
+  <data key="d1">"target value that each store aims to reach for weekly sales."</data>
+  <data key="d2">chunk-a232b9f6d79639653abc06e3ceef715d</data>
+</node>
+<node id="&quot;TOP_3&quot;|">
+  <data key="d0">"INTEGER"|</data>
+  <data key="d1">"the top 3 most performing products in a specific category"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;SILHOUETTE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for silhouette of the product"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;SILHOUETTE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"silhouette describes the shape or outline of the product."</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c</data>
+</node>
+<node id="&quot;STORE_CODE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"Store name or code"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;AREA&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Area represents the size of the store, impacting both efficiency and comp_flag."&lt;SEP&gt;"The area of the store represents a measure in decimal format used to track store sizes."</data>
+  <data key="d2">chunk-5255a540d7be695314acee0d4f84d734&lt;SEP&gt;chunk-750d3d856be7257732dea67c2bf19bdf</data>
+</node>
+<node id="&quot;CITY&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"City name in English, located within a province or area, potentially tied to specific stores."&lt;SEP&gt;"a specific urban area within a province"&lt;SEP&gt;|"City name in English"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;CHANNEL&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"EC, FP, O&amp;O"&lt;SEP&gt;|"EC/FP/O&amp;O"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;OPEN_FLAG&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"Open/Closed"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;ASP_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of average selling price"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;FIT_TYPE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"fit_type specifies the type of fit for the product."</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c</data>
+</node>
+<node id="&quot;PRODUCT_LINE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for product line, e.g., 'inline/MFO'</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;LM_AMT_NET&quot;|">
+  <data key="d0">"DECIMAL"|</data>
+  <data key="d1">|"Net amount from the same day last month"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;AREA&quot;|">
+  <data key="d0">"DECIMAL"|</data>
+  <data key="d1">"the size of the store in square meters or similar units"&lt;SEP&gt;|"Size of the store (e.g., 50 sqm)"&lt;SEP&gt;|"Size of the store"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;MATERIAL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"material indicates the type of material used in the product."</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c</data>
+</node>
+<node id="&quot;STORE_ID&quot;">
+  <data key="d0">|&gt;STRING</data>
+  <data key="d1">|&gt;"unique identifier for each store, serving as a direct reference to specific store instances in queries"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;AMT&quot;|">
+  <data key="d0">"DECIMAL"|</data>
+  <data key="d1">|"Tax-inclusive amount"&lt;SEP&gt;|"Tax-inclusive total amount (current period)"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;STYLE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"the style descriptor of a product, often represented by 7 numbers"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;PRODUCT_NAME&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"name or description of the product purchased from the store."&lt;SEP&gt;"product_name is the name under which the product is categorized and marketed."</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c&lt;SEP&gt;chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;COMP_FLAG&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The comp_flag indicates whether a store participates in competitions, with values such as 'Y' for yes and 'N' for no."&lt;SEP&gt;|&gt;"flag indicating if the store participates in competitions, with values like 'Y' for yes and 'N' for no"</data>
+  <data key="d2">chunk-750d3d856be7257732dea67c2bf19bdf&lt;SEP&gt;chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;BH_STORE_COUNT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Number of BH stores in a specific time frame."</data>
+  <data key="d2">chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;KEY_STORIES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"key_stories represent categories and key items associated with the product for organization purposes."</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c</data>
+</node>
+<node id="&quot;FH_STORE_COUNT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Number of FH stores in a specific time frame."</data>
+  <data key="d2">chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;WEEKDAY_NAME&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"weekday_name specifies the day of the week (e.g., Monday, Tuesday</data>
+  <data key="d2">chunk-29c46d8097b75b1862dfc1190be39b4c</data>
+</node>
+<node id="&quot;LW_AMT_NET&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Net amount from the same day last week ( Lagged weekly net amount</data>
+  <data key="d2">chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;DM_FACT_SALES_CHATBI&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"dm_fact_sales_chatbi is a fact table containing sales data for various channels and regions."</data>
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+</node>
+<node id="&quot;BIRTH_DATE&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"Customer birth dates stored as strings in YYYY-MM-DD format."</data>
+  <data key="d2">chunk-7ca2d60e7269d4663aa2fa79c9521697</data>
+</node>
+<node id="&quot;EDW_DIM_STORE_PROD&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Data warehouse for store dimensions with fields like store_type (BH/FH), area, and open_flag."</data>
+  <data key="d2">chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;COUNTRY&quot;">
+  <data key="d0">"LOCATION"</data>
+  <data key="d1">"The country refers to the geopolitical region where the stores are located, which may influence sales and targets."&lt;SEP&gt;"country refers to Mainland (China), the primary location of interest in this dataset."</data>
+  <data key="d2">chunk-400f6605e84083d638fe9ce11d0fd71b&lt;SEP&gt;chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+</node>
+<node id="&quot;CITY&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"City is a specific location within a province or country, impacting local sales performance and organizational effectiveness."</data>
+  <data key="d2">chunk-21e315a7cb65c6c870c496f02bdbaa37</data>
+</node>
+<node id="&quot;TRANSACTION_DATE&quot;">
+  <data key="d0">"DATE"</data>
+  <data key="d1">"The date when transactions occurred, used in query conditions and joins."</data>
+  <data key="d2">chunk-7ca2d60e7269d4663aa2fa79c9521697</data>
+</node>
+<node id="&quot;CHANNEL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"EC, FP, O&amp;O represent different channels used by stores to conduct business activities."&lt;SEP&gt;"The sales channel used by stores, e.g., EC/FP/O&amp;O."</data>
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf&lt;SEP&gt;chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;ENDER&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for ender of a product"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;STORE_TYPE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"BH and FH denote specific types of stores involved in the sales data analysis."&lt;SEP&gt;"The type of store, e.g., BH/FH ( Business to Home/Homeshopping</data>
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf&lt;SEP&gt;chunk-65a6090c442c3c0487db6b2e17b21107</data>
+</node>
+<node id="&quot;CUSTOMER_NAME&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"A customer's name in the sales data."&lt;SEP&gt;"Customer names like 'Alex' or 'Sam' are individuals interacting with stores through various channels."&lt;SEP&gt;"name of the customer who made a purchase at the store."</data>
+  <data key="d2">chunk-65a6090c442c3c0487db6b2e17b21107&lt;SEP&gt;chunk-2289f6adffc28940c7ad904d42e7b5bf&lt;SEP&gt;chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;UPT_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of utilization rate"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;STORE_TYPE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"the type of store, e.g., BH/FH (e.g., convenience stores or hypermarkets)"&lt;SEP&gt;|"BH/FH"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;CUSTOMER_NAME2&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Another set of customer names such as 'Jordan' or 'Taylor' involved in sales activities."</data>
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+</node>
+<node id="&quot;TRAFFIC_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of traffic visits"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;ENDUSE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for enduse of a product"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;REGION&quot;">
+  <data key="d0">"LOCATION"</data>
+  <data key="d1">"Regions like north, south, east, and west represent geographical areas covered by the stores in the dataset."</data>
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+</node>
+<node id="&quot;PROVINCE&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Province is a geographic region within a country, relevant to the sale and performance of products."</data>
+  <data key="d2">chunk-21e315a7cb65c6c870c496f02bdbaa37</data>
+</node>
+<node id="&quot;REGION&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"North/South/East/West"&lt;SEP&gt;|"north/south/east/west"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;O&amp;O&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"A store or category name as part of the data structure."&lt;SEP&gt;"O&amp;O refers to a specific channel used in store operations, highlighted by its role in comp_flag and other metrics."</data>
+  <data key="d2">chunk-5255a540d7be695314acee0d4f84d734&lt;SEP&gt;chunk-be4ca8a12157794ad8eb91d6be0feb23</data>
+</node>
+<node id="&quot;MFO&quot;|">
+  <data key="d0">"ORGANIZATION"|</data>
+  <data key="d1">"MFO is a store chain with data on sales, targets, and performance metrics, including achievement rates.|</data>
+  <data key="d2">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</node>
+<node id="&quot;MFO PRODUCT LINE&quot;|">
+  <data key="d0">"PRODUCT LINE"|</data>
+  <data key="d1">"MFO's specific product category or offerings.|</data>
+  <data key="d2">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</node>
+<node id="&quot;LAST WEEK'S AMOUNT&quot;|">
+  <data key="d0">"LW_AMT_NET"|</data>
+  <data key="d1">"Tax-inclusive amount from the same day last week.|</data>
+  <data key="d2">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</node>
+<node id="&quot;TOTAL AMOUNT&quot;|">
+  <data key="d0">"AMT"|</data>
+  <data key="d1">"Tax-inclusive amount.|</data>
+  <data key="d2">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</node>
+<node id="&quot;MAINLAND&quot;|">
+  <data key="d0">"GEO"|</data>
+  <data key="d1">"Geographic region 'Mainland' is associated with the country field in the sales data."</data>
+  <data key="d2">chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</node>
+<node id="&quot;FP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Another potential channel type in the given context."</data>
+  <data key="d2">chunk-be4ca8a12157794ad8eb91d6be0feb23</data>
+</node>
+<node id="&quot;LM_AMT_NET&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"LM_AMT_NET is a specific sales metric indicating last month's net amount, used for performance analysis."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;LYD_AMT_NET&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"LYD_AMT_NET represents last year's net amount, providing historical context for sales trends."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;EC&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"An example of a channel, possibly representing an electronic commerce segment."&lt;SEP&gt;"East China is an organization that sells products in the EC channel."</data>
+  <data key="d2">chunk-be4ca8a12157794ad8eb91d6be0feb23&lt;SEP&gt;chunk-21e315a7cb65c6c870c496f02bdbaa37</data>
+</node>
+<node id="&quot;CR_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of conversion rate"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;AMT_NET_WOW_PER&quot;">
+  <data key="d0">|&gt;NUMERIC</data>
+  <data key="d1">|&gt;"weekly growth percentage of net amount"</data>
+  <data key="d2">chunk-a59458dcd05160cc4bee6157acf3969b</data>
+</node>
+<node id="&quot;MEMBER_CODE&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"Member codes used in queries to track customer information and history."&lt;SEP&gt;"Member codes used in queries to track customer information."</data>
+  <data key="d2">chunk-7ca2d60e7269d4663aa2fa79c9521697</data>
+</node>
+<node id="&quot;CUSTOMER_NAME&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"Customer name"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;EFFI (EFFICIENCY)'">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"efficiency refers to the store's productivity metric calculated based on area and other factors."</data>
+  <data key="d2">chunk-5255a540d7be695314acee0d4f84d734</data>
+</node>
+<node id="&quot;TOTALAMOUNTNET&quot;">
+  <data key="d0">"TOTAL NET SALES AMOUNT"</data>
+  <data key="d1">"sum of all sales amounts reported in the week."</data>
+  <data key="d2">chunk-a232b9f6d79639653abc06e3ceef715d</data>
+</node>
+<node id="&quot;DM_FACT_SALES_SKU_CHATBI&quot;|">
+  <data key="d0">"TABLE"|</data>
+  <data key="d1">"the database table used for sales queries"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;ORDER_DATE&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"date when the purchase was made, including time if available."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;YEAR_ID&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"Numeric value representing the year of analysis, influencing sales trends over time."&lt;SEP&gt;|"YYYY"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</node>
+<node id="&quot;CN BH&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"CN BH is a specific category within China's business structure, possibly representing a division or product line."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;AMT_NET&quot;|">
+  <data key="d0">"DECIMAL"|</data>
+  <data key="d1">"Decimal field representing net amount for transactions or sales reports."&lt;SEP&gt;|"Net amount (e.g., 10,000)"&lt;SEP&gt;|"Net amount"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</node>
+<node id="&quot;BH&quot;">
+  <data key="d0">"STORE_TYPE"</data>
+  <data key="d1">"BH represents a type of store category known as 'blockbuster' stores, associated with high productivity metrics."</data>
+  <data key="d2">chunk-5255a540d7be695314acee0d4f84d734</data>
+</node>
+<node id="&quot;WEEK_ID&quot;|">
+  <data key="d0">"INTEGER"|</data>
+  <data key="d1">"represents a specific week identifier used in sales queries to filter data by time periods"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;OOFH&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"O &amp; O Future is an organization that sells products in the O &amp; O channel."</data>
+  <data key="d2">chunk-21e315a7cb65c6c870c496f02bdbaa37</data>
+</node>
+<node id="&quot;STORE_NAME&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"name of the store, e.g., BH/FH stores."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;SUM(AMT_ACH) AS ACHIEVEMENT RATE&quot;">
+  <data key="d0">"NUMERIC VALUE"</data>
+  <data key="d1">"achievement rate calculated as percentage of target net amount achieved by the store."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;STORE (NAME)&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The Store is also identified by its name, providing a descriptive label for the store."</data>
+  <data key="d2">chunk-400f6605e84083d638fe9ce11d0fd71b</data>
+</node>
+<node id="&quot;DATE_CODE BETWEEN '2023-04-01' AND '2024-03-31'">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"time period over which sales data is analyzed."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;SUM(AMT_NET_TARGET) AS TARGET NET AMOUNT&quot;">
+  <data key="d0">"NUMERIC VALUE"</data>
+  <data key="d1">"target net amount achieved by each store."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;COUNTRY&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"refers to the country, specifically 'Mainland' or China"&lt;SEP&gt;|"Mainland or CN"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;COMP_FLAG&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"The category represents whether a store participates in comparative activities (Y/N)."&lt;SEP&gt;|"Y/N"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</node>
+<node id="&quot;SUM(AMT_NET) AS AMT_NET&quot;">
+  <data key="d0">"NUMERIC VALUE"</data>
+  <data key="d1">"actual net amount from sales for each store."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;PROVINCE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"Provincial region within Mainland is a geographic location associated with store activities."&lt;SEP&gt;"the geographical division of a country, such as north, south, east, or west"&lt;SEP&gt;|"City in English"&lt;SEP&gt;|"City name in English"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;FIT_TYPE&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"a descriptor for fit type of the product"</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;CATEGORY_NAME&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"general category of products sold by the store, e.g., electronics, fashion."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;PRICE_VALUE&quot;">
+  <data key="d0">"DECIMAL"</data>
+  <data key="d1">"specific price of a product or transaction amount."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;QUANTITY_SOLD&quot;">
+  <data key="d0">"INTEGER"</data>
+  <data key="d1">"number of units sold for each product in a transaction."</data>
+  <data key="d2">chunk-261abfa0c7bf00b7d60a804ba564b944</data>
+</node>
+<node id="&quot;MONTH_ID&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">|"YYYYMM"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;SALES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Sales represents the financial performance of stores across different periods."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;STORE TYPE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The store type refers to categories like 'BH' or 'FH', which denote different types of stores within the organization."</data>
+  <data key="d2">chunk-750d3d856be7257732dea67c2bf19bdf</data>
+</node>
+<node id="&quot;MATERIAL&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"the material descriptor of a product, such as 'cotton' or 'polyester'</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;OOBH&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"O &amp; O Branches is an organization that sells products in the O &amp; O channel."</data>
+  <data key="d2">chunk-21e315a7cb65c6c870c496f02bdbaa37</data>
+</node>
+<node id="&quot;PRODUCT_NAME&quot;|">
+  <data key="d0">"STRING"|</data>
+  <data key="d1">"the name of the product, e.g., 'inline/MFO'</data>
+  <data key="d2">chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;REGISTER_DATE_STR&quot;">
+  <data key="d0">"DATE"</data>
+  <data key="d1">"Registeration dates converted to date type for use in queries."</data>
+  <data key="d2">chunk-7ca2d60e7269d4663aa2fa79c9521697</data>
+</node>
+<node id="&quot;DATE_CODE&quot;">
+  <data key="d0">"STRING"</data>
+  <data key="d1">"YYYY-MM-DD"</data>
+  <data key="d2">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</node>
+<node id="&quot;COMP_FLAG (Y/N)'">
+  <data key="d0">"DERIVED_ENTITY"</data>
+  <data key="d1">"This field indicates whether a store participates in competitive activities, affecting its productivity metrics."</data>
+  <data key="d2">chunk-5255a540d7be695314acee0d4f84d734</data>
+</node>
+<node id="&quot;STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"store refers to retail establishments managed by CN BH."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;STORE_INFO&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"The category includes various store-related fields like store_code, store_name, and area."&lt;SEP&gt;"additional information about stores, such as location or type"</data>
+  <data key="d2">chunk-e186eaa7e8e4cc694e03bcdad339ff38&lt;SEP&gt;chunk-7b8fcf6265435939d5b717ece1058046</data>
+</node>
+<node id="&quot;TRAFFIC&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Traffic represents store visitor flow and its analysis is crucial for understanding store performance."</data>
+  <data key="d2">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</node>
+<node id="&quot;STORE_INFO&quot;">
+  <data key="d2">chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+  <data key="d1">"Stores represented by 'store_info' category can participate in comparative activities indicated by comp_flag."&lt;&lt;&lt;SEP&gt;"Stores with comp_flag 'Y' participate in comparative activities, influencing their performance metrics like amt_net."&lt;&lt;</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2023RETURNINGCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of returning customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2024RETURNINGCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of returning customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2023NEWCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of new customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2024NEWCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of new customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SUM(STOCK) AS ONHAND_INV&quot;">
+  <data key="d2">chunk-a232b9f6d79639653abc06e3ceef715d</data>
+  <data key="d1">"The measure of stock held (onhand_inv) is associated with a specific store_code, indicating inventory levels per store."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;NORTH REGION&quot;">
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+  <data key="d1">"Store A is located within the North Region, indicating its regional positioning in sales activities."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;STORE A&quot;">
+  <data key="d2">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+  <data key="d1">"Store A is located within the North Region, indicating its regional positioning in sales activities."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2024FIRSTTIMECUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of first-time customers in Sep 2024 compared to total sales during the same period."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;TOTALSALES&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of first-time customers in Sep 2024 compared to total sales during the same period."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2023REPEATCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of repeat customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SEP2024REPEATCUSTOMERS&quot;|">
+  <data key="d2">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+  <data key="d1">"The number of repeat customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ACHIEVEMENT RATE&quot;|">
+  <data key="d2">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+  <data key="d1">"MFO's achievement rate is calculated based on its weekly and yearly sales performance against set targets.|</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<edge source="&quot;AMT_NET_TARGET&quot;|" target="&quot;AMT_NET&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"Net amount compared against target net amount for performance analysis.|&lt;SEP&gt;||"Net amount (amt_net) targets are compared using amt_net_target for performance analysis.|</data>
+  <data key="d5">|&gt;85</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;DATE_CODE&quot;|" target="&quot;MONTH_ID&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;||"Date code within a month.|&lt;SEP&gt;||"YYYY-MM-DD relates to the specific month within a year, indicating temporal resolution.|</data>
+  <data key="d5">|&gt;100</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;CHINA&quot;" target="&quot;STORE&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"Stores operate under China's jurisdiction, highlighting geographical scope and market focus."</data>
+  <data key="d5">"geographical scope, market focus"</data>
+  <data key="d6">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</edge>
+<edge source="&quot;STORE_CODE&quot;" target="&quot;SUM(STOCK) AS ONHAND_INV&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"The measure of stock held (onhand_inv) is associated with a specific store_code, indicating inventory levels per store."</data>
+  <data key="d5">"inventory tracking, association with stores"</data>
+  <data key="d6">chunk-a232b9f6d79639653abc06e3ceef715d</data>
+</edge>
+<edge source="&quot;TOTALTARGETNET&quot;" target="&quot;TOTALAMOUNTNET&quot;">
+  <data key="d3">18.0</data>
+  <data key="d4">"Total net sales amount and weekly sales target amount are calculated for each store to determine if they've met their targets.'</data>
+  <data key="d5">"sales performance, target achievement"</data>
+  <data key="d6">chunk-a232b9f6d79639653abc06e3ceef715d</data>
+</edge>
+<edge source="&quot;STORE_CODE&quot;|" target="&quot;CHANNEL&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"Store code linked to corresponding channel.|&lt;SEP&gt;||"Store code is linked to channel, indicating store-specific operations.|</data>
+  <data key="d5">|&gt;70</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;CITY&quot;|" target="&quot;PROVINCE&quot;|">
+  <data key="d3">4.0</data>
+  <data key="d4">"Geographic locations defined by province provide context for store activities within specific cities.")&lt;&lt;&lt;SEP&gt;|&gt;|"Provincial-level analysis aggregates city-specific data.|&lt;SEP&gt;||"Provincial-level data is further broken down by city name in English.|</data>
+  <data key="d5">|&gt;6&lt;SEP&gt;|&gt;90</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc&lt;SEP&gt;chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</edge>
+<edge source="&quot;CITY&quot;|" target="&quot;AREA&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"City-specific sales aggregated by store area.|&lt;SEP&gt;||"City-specific analysis aggregates sales based on area, providing granular insights.|</data>
+  <data key="d5">|&gt;70</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;CHANNEL&quot;|" target="&quot;STORE_TYPE&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"Channel type influencing store type.|&lt;SEP&gt;||"Channel type influences store_type and subsequent sales performance.|</data>
+  <data key="d5">|&gt;75</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;OPEN_FLAG&quot;|" target="&quot;STORE_TYPE&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"Store type and operational status affect sales performance.|&lt;SEP&gt;||"Store type and operational status (open_flag) influence sales performance.|</data>
+  <data key="d5">|&gt;65</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;COUNTRY&quot;" target="&quot;STORE&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"The Store entity operates in the Country: China.</data>
+  <data key="d5">"location influence"</data>
+  <data key="d6">chunk-750d3d856be7257732dea67c2bf19bdf</data>
+</edge>
+<edge source="&quot;REGION&quot;|" target="&quot;CUSTOMER_NAME&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;|"Customer data analyzed geographically.|&lt;SEP&gt;||"Customer data is geographically segmented by region, aiding targeted analysis.|</data>
+  <data key="d5">|&gt;80</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;MFO&quot;|" target="&quot;ACHIEVEMENT RATE&quot;|">
+  <data key="d3">8.0</data>
+  <data key="d4">"MFO's achievement rate is calculated based on its weekly and yearly sales performance against set targets.|</data>
+  <data key="d5">"sales performance, target achievement"|</data>
+  <data key="d6">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</edge>
+<edge source="&quot;MFO PRODUCT LINE&quot;|" target="&quot;ACHIEVEMENT RATE&quot;|">
+  <data key="d3">8.0</data>
+  <data key="d4">"MFO's product line has an achievement rate calculated based on its weekly and yearly sales performance against set targets.|</data>
+  <data key="d5">"sales performance, target achievement"|</data>
+  <data key="d6">chunk-f64ac41628dd256e9300e60f8a50cbf3</data>
+</edge>
+<edge source="&quot;YEAR_ID&quot;|" target="&quot;STORE_INFO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Store performance metrics like amt_net are analyzed over specific years indicated by year_id, affecting sales trends and comparisons.")&lt;&lt;</data>
+  <data key="d5">|&gt;7</data>
+  <data key="d6">chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</edge>
+<edge source="&quot;YEAR_ID&quot;|" target="&quot;MONTH_ID&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;||"Monthly data aggregated across years.|&lt;SEP&gt;||"Monthly data is aggregated by year_id for annual context.|</data>
+  <data key="d5">|&gt;95</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;YEAR_ID&quot;|" target="&quot;COUNTRY&quot;|">
+  <data key="d3">3.0</data>
+  <data key="d4">|&gt;||"Yearly data segmented by country.|&lt;SEP&gt;||"Yearly data is segmented by country, reflecting regional variations.|</data>
+  <data key="d5">|&gt;80</data>
+  <data key="d6">chunk-a7a920eb67d1262cd04c312cc7ede4bc</data>
+</edge>
+<edge source="&quot;CN BH&quot;" target="&quot;STORE&quot;">
+  <data key="d3">18.0</data>
+  <data key="d4">"CN BH manages a network of stores, indicating a hierarchical structure within the business organization."</data>
+  <data key="d5">"management, hierarchy"</data>
+  <data key="d6">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</edge>
+<edge source="&quot;AMT_NET&quot;|" target="&quot;STORE_INFO&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Store performance is measured by amt_net, which can be influenced by factors like comp_flag and store location in Mainland region.")&lt;&lt;</data>
+  <data key="d5">|&gt;7</data>
+  <data key="d6">chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</edge>
+<edge source="&quot;COMP_FLAG&quot;|" target="&quot;STORE_INFO&quot;">
+  <data key="d3">2.0</data>
+  <data key="d4">"Stores represented by 'store_info' category can participate in comparative activities indicated by comp_flag."&lt;&lt;&lt;SEP&gt;"Stores with comp_flag 'Y' participate in comparative activities, influencing their performance metrics like amt_net."&lt;&lt;</data>
+  <data key="d5">|&gt;5</data>
+  <data key="d6">chunk-e186eaa7e8e4cc694e03bcdad339ff38</data>
+</edge>
+<edge source="&quot;SALES&quot;" target="&quot;TRAFFIC&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"Traffic analysis is directly related to sales performance, indicating a key business metric for evaluation."&lt;SEP&gt;"Traffic analysis is directly related to sales performance, indicating a key business metric for evaluation.'</data>
+  <data key="d5">"performance metrics, analytics"</data>
+  <data key="d6">chunk-991a72a97cd85d23be8bb0eb06b6ddfa</data>
+</edge>
+<edge source="&quot;SEP2023RETURNINGCUSTOMERS&quot;|" target="&quot;SEP2024RETURNINGCUSTOMERS&quot;|">
+  <data key="d3">7.0</data>
+  <data key="d4">"The number of returning customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d5">"customer retention"|</data>
+  <data key="d6">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+</edge>
+<edge source="&quot;SEP2023NEWCUSTOMERS&quot;|" target="&quot;SEP2024NEWCUSTOMERS&quot;|">
+  <data key="d3">8.0</data>
+  <data key="d4">"The number of new customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d5">"customer growth"|</data>
+  <data key="d6">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+</edge>
+<edge source="&quot;NORTH REGION&quot;" target="&quot;STORE A&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"Store A is located within the North Region, indicating its regional positioning in sales activities."</data>
+  <data key="d5">"geographical location, store presence"</data>
+  <data key="d6">chunk-2289f6adffc28940c7ad904d42e7b5bf</data>
+</edge>
+<edge source="&quot;SEP2024FIRSTTIMECUSTOMERS&quot;|" target="&quot;TOTALSALES&quot;|">
+  <data key="d3">8.0</data>
+  <data key="d4">"The number of first-time customers in Sep 2024 compared to total sales during the same period."</data>
+  <data key="d5">"customer analytics, sales performance"|</data>
+  <data key="d6">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+</edge>
+<edge source="&quot;SEP2023REPEATCUSTOMERS&quot;|" target="&quot;SEP2024REPEATCUSTOMERS&quot;|">
+  <data key="d3">6.0</data>
+  <data key="d4">"The number of repeat customers in Sep 2024 compared to Sep 2023."</data>
+  <data key="d5">"customer loyalty"|</data>
+  <data key="d6">chunk-3be13d750b4a7a96b95fe5292434dc14</data>
+</edge>
+</graph></graphml>

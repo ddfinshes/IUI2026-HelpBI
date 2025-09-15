@@ -1,0 +1,853 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d5" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d4" for="edge" attr.name="description" attr.type="string"/>
+<key id="d3" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="&quot;STYLE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Style refers to the categorization of product types, defining their characteristics."</data>
+  <data key="d2">chunk-f96a26790468a59f3622f7521b1a2cee</data>
+</node>
+<node id="&quot;G&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"A generic entity or company named G, with limited specifics available."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;SAMPLE&quot;">
+  <data key="d0">"ENTITY"</data>
+  <data key="d1">"Sample represents an instance within the Product category that adheres to specific Style guidelines."</data>
+  <data key="d2">chunk-f96a26790468a59f3622f7521b1a2cee</data>
+</node>
+<node id="&quot;VIP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Could refer to a category within an organization, such as Very Important Persons, without further context."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;COTTON&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Cotton represents a specific attribute or feature categorized under Key Stories."&lt;SEP&gt;"Cotton represents a specific material category within the Key Stories organization, likely referring to fabric or fiber types."</data>
+  <data key="d2">chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;MATERIAL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Material is likely an organization involved in producing various products and materials."</data>
+  <data key="d2">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</node>
+<node id="&quot;VIP STORE 2&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"VIP STORE 2 is mentioned alongside other entities, possibly part of a broader list or category."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;PRODUCT MATERIAL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product material refers to specific types of materials used in product manufacturing, categorized for different applications."&lt;SEP&gt;"Product material refers to specific types of materials used in products, categorized based on their application and properties."</data>
+  <data key="d2">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</node>
+<node id="&quot;ARTICLE LEVEL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Article level categorizes products according to their components or specifications for detailed classification processes."&lt;SEP&gt;"Article level categorizes products based on their components or specifications, aiding in detailed classification processes."</data>
+  <data key="d2">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</node>
+<node id="&quot;FTW&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"FTW stands for Footwear, another category within the product structure."</data>
+  <data key="d2">chunk-95a9cc79ebe112bb72b2e081745b95c6</data>
+</node>
+<node id="&quot;VANISH&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Vanish is a category known for its innovative products or services that offer solutions to specific challenges."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;WXLIVESHOP&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"WXLIVESHOP is another entity in the list, likely related to retail or e-commerce."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;UNSTOPPABLE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Unstoppable is a category highlighting unstoppable performance, innovation, or dominance in various competitive fields."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;UA KOREA&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"UA Korea refers to an organization mentioned alongside other entities in the text."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;FACTORY STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The Factory store is another organizational entity within the same chain, noted for its store_type FH."</data>
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</node>
+<node id="&quot;NAVER SMARTSTORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Naver Smartstore is another organizational entity mentioned in the context of various shops and companies."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;CURRY&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Curry is a category focused on culinary expertise, food innovations, or gastronomic excellence."&lt;SEP&gt;"Curry is a product category associated with specific attributes or features under the Key Stories organization."&lt;SEP&gt;"Curry represents a specific attribute or feature within the Key Stories organization, likely related to product design or function."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f&lt;SEP&gt;chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;UA KOREA EMPLOYEE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"This entity represents a person within the UA Korea organization."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;YOY&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"YOY stands for Year-over-Year comparison, another common metric in retail sales analysis."</data>
+  <data key="d2">chunk-6fcdeb552b0899dfdeda91973ffb38fe</data>
+</node>
+<node id="&quot;KEY STORIES&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Key Stories is an organizational system used to classify products based on attributes like "Curry" and "Fat TIRE."</data>
+  <data key="d2">chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;TRAFFIC DATA&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Traffic Data is part of QTD and refers to internet metrics tracked over a quarter."</data>
+  <data key="d2">chunk-37beb78e9f6b438a9bd27680e7e35090</data>
+</node>
+<node id="&quot;APRIL 1ST TO DECEMBER 31ST&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The date range from April 1st to December 31st used for determining the year part of the 'week id'."</data>
+  <data key="d2">chunk-94427e6e788763731c63cd8c2a166300</data>
+</node>
+<node id="&quot;INTERNET TRAFFIC&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Internet Traffic is the specific data component within Traffic Data used for analyzing web metrics."</data>
+  <data key="d2">chunk-37beb78e9f6b438a9bd27680e7e35090</data>
+</node>
+<node id="&quot;COUNTRY=MAINLAND&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The category 'country=mainland' describes the specific region of mainland China used in this context."</data>
+  <data key="d2">chunk-413be33c46f0f42288c907a836e650af</data>
+</node>
+<node id="&quot;JANUARY 1ST TO MARCH 31ST&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The date range from January 1st to March 31st used for determining the year part of the 'week id'."</data>
+  <data key="d2">chunk-94427e6e788763731c63cd8c2a166300</data>
+</node>
+<node id="&quot;SAMPLE: 1234567&quot;">
+  <data key="d0">"INSTANCE"</data>
+  <data key="d1">"Sample: 1234567 is an instance identifier used to reference specific samples within a larger category system."</data>
+  <data key="d2">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</node>
+<node id="&quot;ALIBABA CLOUD'S QUALITY TESTED DEPARTMENT&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"This is a subgroup within Alibaba Cloud responsible for quality assurance activities during specific periods."</data>
+  <data key="d2">chunk-0f4cdca4d7066a322ad4eff393a47182</data>
+</node>
+<node id="&quot;INSTITUT INTERNATIONAL DES HAUTES ÉTUDES&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"An organization hosting a conference focused on category management with international experts."&lt;SEP&gt;"An organization hosting a conference on category management focused on high-level discussions."</data>
+  <data key="d2">chunk-60c1398a90ff2c12fdcf73dc102a5bb8</data>
+</node>
+<node id="&quot;KAKAO GIFT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"KaKao Gift refers to a category of products likely related to gifts and promotions within the KaKao platform."</data>
+  <data key="d2">chunk-90a5fdd7119b56ef55d3eb42e9de2519</data>
+</node>
+<node id="&quot;STOCK KEEPING UNIT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Stock Keeping Unit refers to a classification system used within organizations for managing inventory and tracking product details like color and size."</data>
+  <data key="d2">chunk-541102ee969bc6d5dc072ae900347083</data>
+</node>
+<node id="&quot;CATEGORY MANAGEMENT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The central focus of the conference, dealing with strategic planning and innovation."&lt;SEP&gt;"The focus of the conference, dealing with strategic planning and innovation."</data>
+  <data key="d2">chunk-60c1398a90ff2c12fdcf73dc102a5bb8</data>
+</node>
+<node id="&quot;MUNDOVITA&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"MundoVita is a key player within the DLSC network, specializing in luxury products and high-end services."</data>
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</node>
+<node id="&quot;THIS WEEK&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The week from last Sunday to today."</data>
+  <data key="d2">chunk-9e1107fa6e9eb93ec1a25a6fb6b57ca9</data>
+</node>
+<node id="&quot;GOLF&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"GOLF is a category of end use for sports equipment and apparel."</data>
+  <data key="d2">chunk-e368f27a84c3ddbdafc73646df61714c</data>
+</node>
+<node id="&quot;COLOR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"color defines a component contributing to the definition of 123."</data>
+  <data key="d2">chunk-77dabcbe824016c2a6a6b65a2124fbb0</data>
+</node>
+<node id="&quot;BASEBALL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"BASEBALL is a category of end use for products like sports apparel."</data>
+  <data key="d2">chunk-e368f27a84c3ddbdafc73646df61714c</data>
+</node>
+<node id="&quot;NAME&quot;">
+  <data key="d0">"TYPE"</data>
+  <data key="d1">"description"</data>
+  <data key="d2">chunk-014d190dbd6b08ecd93c6caefa692831</data>
+</node>
+<node id="&quot;FY27&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Fiscal Year 2027, which runs from April 1, 2026, to March 31, 2027."</data>
+  <data key="d2">chunk-ad20be2ac099c1d305b2d50a09af2b90</data>
+</node>
+<node id="&quot;BOYS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product subcategory for boys."</data>
+  <data key="d2">chunk-48b8b137e918a478d17d20ecbbcc422b</data>
+</node>
+<node id="&quot;STORE TYPE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Store Type refers to a category of store operations, possibly indicating direct sales or another specified method."</data>
+  <data key="d2">chunk-9e0bb6563c8ad17651406d6501474c64</data>
+</node>
+<node id="&quot;TMALL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"TMALL is a retail platform described in the context of various shops and companies."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;SITE/EC&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"SITE/EC is a product category or service offered by the Brand, possibly with subcategories indicated by 'EC.'"</data>
+  <data key="d2">chunk-3576587d07cc8567b25bba25801199db</data>
+</node>
+<node id="&quot;STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Store is a commerce establishment focused on trade and sale services."&lt;SEP&gt;"Store is an organization representing a business location focused on opening or closing."&lt;SEP&gt;"Store is an organization representing a business location that has a status indicating its operational state."</data>
+  <data key="d2">chunk-4454b428974aa1c8faa6f3ec320b85d5&lt;SEP&gt;chunk-4cfbb84b631c25969748984bc2d32b59</data>
+</node>
+<node id="&quot;AMT_NOTAX">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"amt_notax represents amount not taxed, likely part of a dataset tracking non-taxable amounts."</data>
+  <data key="d2">chunk-c3b5f642c9e07515bbfb03d49035f4e8</data>
+</node>
+<node id="&quot;TRIBASE REIGN&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Tribase Reign is a specific product line within warm footwear, known for its innovative designs and materials."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;YEAR&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Year refers to an organization involved in comparing sales data of stores across different countries over various time periods."</data>
+  <data key="d2">chunk-135c843f69848b28a5ec739da95f0b8e</data>
+</node>
+<node id="&quot;QTD&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"QTD refers to Quarterly Traffic Data, which tracks internet traffic over a quarter and is used to analyze web metrics."&lt;SEP&gt;"QTD represents the Quality Tested Department, which focuses on ensuring software quality and functionality within Alibaba Cloud's development process."&lt;SEP&gt;"Within Alibaba Cloud, this subgroup focuses on quality assurance during specific periods."</data>
+  <data key="d2">chunk-0f4cdca4d7066a322ad4eff393a47182&lt;SEP&gt;chunk-37beb78e9f6b438a9bd27680e7e35090</data>
+</node>
+<node id="&quot;SLIPSPEED&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Slipspeed denotes another attribute category under Key Stories, possibly indicating performance features or design aspects of the products."&lt;SEP&gt;"Slipspeed is a product within the warm footwear category, focusing on performance features."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d&lt;SEP&gt;chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;SILHOUETTE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Silhouette is an attribute describing the shape or outline of a product."</data>
+  <data key="d2">chunk-1fce6c5eff5d1cc163cd206e9ab118f0</data>
+</node>
+<node id="&quot;BH&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"BH is an abbreviation or specific term within the context provided, likely related to store operations."</data>
+  <data key="d2">chunk-9e0bb6563c8ad17651406d6501474c64</data>
+</node>
+<node id="&quot;LW_AMT_NOTAX">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"lw_amt_notax represents a subcategory or specific type within amt_notax, possibly indicating a more detailed breakdown of non-taxed amounts."</data>
+  <data key="d2">chunk-c3b5f642c9e07515bbfb03d49035f4e8</data>
+</node>
+<node id="&quot;FH&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"FH is another abbreviation or term within the context, possibly related to different aspects of store management or categorization."</data>
+  <data key="d2">chunk-9e0bb6563c8ad17651406d6501474c64</data>
+</node>
+<node id="&quot;SS24&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"SS24 is a category code used for specific selling seasons."</data>
+  <data key="d2">chunk-aa66c7206507378b231a416cd554aabb</data>
+</node>
+<node id="&quot;FW24&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"FW24 is another category code used for specific selling seasons."</data>
+  <data key="d2">chunk-aa66c7206507378b231a416cd554aabb</data>
+</node>
+<node id="&quot;SELLING SEASON&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Selling season refers to the time periods during which products are sold, often categorized by codes like SS24 and FW24."</data>
+  <data key="d2">chunk-aa66c7206507378b231a416cd554aabb</data>
+</node>
+<node id="&quot;MARCH 31, 2024&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"End date for the fiscal year."</data>
+  <data key="d2">chunk-5abd1d210f1c5c7e2dcb76b1de4dda78</data>
+</node>
+<node id="&quot;TIKTOK STORE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"TikTok Store is part of the broader TikTok ecosystem, categorized under digital products or services."</data>
+  <data key="d2">chunk-90a5fdd7119b56ef55d3eb42e9de2519</data>
+</node>
+<node id="&quot;FAT TIRE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Fat TIRE denotes another attribute category under Key Stories, possibly indicating performance features or design aspects of the products."&lt;SEP&gt;"Fat TIRE is another product category within the Key Stories organization, each representing distinct attributes of the products.&lt;SEP&gt;"Fat Tire denotes yet another product in the warm footwear category, emphasizing durability or comfort."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d&lt;SEP&gt;chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;APRIL 1, 2023&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Event date for the fiscal year."</data>
+  <data key="d2">chunk-5abd1d210f1c5c7e2dcb76b1de4dda78</data>
+</node>
+<node id="&quot;VIP JITX STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"VIP JITX STORE is another store organization."</data>
+  <data key="d2">chunk-5ab86cf3cc0c7fb6a47913c38b9d6aab</data>
+</node>
+<node id="&quot;MENS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product subcategory for men."</data>
+  <data key="d2">chunk-48b8b137e918a478d17d20ecbbcc422b</data>
+</node>
+<node id="&quot;PROJECT ROCK&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Project Rock is a category known for its bold designs, impactful themes, or artistic expressions.&lt;SEP&gt;"Project Rock is a category known for its bold designs, impactful themes, or artistic expressions."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;FP&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"FP is a distributor within the electronic commerce channel."&lt;SEP&gt;"FP is an organization involved in the distribution aspect of electronic commerce."&lt;SEP&gt;"FP stands for another entity code within the channel system."</data>
+  <data key="d2">chunk-9f70b92b51da5edeeed51272d26b66d1&lt;SEP&gt;chunk-221e8250a82a6eaf877414fc21e93beb</data>
+</node>
+<node id="&quot;FY24&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"FY24 represents the fiscal year from April 1, 2023, to March 31, 2024."</data>
+  <data key="d2">chunk-5abd1d210f1c5c7e2dcb76b1de4dda78</data>
+</node>
+<node id="&quot;FLOW&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"FLOW is a category representing fluid dynamics or flow-related technologies."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;GIRLS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product subcategory for girls."</data>
+  <data key="d2">chunk-48b8b137e918a478d17d20ecbbcc422b</data>
+</node>
+<node id="&quot;OUTERWEAR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Outerwear is a category dedicated to winter apparel and accessories, designed to protect and warm the body during colder months."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;EC DEVICES&quot;">
+  <data key="d0">"TECHNOLOGY"</data>
+  <data key="d1">"EC devices are specific technology products associated with EC."</data>
+  <data key="d2">chunk-7a47281720686a1e6f5013755dc3c607</data>
+</node>
+<node id="&quot;AMP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"AMP is a category emphasizing performance, innovation, or excellence in its products or services."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;STATUS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Status refers to the current state of the store, such as open or closed, which indicates its operational condition."&lt;SEP&gt;"Status refers to the operational state of the store, indicating whether it is open or closed."</data>
+  <data key="d2">chunk-4454b428974aa1c8faa6f3ec320b85d5</data>
+</node>
+<node id="&quot;WOMENS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product subcategory for women."</data>
+  <data key="d2">chunk-48b8b137e918a478d17d20ecbbcc422b</data>
+</node>
+<node id="&quot;INLINE;MFO;PROMO;ETC&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Inline along with MFO and Promo are specific attributes or classifications within product lines."</data>
+  <data key="d2">chunk-409c608adbd3a1031d5fa14016f86280</data>
+</node>
+<node id="&quot;ISO&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Iso is a category focusing on isomerization processes or substances with the same molecular formula but different structures."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;MFO&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"MFO refers to a classification attribute used in product descriptions such as Promo, Inline, etc."</data>
+  <data key="d2">chunk-409c608adbd3a1031d5fa14016f86280</data>
+</node>
+<node id="&quot;XIAOHONGSHU&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"XIAOHONGSHU is an organization listed on market/, indicating its role as a digital marketplace for products and services."</data>
+  <data key="d2">chunk-6814eb745917d570deaf72687041104e</data>
+</node>
+<node id="&quot;TMALL OUTLET&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"TMALL Outlet is a store organization."</data>
+  <data key="d2">chunk-5ab86cf3cc0c7fb6a47913c38b9d6aab</data>
+</node>
+<node id="&quot;FERRARI F8 TRIBUTO&quot;">
+  <data key="d0">"PRODUCT"</data>
+  <data key="d1">"A luxury car model known for its advanced technology and premium features."</data>
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</node>
+<node id="&quot;HK&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"A geographic location, likely referring to Hong Kong."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;OTTOMAN FLEECE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Ottoman Fleece denotes another material attribute under Key Stories, possibly indicating traditional weaving techniques or specific fabric qualities."&lt;SEP&gt;"Ottoman Fleece is an attribute category within the Key Stories organization, likely referring to materials or styles of products."</data>
+  <data key="d2">chunk-179344b09a84db0e1873530db3610dbe</data>
+</node>
+<node id="&quot;UNISEX&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product category that doesn't specify gender, suitable for both male and female."</data>
+  <data key="d2">chunk-48b8b137e918a478d17d20ecbbcc422b</data>
+</node>
+<node id="&quot;PRODUCT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Product is a category defined by its style and used in various samples."&lt;SEP&gt;"Product is a category of goods or items sold during specific seasons."&lt;SEP&gt;"The Product category refers to goods or items being discussed, likely in a commercial context."&lt;SEP&gt;"The Product is described with attributes like LOOSE, REGULAR, FITTED, and ONE SIZE, which define its fit specifications."&lt;SEP&gt;"The product is described with attributes such as LOOSE, REGULAR, FITTED, and ONE SIZE, which define its dimensions for fitting."</data>
+  <data key="d2">chunk-1fce6c5eff5d1cc163cd206e9ab118f0&lt;SEP&gt;chunk-f96a26790468a59f3622f7521b1a2cee&lt;SEP&gt;chunk-aa66c7206507378b231a416cd554aabb&lt;SEP&gt;chunk-f67e8073f7da74c39074f492cea052d9</data>
+</node>
+<node id="&quot;O&amp;O&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"O&amp;O is another distributor involved in the electronic commerce and retail distribution network."&lt;SEP&gt;"O&amp;O is another organizational entity related to electronic commerce and possibly retail distribution."&lt;SEP&gt;"O&amp;O represents an additional category or group within the store's channel system."</data>
+  <data key="d2">chunk-9f70b92b51da5edeeed51272d26b66d1&lt;SEP&gt;chunk-221e8250a82a6eaf877414fc21e93beb</data>
+</node>
+<node id="&quot;EC&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"EC is an unspecified category or entity, possibly related to Europe or another relevant context."&lt;SEP&gt;"EC is likely a specific entity code used in the channel categorization system."&lt;SEP&gt;"EC refers to a category such as Energy Conservation, likely within an organizational context."&lt;SEP&gt;"EC refers to an abbreviation for a specific type of organization, likely related to retail."&lt;SEP&gt;"EC represents a specific division or section within Coupang, possibly electronics-related."&lt;SEP&gt;"EC stands for East, indicating a geographic location associated with the Brand and its SITE product."&lt;SEP&gt;"EC, possibly an acronym for an organization or category within the text."</data>
+  <data key="d2">chunk-9f70b92b51da5edeeed51272d26b66d1&lt;SEP&gt;chunk-137beb83502048a7fc9d4149872a0e65&lt;SEP&gt;chunk-5ab86cf3cc0c7fb6a47913c38b9d6aab&lt;SEP&gt;chunk-3576587d07cc8567b25bba25801199db&lt;SEP&gt;chunk-90a5fdd7119b56ef55d3eb42e9de2519&lt;SEP&gt;chunk-7a47281720686a1e6f5013755dc3c607&lt;SEP&gt;chunk-276f8e81cf827d1db322e7605fbac26c</data>
+</node>
+<node id="&quot;SPRING&quot;">
+  <data key="d0">"TIME PERIOD"</data>
+  <data key="d1">"Spring represents one instance within the selling season cycle."</data>
+  <data key="d2">chunk-aa66c7206507378b231a416cd554aabb</data>
+</node>
+<node id="&quot;MANUFACTURER'S SUGGESTED RETAIL PRICE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"This is a pricing strategy employed by car manufacturers to determine the suggested retail price of their vehicles."</data>
+  <data key="d2">chunk-03e588dde2f27b0502ce612e5871f5c7</data>
+</node>
+<node id="NAME">
+  <data key="d0">TYPE</data>
+  <data key="d1">description</data>
+  <data key="d2">chunk-d3d5b2e9cc26e07d9bf4ebfbab15fda4&lt;SEP&gt;chunk-1a0023bf1c1f83e293690b007cde0f6e</data>
+</node>
+<node id="&quot;MSRP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"MSRP refers to the Manufacturer's Suggested Retail Price strategy."</data>
+  <data key="d2">chunk-03e588dde2f27b0502ce612e5871f5c7</data>
+</node>
+<node id="&quot;VIP STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"VIP STORE is mentioned alongside other entities, possibly part of a broader list or category."</data>
+  <data key="d2">chunk-137beb83502048a7fc9d4149872a0e65</data>
+</node>
+<node id="&quot;MAINLAND CHINA&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Mainland China refers to the geographical location of the mainland portion of China."&lt;SEP&gt;"Mainland China refers to the mainland portion of China, often associated with database entries and geographical information."&lt;SEP&gt;"mainland China is a specific regional designation within China."&lt;SEP&gt;"mainland China refers to the geographical area within China designated as 'mainland' in the context of the database."</data>
+  <data key="d2">chunk-413be33c46f0f42288c907a836e650af&lt;SEP&gt;chunk-1a0023bf1c1f83e293690b007cde0f6e</data>
+</node>
+<node id="&quot;COMP STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"The Comp Store is an organization located at 123 Business Street, City A, which has been operational for a full year."</data>
+  <data key="d2">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</node>
+<node id="&quot;FERRARI FF&quot;">
+  <data key="d0">"PRODUCT"</data>
+  <data key="d1">"Another luxury car model from the Ferrari brand, featuring a sleek design and powerful engine."</data>
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</node>
+<node id="&quot;CITY A&quot;">
+  <data key="d0">"LOCATION"</data>
+  <data key="d1">"City A is where the Comp Store is located, noted as a significant point in the database for tracking business performance."</data>
+  <data key="d2">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</node>
+<node id="&quot;JOHN DOE&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"John Doe is the manager of the Comp Store in City A, managing its operations and interacting with the location."</data>
+  <data key="d2">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</node>
+<node id="&quot;FERRARI FF2&quot;">
+  <data key="d0">"PRODUCT"</data>
+  <data key="d1">"A variant of the Ferrari FF, known for its aerodynamic design and performance characteristics."</data>
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</node>
+<node id="&quot;LAST WEEK&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Last week is a reference to a specific period of time from last Saturday to the previous Sunday."</data>
+  <data key="d2">chunk-014d190dbd6b08ecd93c6caefa692831</data>
+</node>
+<node id="&quot;FW&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"FW refers to a framework or organization that uses a specific format (e.g., FW23) to represent the last two digits of a year."</data>
+  <data key="d2">chunk-c77c8c06ba5f7b12370df776f2154314</data>
+</node>
+<node id="&quot;FALL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Fall is another category representing the opposite season to Summer, also indicated by a similar format in some systems."</data>
+  <data key="d2">chunk-353ef6037b6621a86f02e13d0384be51</data>
+</node>
+<node id="&quot;APAC&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"APAC is a label referring to the Asia-Pacific region."</data>
+  <data key="d2">chunk-460f43cd76ed8c2b6e38a80b361b211b</data>
+</node>
+<node id="&quot;WOW%">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"WOW% is a placeholder or code representing an organization or entity, possibly related to tax or accounting data."</data>
+  <data key="d2">chunk-c3b5f642c9e07515bbfb03d49035f4e8</data>
+</node>
+<node id="&quot;CHINA TIKTOK SPORTS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Refers to an entity related to China, TikTok, and sports, possibly an organization or brand."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;FLEECE/MERIDIAN/MOTION/WARM FOOTWEAR/CLONE MAGNETICO/STORM FTW/SLIPSPEED/FAT TIRE/TRIBASE REIGN&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"These are all products within the warm footwear category, each with specific features and designs."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;HOVR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"HOVR is another category highlighting advanced technologies or cutting-edge innovations in various fields."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;BRAND&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Brand is a company organization referred to as EC'S brand."</data>
+  <data key="d2">chunk-3576587d07cc8567b25bba25801199db</data>
+</node>
+<node id="&quot;FLEECE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Fleece is part of the warm footwear category, known for its materials and designs."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;RUNNING&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"RUNNING emphasizes activities aimed at improving cardiovascular health and endurance."</data>
+  <data key="d2">chunk-e368f27a84c3ddbdafc73646df61714c</data>
+</node>
+<node id="&quot;11ST&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Could be a company or group with the name 11ST, but no specific details are provided."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;MERIDIAN&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Meridian represents another product or category within warm footwear."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;OUTDOOR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"OUTDOOR signifies products or services designed for use in outdoor environments."</data>
+  <data key="d2">chunk-e368f27a84c3ddbdafc73646df61714c</data>
+</node>
+<node id="&quot;TAG PRICE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Tag price is a specific pricing tactic used by manufacturers to set retail prices for their products."</data>
+  <data key="d2">chunk-03e588dde2f27b0502ce612e5871f5c7</data>
+</node>
+<node id="&quot;MOTION&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Motion denotes a specific product line or feature in the warm footwear category."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;123&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Organization 123. The number represents an organization or category code."</data>
+  <data key="d2">chunk-202cb962ac59075b964b07152d234b70</data>
+</node>
+<node id="&quot;WARM FOOTWEAR&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Warm Footwear is the overarching category that includes all products listed, such as Fleece and Motion."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;KAKAO DEAL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"KaKao Deal might be a business or deal context without additional details."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;CLONE MAGNETICO&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Clone Magnetico is a specific product within the warm footwear category known for its unique features."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;STORM FTW&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"STORM FTW represents another variant or model under the warm footwear category."</data>
+  <data key="d2">chunk-f16d7fa5fca5fe73d1f1cb0c8a33973d</data>
+</node>
+<node id="&quot;ARMOUR PRINT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Armour Print is a product category known for its stylish designs and unique features."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;ACH&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"ACH is an acronym representing achievements in a specific domain."&lt;SEP&gt;"ACH represents achievements in a specific domain."</data>
+  <data key="d2">chunk-a91e471571d3e2e9f31b567cee21318f</data>
+</node>
+<node id="&quot;MAINLAND&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Mainland refers to mainland China within a database context."</data>
+  <data key="d2">chunk-ad06aecfe8675dde8437b9d402f28bfa</data>
+</node>
+<node id="&quot;AMT_NOTAX&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Amt_notax refers to not-tax-related activities or transactions, categorized under a broader system."</data>
+  <data key="d2">chunk-a91e471571d3e2e9f31b567cee21318f</data>
+</node>
+<node id="&quot;TRAINING&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"TRAINING is a category highlighting the focus on physical fitness and performance."</data>
+  <data key="d2">chunk-e368f27a84c3ddbdafc73646df61714c</data>
+</node>
+<node id="&quot; CURRY&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Curry is a category focused on culinary expertise, food innovations, or gastronomic excellence."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;XYZ CORPORATION&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"XYZ Corporation is an organization known for launching products."</data>
+  <data key="d2">chunk-db13c5d37e8c4aa07dfe90df07d57e18</data>
+</node>
+<node id="&quot;WOMEN'S BRA &amp; FITTED BOTTOMS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"WOMEN'S BRA &amp; FITTED BOTTOMS is a clothing category focusing on women's underwear and bottoms, emphasizing comfort and style."</data>
+  <data key="d2">chunk-9e0bcd7a4bd62f10448a264f32c04c3f</data>
+</node>
+<node id="&quot;ALEX&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Alex is a character who experiences frustration and is observant of the dynamics among other characters."</data>
+  <data key="d2">chunk-db13c5d37e8c4aa07dfe90df07d57e18</data>
+</node>
+<node id="&quot;PDD&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"PDD could refer to an organization, but no specific information is provided about its nature."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;PLATFORM&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Assuming Platform refers to a person named Platform."&lt;SEP&gt;"The platform refers to the organization managing the commerce aspect."</data>
+  <data key="d2">chunk-b05f4a9cf21da81ea19258c199843fcd&lt;SEP&gt;chunk-7a47281720686a1e6f5013755dc3c607</data>
+</node>
+<node id="&quot;DIVISION&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"APP is a division within the product category."</data>
+  <data key="d2">chunk-95a9cc79ebe112bb72b2e081745b95c6</data>
+</node>
+<node id="&quot;QUARTER&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Quarter refers to a specific time period used in tracking data, with QTD being quarterly traffic data."</data>
+  <data key="d2">chunk-37beb78e9f6b438a9bd27680e7e35090</data>
+</node>
+<node id="&quot;APRIL 1, 2022 - MARCH 31, 2023&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"This event marks the fiscal year 2023, indicating a significant period in financial planning and reporting."</data>
+  <data key="d2">chunk-611f768c3559200bccf0ddfa5070011a</data>
+</node>
+<node id="&quot;APP&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"APP stands for Apparel, indicating a broad category of products."</data>
+  <data key="d2">chunk-95a9cc79ebe112bb72b2e081745b95c6</data>
+</node>
+<node id="&quot;TYPE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Type specifies particular attributes or classifications within products, such as LOOSE, REGULAR, etc."</data>
+  <data key="d2">chunk-f67e8073f7da74c39074f492cea052d9</data>
+</node>
+<node id="&quot;ACC&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"ACC stands for Accessories, part of the broader product division."</data>
+  <data key="d2">chunk-95a9cc79ebe112bb72b2e081745b95c6</data>
+</node>
+<node id="&quot;FQL&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"FQL appears to be a company or entity without further specified details."</data>
+  <data key="d2">chunk-5c75b1ad9becc8620ce29907d732070e</data>
+</node>
+<node id="&quot;COMP&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"a company that measures growth and provides financial metrics like store amounts without tax and LYD amt without tax"&lt;SEP&gt;"comp refers to a Same Store Comparison metric used in retail sales analysis."</data>
+  <data key="d2">chunk-6fcdeb552b0899dfdeda91973ffb38fe&lt;SEP&gt;chunk-3aab0876715f03a5b38a969ff7f9bfa8</data>
+</node>
+<node id="&quot;MSRP LABEL PRICE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"MSRP label price refers to the specific pricing notation used on vehicle labels related to Manufacturer's Suggested Retail Price."</data>
+  <data key="d2">chunk-03e588dde2f27b0502ce612e5871f5c7</data>
+</node>
+<node id="&quot;COUPANG&quot;">
+  <data key="d2">chunk-90a5fdd7119b56ef55d3eb42e9de2519</data>
+  <data key="d1">"Coupang utilizes EC as part of its organizational structure, indicating internal management and divisional operations."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;ALI BABA CLOUD&quot;">
+  <data key="d2">chunk-0f4cdca4d7066a322ad4eff393a47182</data>
+  <data key="d1">"QTD was involved in testing activities within Alibaba Cloud's framework during a specific quarter."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;FY23&quot;">
+  <data key="d2">chunk-611f768c3559200bccf0ddfa5070011a</data>
+  <data key="d1">"FY23 defines the event's timeframe."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;OPERATED STORE&quot;">
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+  <data key="d1">"Both are organized entities under the same category, indicating a shared operational framework."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;DLSC&quot;">
+  <data key="d2">chunk-2c0d8734287f621da4978338faef8ae4</data>
+  <data key="d1">"DLSC operates MundoVita as part of its organizational structure, highlighting their shared network membership."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<edge source="&quot;STYLE&quot;" target="&quot;123&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"style defines 123 as a combination with color."</data>
+  <data key="d5">"defines contribution"</data>
+  <data key="d6">chunk-77dabcbe824016c2a6a6b65a2124fbb0</data>
+</edge>
+<edge source="&quot;STYLE&quot;" target="&quot;PRODUCT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Style defines the characteristics of Product categories, establishing a foundational relationship in their categorization."</data>
+  <data key="d5">"categorization, style definition"</data>
+  <data key="d6">chunk-f96a26790468a59f3622f7521b1a2cee</data>
+</edge>
+<edge source="&quot;STYLE&quot;" target="&quot;SAMPLE&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Sample is categorized under Style to define its specific attributes within Product categories."</data>
+  <data key="d5">"classification, specificity"</data>
+  <data key="d6">chunk-f96a26790468a59f3622f7521b1a2cee</data>
+</edge>
+<edge source="&quot;MATERIAL&quot;" target="&quot;PRODUCT MATERIAL&quot;">
+  <data key="d3">24.0</data>
+  <data key="d4">"Material serves as the foundational element for Product material classification and categorization in product manufacturing."&lt;SEP&gt;"Material serves as the foundational element for categorizing and providing Product materials in product manufacturing."</data>
+  <data key="d5">"categorization foundation, material provision"&lt;SEP&gt;"foundational element, classification basis"</data>
+  <data key="d6">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</edge>
+<edge source="&quot;PRODUCT MATERIAL&quot;" target="&quot;ARTICLE LEVEL&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Product material influences how Article level categorization is applied across various products to ensure precision and organization."</data>
+  <data key="d5">"categorization influence, precision organization"</data>
+  <data key="d6">chunk-30cc11e645e962dcac2e8c68370391df</data>
+</edge>
+<edge source="&quot;FACTORY STORE&quot;" target="&quot;OPERATED STORE&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Both are organized entities under the same category, indicating a shared operational framework."</data>
+  <data key="d5">"organizational alignment, same category"</data>
+  <data key="d6">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</edge>
+<edge source="&quot;MUNDOVITA&quot;" target="&quot;FERRARI FF&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"MundoVita offers Ferrari FF as a premium product in DLSC stores, showcasing their range of luxury offerings."</data>
+  <data key="d5">"luxury products, premium offerings"</data>
+  <data key="d6">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</edge>
+<edge source="&quot;MUNDOVITA&quot;" target="&quot;DLSC&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"DLSC operates MundoVita as part of its organizational structure, highlighting their shared network membership."</data>
+  <data key="d5">"network organization, shared ownership"</data>
+  <data key="d6">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</edge>
+<edge source="&quot;MUNDOVITA&quot;" target="&quot;FERRARI F8 TRIBUTO&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"MundoVita sells Ferrari F8 Tributo within its store network, emphasizing product availability and customer access.'</data>
+  <data key="d5">"product availability, customer access"</data>
+  <data key="d6">chunk-2c0d8734287f621da4978338faef8ae4</data>
+</edge>
+<edge source="&quot;COLOR&quot;" target="&quot;123&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"color defines 123 as a combination with style."</data>
+  <data key="d5">"defines contribution"</data>
+  <data key="d6">chunk-77dabcbe824016c2a6a6b65a2124fbb0</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;STATUS&quot;">
+  <data key="d3">11.0</data>
+  <data key="d4">"The Store's operational state influences its classification within the organizational structure."&lt;SEP&gt;"The Store's status directly affects its classification as an organization within the given context.'</data>
+  <data key="d5">"status impact, operational state'&lt;SEP&gt;"status influence, operational state"</data>
+  <data key="d6">chunk-4454b428974aa1c8faa6f3ec320b85d5</data>
+</edge>
+<edge source="&quot;QTD&quot;" target="&quot;ALI BABA CLOUD&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"QTD was involved in testing activities within Alibaba Cloud's framework during a specific quarter."</data>
+  <data key="d5">"testing, quality assurance, temporal relationship"</data>
+  <data key="d6">chunk-0f4cdca4d7066a322ad4eff393a47182</data>
+</edge>
+<edge source="&quot;SILHOUETTE&quot;" target="&quot;PRODUCT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The Silhouette attribute defines specific characteristics of the Product category."</data>
+  <data key="d5">"attribute definition, product specifics"</data>
+  <data key="d6">chunk-1fce6c5eff5d1cc163cd206e9ab118f0</data>
+</edge>
+<edge source="&quot;SS24&quot;" target="&quot;SELLING SEASON&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"SS24 is part of the category code for specific selling seasons, indicating a particular period."&lt;SEP&gt;"SS24 is part of the category codes for specific selling seasons, indicating particular periods within those seasons."</data>
+  <data key="d5">"category codes relate to seasonal periods"</data>
+  <data key="d6">chunk-aa66c7206507378b231a416cd554aabb</data>
+</edge>
+<edge source="&quot;FW24&quot;" target="&quot;SELLING SEASON&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"FW24 is another part of the category code used to denote specific selling periods within a season."&lt;SEP&gt;"FW24 is another part of the category code used to denote specific selling periods within a season.'</data>
+  <data key="d5">"category codes relate to seasonal periods"</data>
+  <data key="d6">chunk-aa66c7206507378b231a416cd554aabb</data>
+</edge>
+<edge source="&quot;SELLING SEASON&quot;" target="&quot;PRODUCT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The product is sold during the defined season, which may include codes like SS24 and FW24 for specific instances."</data>
+  <data key="d5">"products are categorized by their selling seasons"</data>
+  <data key="d6">chunk-aa66c7206507378b231a416cd554aabb</data>
+</edge>
+<edge source="&quot;SELLING SEASON&quot;" target="&quot;SPRING&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"Spring represents a significant period within the selling season cycle, often tied to product launches or sales strategies."</data>
+  <data key="d5">"seasonal phases influence product categorization and timing"</data>
+  <data key="d6">chunk-aa66c7206507378b231a416cd554aabb</data>
+</edge>
+<edge source="&quot;EC&quot;" target="&quot;COUPANG&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"Coupang utilizes EC as part of its organizational structure, indicating internal management and divisional operations."</data>
+  <data key="d5">"organizational division, internal management"</data>
+  <data key="d6">chunk-90a5fdd7119b56ef55d3eb42e9de2519</data>
+</edge>
+<edge source="&quot;MSRP&quot;" target="&quot;TAG PRICE&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Both MSRP and Tag price are pricing strategies used in the automotive industry, with MSRP often being similar to Tag prices but structured differently.</data>
+  <data key="d5">"pricing strategies, industry context"</data>
+  <data key="d6">chunk-03e588dde2f27b0502ce612e5871f5c7</data>
+</edge>
+<edge source="&quot;COMP STORE&quot;" target="&quot;JOHN DOE&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"John Doe manages the operations of the Comp Store, which has been operational for a full year."|&gt;|&gt;relation_keywords: management, operational, full year</data>
+  <data key="d5">8</data>
+  <data key="d6">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</edge>
+<edge source="&quot;COMP STORE&quot;" target="&quot;CITY A&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"The Comp Store is located in City A, which may influence its business operations and growth potential."|&gt;|&gt;relation_keywords: location influence, operational impact</data>
+  <data key="d5">6</data>
+  <data key="d6">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</edge>
+<edge source="&quot;CITY A&quot;" target="&quot;JOHN DOE&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"John Doe is based in City A, where the Comp Store operates and interacts with local businesses or factors."|&gt;|&gt;relation_keywords: location, interaction</data>
+  <data key="d5">7</data>
+  <data key="d6">chunk-8f2ef807a3ab81449fcf01879b2730af</data>
+</edge>
+<edge source="&quot;ACH&quot;" target="&quot;AMT_NOTAX&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"ACH is associated with amt_notax as part of the same category or system where achievements are tracked for non-tax management."</data>
+  <data key="d5">"category association, tracking achievements"</data>
+  <data key="d6">chunk-a91e471571d3e2e9f31b567cee21318f</data>
+</edge>
+<edge source="&quot;APRIL 1, 2022 - MARCH 31, 2023&quot;" target="&quot;FY23&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"FY23 defines the event's timeframe."</data>
+  <data key="d5">"fiscal year, time frame"</data>
+  <data key="d6">chunk-611f768c3559200bccf0ddfa5070011a</data>
+</edge>
+</graph></graphml>

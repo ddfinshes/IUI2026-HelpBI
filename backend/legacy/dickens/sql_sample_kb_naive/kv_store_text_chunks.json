@@ -1,0 +1,338 @@
+{
+  "chunk-c4ca4238a0b923820dcc509a6f75849b": {
+    "tokens": 1,
+    "content": "1",
+    "chunk_order_index": 0,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-3fbd0fcc8ebd49437873902155b46517": {
+    "tokens": 666,
+    "content": "Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.\n\nWTD: this week (from last Sunday to  yesterday).\nMTD:this month (from the 1st of this month to yesterday).\nQTD: this quarter (from the start of this quarter to yesterday) .\nYTD: this year (from the start of this year to yesterday) .\nSelect the correct target fields required according to the user's questions:\n-F1 target:amt_notax_target_f1;\n-F2 target:amt_notax_target_f2;\n-F3 target:amt_notax_target_f3;\n-F4 target:amt_notax_target_f4.\n\n**question sample**:\n-WTD / MTD / QTD / YTD sales vs Target?\n-what is the MTD sales achievement for China FP?\n-WTD / MTD / QTD / YTD sales vs F1 (target)? Means the target use the f1 target.\n\n**SQL query sample**:\n SELECT \n 'WTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND CURRENT_DATE - INTERVAL '1 day'\n UNION ALL \n\n SELECT \n 'MTD'  as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day'  \n\n UNION ALL \n\n SELECT \n 'QTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC(QUARTER', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' \n \n UNION ALL \n\n SELECT \n 'YTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('YEAR', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' \n;\n\n2",
+    "chunk_order_index": 1,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-8f8913f7792762e471c6381cb2f09e68": {
+    "tokens": 452,
+    "content": "Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nWeekly comp growth % for sales / traffic / CR / AOV / ASP / UPT.\nwhat is the weekly sales comp in week 34?\n\n**SQL query sample**:\n SELECT \n week_id,\n    SUM(amt) as sales_amt,  \n SUM(amt_notax) as Sales_notax , \n SUM(amt_notax)/SUM(lyd_amt_notax)-1 as sales_comp_per ,  \n    SUM(traffic) as traffic,    \n SUM(traffic)/SUM(lyd_traffic)-1 as traffic_comp_per , \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lyd_traffic is not null  THEN lyd_trans else 0 END)/SUM(lyd_traffic))-1 as cr_comp_per , \n SUM(amt_notax)/SUM(trans) as AOV ,\n SUM(amt_notax)/SUM(trans)/(SUM(lyd_amt_notax)/SUM(lyd_trans))-1 as aov_comp_per ,   \n SUM(amt_notax)/SUM(qty) as ASP,  \n SUM(amt_notax)/SUM(qty)/(SUM(lyd_amt_notax)/SUM(lyd_qty))-1 as asp_comp_per ,  \n SUM(qty)/SUM(trans) as UPT ,\n SUM(qty)/SUM(trans)/(SUM(lyd_qty)/SUM(lyd_trans))-1 as UPT_comp_per   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    week_id ='202534'  \n    AND comp_flag ='Y' -- The store participating in the comp. \n GROUP BY \n    week_id\n;\n\n\n3",
+    "chunk_order_index": 2,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-a09535e135093acf8ea4dd1a45037472": {
+    "tokens": 185,
+    "content": "Query the sales growth situation for a specific month, and certain conditions such as countries and channels can be specified. The comparison formula is: sales of this month / sales of last month - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nWhat is the sales MOM% for APAC EC?\n\n**SQL query sample**:\n SELECT \n month_id,\n    SUM(amt) as sales_amt,  \n SUM(amt_notax) as Sales_notax , \n SUM(amt_notax)/SUM(lm_amt_notax)-1 as sales_notax_mom_per   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  \n GROUP BY \n    month_id\n;\n\n\n4",
+    "chunk_order_index": 3,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-a1c5fcc84cda41ddec0bd7fe7ad1c138": {
+    "tokens": 221,
+    "content": "Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nWhat is the % to go to achieve the month revenue?\n\n**SQL query sample**:\n SELECT \n TO_CHAR(CURRENT_DATE, 'YYYY-MM') AS title,\n    SUM(amt) as amt, \n SUM(amt_notax) as amt_notax , \n SUM(amt_notax_target) as amt_notax_target,\n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code BETWEEN TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  \n GROUP BY \n    TO_CHAR(CURRENT_DATE, 'YYYY-MM')\n;\n\n\n5",
+    "chunk_order_index": 4,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-de117b195eb2d01d7553767fc6a0597a": {
+    "tokens": 431,
+    "content": "Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nWoW growth% of sales / traffic / CR / AOV / ASP / UPT\n\n**SQL query sample**:\n SELECT \n week_id,\n    SUM(amt) as amt, \n SUM(amt_notax) as amt_notax ,\n SUM(amt_notax)/SUM(lw_amt_notax)-1 as sales_notax_wow_per ,  \n    SUM(traffic) as traffic,   \n SUM(traffic)/SUM(lw_traffic)-1 as traffic_wow_per ,   \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lw_traffic is not null  THEN lw_trans else 0 END)/SUM(lw_traffic))-1 as cr_wow_per ,  \n SUM(amt_notax)/SUM(trans) as AOV ,  \n SUM(amt_notax)/SUM(trans)/(SUM(lw_amt_notax)/SUM(lw_trans))-1 as aov_wow_per ,  \n SUM(amt_notax)/SUM(qty) as ASP, \n SUM(amt_notax)/SUM(qty)/(SUM(lw_amt_notax)/SUM(lw_qty))-1 as asp_wow_per ,   \n SUM(qty)/SUM(trans) as UPT ,\n SUM(qty)/SUM(trans)/(SUM(lw_qty)/SUM(lw_trans))-1 as UPT_wow_per   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today} \n GROUP BY \n    week_id\n;\n\n\n6",
+    "chunk_order_index": 5,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-ce55a18321642b5eb7993380b6d82056": {
+    "tokens": 456,
+    "content": "Query the sales growth in a certain month, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this month / sales amount of last month - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nMoM growth% of sales / traffic / CR / AOV / ASP / UPT\n\n**SQL query sample**:\n SELECT \n month_id,\n    SUM(amt) as amt, \n SUM(amt_notax) as amt_notax , \n SUM(amt_notax)/SUM(lm_amt_notax)-1 as amt_notax_mom_per ,  \n    SUM(traffic) as traffic,  \n SUM(traffic)/SUM(lm_traffic)-1 as traffic_mom_per ,   \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  \n SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lm_traffic is not null  THEN lm_trans else 0 END)/SUM(lm_traffic))-1 as cr_mom_per ,  \n SUM(amt_notax)/SUM(trans) as AOV ,\n SUM(amt_notax)/SUM(trans)/(SUM(lm_amt_notax)/SUM(lm_trans))-1 as aov_mom_per ,   \n SUM(amt_notax)/SUM(qty) as ASP,  \n SUM(amt_notax)/SUM(qty)/(SUM(lm_amt_notax)/SUM(lm_qty))-1 as asp_mom_per ,   \n SUM(qty)/SUM(trans) as UPT ,\n SUM(qty)/SUM(trans)/(SUM(lm_qty)/SUM(lm_trans))-1 as UPT_mom_per    \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  \n GROUP BY \n    month_id\n;\n\n\n7",
+    "chunk_order_index": 6,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-254d6a1cf2d553412d83043e25c14eb9": {
+    "tokens": 309,
+    "content": "Calculate the sales proportion according to the division attribute of the product, and at the same time compare it with the sales proportion of last week. Of course, it's also possible to only query the sales proportion. The sales proportion is displayed as a percentage with two decimal places. \n\n**question sample**:\nSOB of APP / FTW / ACCS and how does it compare to last week?\n\n**SQL query sample**:\nWITH DivisionSales AS (\n SELECT \n division,\n    SUM(amt) as TotalAmount, \n    SUM(lw_amt) as LWTotalAmount \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n date_code  Between {1st of this week} AND {Today} \n    AND division in ('Apparel','Footwear','Accessories')   \n GROUP BY \n    division\n ),\n TotalSales AS (\n    SELECT \n        SUM(TotalAmount) AS GrandTotal,\n  SUM(LWTotalAmount) AS LWGrandTotal \n    FROM \n        DivisionSales\n)\nSELECT \n    ds.division,\n    ds.TotalAmount,\n    CAST(ds.TotalAmount / ts.GrandTotal * 100.0 as decimal(7,2))  ||'%' AS PercentageOfTotal,\n ds.LWTotalAmount,\n    CAST(ds.LWTotalAmount / ts.LWGrandTotal * 100.0 as decimal(7,2))  ||'%' AS LWPercentageOfTotal  \n FROM \n    DivisionSales ds,\n    TotalSales ts\n ORDER BY \n    ds.TotalAmount DESC;\n\n\n8",
+    "chunk_order_index": 7,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-897692a94e28ae844fa38a22e75ab2c8": {
+    "tokens": 311,
+    "content": "Calculate the sales proportion according to certain key attributes of the products, and at the same time compare it with the proportions of sales amount and sales quantity of last week. Of course, it's also possible to only query the proportion of sales amount or the proportion of sales quantity. The proportion of sales amount is displayed as a percentage with two decimal places. \n\n**question sample**:\nKey category sales SOB / Unit SOB and its performance vs  last week.\n\n**SQL query sample**:\nWITH categorySales AS (\n SELECT \n key_stories,\n    SUM(amt) as TotalAmount,\n    SUM(lw_amt) as LWTotalAmount \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n date_code  Between {1st of this week} AND {Today} \n GROUP BY \n    key_stories\n ),\n TotalSales AS (\n    SELECT \n        SUM(TotalAmount) AS GrandTotal,\n  SUM(LWTotalAmount) AS LWGrandTotal \n    FROM \n        categorySales\n)\nSELECT \n    ds.key_stories,\n    ds.TotalAmount,\n    CAST(ds.TotalAmount / ts.GrandTotal * 100.0 as decimal(7,2))  ||'%' AS PercentageOfTotal,\n ds.LWTotalAmount,\n    CAST(ds.LWTotalAmount / ts.LWGrandTotal * 100.0 as decimal(7,2))  ||'%' AS LWPercentageOfTotal \n FROM \n    categorySales ds,\n    TotalSales ts\n ORDER BY \n    ds.TotalAmount DESC;\n \n\n9",
+    "chunk_order_index": 8,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-330861d79cccc7c2372a09a3a89b3bd1": {
+    "tokens": 454,
+    "content": "Query the sales proportion situation of MFO products. The sales proportion is displayed as a percentage with two decimal places. \n\n**question sample**:\nWhat is the MFO% in week 27? How does it compare to last week and last year average?\n\n**SQL query sample**:\nWITH MFOSales202527 AS ( SELECT 'MFO' AS title, SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  \nweek_id = '202527' AND product_line = 'MFO' ),\nTotalSales202527 AS ( SELECT 'Total' AS title, SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  \n week_id = '202527' ),\nMFOSales202526 AS ( SELECT SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  \n week_id = '202526' AND product_line = 'MFO' ),\nTotalSales202526 AS ( SELECT SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  \n week_id = '202526' ),\nMFOSalesly AS ( SELECT SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  \n year_id = '2024' AND product_line = 'MFO' ),\nTotalSalesly AS ( SELECT SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  \n year_id = '2024' ) SELECT\n( SELECT CASE WHEN TotalSales202527.total_amt = 0 THEN 0 ELSE MFOSales202527.mfo_amt / TotalSales202527.total_amt END  FROM MFOSales202527, TotalSales202527 ) AS MFO_amt_per202527,\n( SELECT CASE WHEN TotalSales202526.total_amt = 0 THEN 0 ELSE MFOSales202526.mfo_amt / TotalSales202526.total_amt END  FROM MFOSales202526, TotalSales202526 ) AS MFO_amt_per202526,\n( SELECT CASE WHEN TotalSalesly.total_amt = 0 THEN 0 ELSE MFOSalesly.mfo_amt / TotalSalesly.total_amt END  FROM MFOSalesly, TotalSalesly ) AS MFO_amt_perlastyear\n;\n\n\n10",
+    "chunk_order_index": 9,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-ba7654d430ca23e448891ef987c0e59c": {
+    "tokens": 223,
+    "content": "Query the sales and target on store code or store name  and calculate the achievement rate.\nThe formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.\n\n**question sample**:\nWhat was yesterday sales on store '1234'? Does it meet sales target?\n\n**SQL query sample**:\n SELECT \n date_code,\n store_code,\n store_name,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax ,\n SUM(amt_notax_target),\n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code = TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  \n    AND (store_code like '%1234%'   \n     OR store_name like '%1234%' )  \n GROUP BY \n    date_code,\n store_code,\n store_name\n ;\n\n\n11",
+    "chunk_order_index": 10,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-cb032537ad201b24363ac75debaa89b8": {
+    "tokens": 192,
+    "content": "Query the store which has the best wow sales growth%.\n\n**question sample**:\nWhich store has the best wow sales growth%?\n\n**SQL query sample**:\n SELECT \n    top 5 \n week_id,\n store_code,\n store_name,\n    SUM(amt) as sales_amt,\n SUM(amt_notax) as Sales_notax , \n SUM(lw_amt_notax) as LW_sales_notax , \n case when SUM(lw_amt_notax) =0 then 0 else  SUM(amt_notax)/SUM(lw_amt_notax)-1 end as sales_notax_wow_per  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today}\n AND lw_amt_notax >0 \n    AND amt_notax >0 \n GROUP BY \n    week_id,\n store_code,\n store_name\n ORDER BY \n    sales_notax_wow_per DESC\n;\n\n\n12",
+    "chunk_order_index": 11,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-a0e495662206881cd283cc4dc1317c05": {
+    "tokens": 195,
+    "content": "Query the store which  has the worst wow sales growth%.\n\n**question sample**:\nWhich store has the worst wow sales growth%?\n\n**SQL query sample**:\n SELECT \n    top 5 \n week_id,\n store_code,\n store_name,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n SUM(lw_amt_notax) as LW_sales_notax , \n case when SUM(lw_amt_notax) =0 then 0 else  SUM(amt_notax)/SUM(lw_amt_notax)-1 end as sales_notax_wow_per \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today} \n AND lw_amt_notax >0 \n    AND amt_notax >0 \n GROUP BY \n    week_id,\n store_code,\n store_name\n ORDER BY \n    sales_notax_wow_per ASC\n;\n\n\n13",
+    "chunk_order_index": 12,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-21d4447153a842254fa5322c00ea96d9": {
+    "tokens": 111,
+    "content": "Query the product categories that contribute significantly to the weekly sales.\n\n**question sample**:\nWhich category drive China BH revenue in week 27?\n\n**SQL query sample**:\n SELECT \n    top 5 \n key_stories,\n    SUM(amt) as sales_amt \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n    week_id ='202527' \n AND country = 'Mainland' \n AND store_type = 'BH' \n GROUP BY \n key_stories\n ORDER BY \n    SUM(amt) DESC\n;\n\n\n14",
+    "chunk_order_index": 13,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-c2240ff31048a51f880dbf743ad86279": {
+    "tokens": 438,
+    "content": "Query the sell-through rate of the product as of today.\nQuery the sell through of the weekly frequency of commodities.\nsell-through: sales units( from last Sunday to today ) /(Inventory quantity of last Saturday + sales units( from last Sunday to today )),Display with two decimal places in percentage..\n\n**question sample**:\nWhat is the sell-through of 'CURRY' as of today?\n'CURRY' could be the product's name, division, category, or material.\n\n**SQL query sample**:\nWith salesQty as (\n SELECT \n product_name,\n    SUM(qty) as sales_units \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n    date_code between {1st of this week} AND {today}\n AND (\n     product_name like '%CURRY%' OR\n  division like '%CURRY%' OR\n  key_stories like '%CURRY%' OR\n  material like '%CURRY%'\n )\n GROUP BY \n product_name\n),\nInvOfLastSaturday as (\n-- Get the onhand inventory of the most recent Saturday before the transaction starts.\n  SELECT \n country,\n    SUM(stock) as onhand_inv  \n FROM \n    dm_fact_onhand_chatbi \n WHERE \n    date_code =\n(Select \n TO_CHAR(MAX(date_code),'YYYY-MM-DD') -- edw_dim_calendar.date_code:type of date;dm_fact_onhand_chatbi.date_code:type of String(YYYY-MM-DD).\n FROM edw_dim_calendar \n WHERE \n date_code <{today} AND weekday_name ='Saturday') \n AND (\n     product_name like '%CURRY%' OR\n  division like '%CURRY%' OR\n  key_stories like '%CURRY%' OR\n  material like '%CURRY%'\n )\n GROUP BY \n product_name\n)\n Select \n sales.product_name,\n sales.sales_units,\n stock.onhand_inv,\n CASE WHEN stock.onhand_inv = 0 THEN 0 ELSE CAST(sales.sales_units*100.00/stock.onhand_inv as decimal(18,2)) END || '%' as sell_through \n FROM salesQty sales inner join InvOfLastSaturday stock \n on sales.product_name = stock.product_name\n;\n\n\n15",
+    "chunk_order_index": 14,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-1874d2e8387aed7108305351efe7678f": {
+    "tokens": 268,
+    "content": "Query the number of stores that have reached their weekly sales targets and calculate the percentage.\nDisplay with two decimal places in percentage.\n\n**question sample**:\nHow many stores reach weekly sales target? Absolute store count and % of total\n\n**SQL query sample**:\nWITH StoreSales AS (\n SELECT \n store_code,\n    SUM(amt_notax) as TotalAmountNet,\n    SUM(amt_notax_target) as TotalTargetNet \n FROM \n    dm_fact_sales_chatbi \n WHERE \n date_code  Between {1st of this week} AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') \n GROUP BY \n    store_code\n ),\n ReachStore AS (\n    SELECT \n        count(DISTINCT store_code) as reachcount \n    FROM \n        StoreSales\n WHERE \n     TotalAmountNet>=TotalTargetNet\n),\n ALLStore AS (\n    SELECT \n        count(DISTINCT store_code) as allcount \n    FROM \n        StoreSales\n)\nSELECT \n    ds.reachcount as reached_store,\n    ts.allcount as all_store,\n    CAST(ds.reachcount*1.00 / ts.allcount*100.0 as decimal(7,2)) ||'%' AS PercentageOfTotal \n FROM \n    ReachStore ds,\n    ALLStore ts;\n\n\n16",
+    "chunk_order_index": 15,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-a3e0339964067cf17449df8b10fa69d5": {
+    "tokens": 441,
+    "content": "Query the discount level of this week.\nAnd show the Comparison to last week and last year channel average.\n\n**question sample**:\nWhat is the discount level of this week? How does it compare to last week and last year channel average?\n\n**SQL query sample**:\nWith twdis as (\n    SELECT\n week_id,\n channel,\n    SUM(amt)/SUM(orig_price)-1 as tw_discount  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today} \n GROUP BY \n    week_id,\n channel\n),\n    Lwdis as (\n SELECT\n channel,\n    SUM(amt)/SUM(orig_price)-1 as lw_discount \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between DATEADD(day,-7,{last Sunday}) AND DATEADD(day,-7,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) \n GROUP BY \n channel\n),\nLMdis as (\n    SELECT\n channel,\n    SUM(amt)/SUM(orig_price)-1 as lm_discount \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between DATEADD(month,-1,{1st of this week}) AND DATEADD(month,-1,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) \n GROUP BY \n channel\n),\nLYdis as (\nSELECT\n channel,\n    SUM(amt)/SUM(orig_price)-1 as ly_discount \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between DATEADD(year,-1,{1st of this week}) AND DATEADD(year,-1,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) \n GROUP BY \n channel\n)\n\n SELECT \n tw.week_id,\n tw.channel,\n    tw.tw_discount , \n lw.lw_discount , \n lm.lm_discount ,  \n    ly.ly_discount  \n FROM \n    twdis tw left join lwdis lw on tw.channel=lw.channel \n    left join lmdis lm on tw.channel=lm.channel \n    left join lydis ly on tw.channel=ly.channel \n;\n\n\n17",
+    "chunk_order_index": 16,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-cb0836447eca4256c4a62105c86c13a6": {
+    "tokens": 120,
+    "content": "Query the number of opening stores as of a date.\n\n**question sample**:\nHow many opening stores do we have as of yyyymmdd?\n\n**SQL query sample**:\n SELECT \n    store.country,\n count(store.store_code) as storecount \n FROM \n    edw_dim_store_prod store inner join edw_dim_calendar calendar\n on store.date_sid = calendar.date_sid\n WHERE \n    calendar.date_code = 'yyyy-mm-dd' \n    AND store.open_flag ='open' \n GROUP BY \n    store.country\n ORDER BY \n    count(store.store_code) DESC\n;\n\n18",
+    "chunk_order_index": 17,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-1ea519e16923f378ccfb88d3e660605c": {
+    "tokens": 127,
+    "content": "Query the number of comp stores as of a date.\n\n**question sample**:\nHow many comp stores do we have as of yyyymmdd?\n\n**SQL query sample**:\n SELECT \n    store.country,\n count(store.store_code) as storecount \n FROM \n    edw_dim_store_prod store inner join edw_dim_calendar calendar\n on store.date_sid = calendar.date_sid\n WHERE \n    calendar.date_code = 'yyyy-mm-dd' \n    AND store.comp_flag ='Y' -- The store participating in the comp.\n GROUP BY \n    store.country\n ORDER BY \n    count(store.store_code) DESC\n;\n\n19",
+    "chunk_order_index": 18,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-581b891fc41e5d8276c3eb5c57314162": {
+    "tokens": 221,
+    "content": "Query the average store size .\n\n**question sample**:\nWhat is average China BH store size in FY24? What is average China BH comp store size in FY24?\n\n**SQL query sample**:\n SELECT \n    'FY24store' as title,\n AVG(store.area) as storearea \n FROM \n    edw_dim_store_prod store inner join edw_dim_calendar calendar\n on store.date_sid = calendar.date_sid\n WHERE \n    calendar.date_code between '2023-04-01' AND '2024-03-31' \n AND store.store_type = 'BH' \n UNION ALL \n SELECT \n    'FY24compstore' as title,\n AVG(store.area) as storearea \n FROM \n    edw_dim_store_prod store inner join edw_dim_calendar calendar\n on store.date_sid = calendar.date_sid\n WHERE \n    calendar.date_code between '2023-04-01' AND '2024-03-31' \n AND store.store_type = 'BH' \n AND store.comp_flag = 'Y' -- The store participating in the comp.\n;\n\n\n20",
+    "chunk_order_index": 19,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-228add7fd988382433a7bc36e1795bf6": {
+    "tokens": 177,
+    "content": "Query the number of the new stores.\nThe store information in edw_dim_store_prod is at a daily granularity, meaning the store information is repeated daily.\n\n**question sample**:\nHow many new stores do we have in FY24?\n\n**SQL query sample**:\nWith openstore as (\n    SELECT \n store.store_master_code,\n min(store.open_date) as open_date \n FROM \n    edw_dim_store_prod store inner join edw_dim_calendar calendar\n on store.date_sid = calendar.date_sid\n WHERE \n    calendar.date_code between '2023-04-01' AND '2024-03-31' \n GROUP BY \n    store.store_master_code\n)\n SELECT \n count(store_master_code) \n FROM \n    openstore\n WHERE \n    open_date between '2023-04-01' AND '2024-03-31'\n;\n\n\n21",
+    "chunk_order_index": 20,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-4ebb00d08eb473ec44f528970290f455": {
+    "tokens": 195,
+    "content": "Query the sales and target for stores , and calculate the achievement rate.\namt_ach >0 : achieve the target；\namt_ach <0 :did not achieve the target.\n\n**question sample**:\nWhich stores did not meet sales target last week?\n\n**SQL query sample**:\n SELECT \n store_code,\n store_name,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n SUM(amt_notax_target) as amt_notax_target, \n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  {last last Sunday} and {last Saturday} \n GROUP BY \n store_code,\n store_name\n HAVING \n    amt_ach >0 \n ORDER BY \n    amt_ach desc\n;\n\n\n22",
+    "chunk_order_index": 21,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-aab9c45652eb0f562c6918ede6b5e39a": {
+    "tokens": 201,
+    "content": "Query the sales and target for stores , and calculate the achievement rate.\nQuery the sales performance after the store opened .\n\n**question sample**:\nDo we have any new store opened last week? When did it open and how did it perform?\n\n**SQL query sample**:\n SELECT \n store_code,\n store_name,\n open_date,\n    SUM(amt) as sales_amt_ToNow, \n SUM(amt_notax) as Sales_notax , \n SUM(amt_notax_target) as amt_notax_target, \n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code >= {last last Sunday}\n    AND open_date between  {last last Sunday} and {last Saturday} \n GROUP BY \n store_code,\n store_name,\n open_date\n ORDER BY \n    SUM(amt) desc\n;\n\n\n23",
+    "chunk_order_index": 22,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-2c338d675dfdc5021f0bdeee725039f3": {
+    "tokens": 179,
+    "content": "Retrieve the traffic from the previous year for analysis.\n\n**question sample**:\nWhat is CN BH average monthly traffic per store?\n\n**SQL query sample**:\nWith Store_traffic_monthly as (\n SELECT \n    country,\n channel,\n store_type,\n store_code,\n    SUM(traffic)/12 as traffic_monthly  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  {last year day} and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') \n AND country = 'Mainland' \n AND store_type = 'BH' \n GROUP BY \n country,\n channel,\n store_type,\n store_code\n)\nSELECT \n    country,\n channel,\n store_type,\n    AVG(traffic_monthly) as Avg_traffic_monthly  \n FROM Store_traffic_monthly \n GROUP BY \n    country,\n channel,\n store_type\n;\n\n\n24",
+    "chunk_order_index": 23,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-013a65647466b9408c0f36ea175eab12": {
+    "tokens": 218,
+    "content": "Query the average opening time of store.\n\n**question sample**:\nWhat is the average opening time for existing CN BH?\n\n**SQL query sample**:\nWith Store_opentime as (\n SELECT \n    store.country,\n channel.channel_name as channel,\n store.store_type,\n store.store_last_code as store_code,\n    DATEDIFF(day, store.open_date, CASE WHEN (store.close_date is null or store.close_date ='9999-12-31') THEN CURRENT_DATE ELSE store.close_date END) as open_day   \n FROM \n    edw_dim_store store inner join edw_dim_channel channel on store.channel_sid = channel.channel_sid \n WHERE \n    store.country = 'Mainland' \n AND store.store_type = 'BH' \n GROUP BY \n store.country,\n channel.channel_name,\n store.store_type,\n store.store_last_code,\n    store.open_date,\n    store.close_date\n)\nSELECT \n    country,\n channel,\n store_type,\n    AVG(open_day) as Avg_open_time \n FROM Store_opentime\n GROUP BY \n    country,\n channel,\n store_type\n;\n\n\n25",
+    "chunk_order_index": 24,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-0580d69f683f05df5083e9f439833c32": {
+    "tokens": 135,
+    "content": "Query the number of new stores opened within a specific time period.\n\n**question sample**:\nHow many stores did we open in 2023?\n\n**SQL query sample**:\n    SELECT \n store.country,\n count(distinct store.store_master_code) as storecount \n FROM \n    edw_dim_store_prod store\n WHERE \n    store.open_date between '2023-01-01' AND '2023-12-31' \n AND store.store_master_code not in (\n Select distinct store_master_code from edw_dim_store_prod where open_date < '2023-01-01' AND open_flag ='open')\n GROUP BY \n    store.country\n;\n\n\n27",
+    "chunk_order_index": 25,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-d5918a74814a986a057acf4a0a040854": {
+    "tokens": 249,
+    "content": "Query the sales and target for stores , and calculate the achievement rate.\n\n**question sample**:\nWhich one is the best performing EC platform in week 27? How good is it?\n\n**SQL query sample**:\n SELECT \n    top 1 \n week_id,\n store_code,\n store_name,\n SUM(amt) as sales_amt,\n SUM(amt_notax) as Sales_notax ,\n SUM(amt_notax_target) as amt_notax_target, \n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach,  \n SUM(lw_amt_notax) as sales_notax_LW ,  \n CASE WHEN SUM(lw_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lw_amt_notax)-1 END as sales_notax_wow_per  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    week_id ='202527' \n AND channel = 'EC' \n GROUP BY \n week_id,\n store_code,\n store_name \n HAVING \n    sales_amt >0 \n AND amt_ach is not null \n ORDER BY \n    amt_ach desc \n;\n\n28",
+    "chunk_order_index": 26,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-efbaf03022823a65dae001c620189bda": {
+    "tokens": 230,
+    "content": "Query Top 10 stores with positive comp growth.\n comp growth：compare with last year.\n \n**question sample**:\nTop 10 stores with positive comp growth\n\n**SQL query sample**:\n SELECT \n    top 10 \n store_code,\n store_name,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n SUM(lyd_amt_notax) as sales_notax_LYD , \n CASE WHEN SUM(lyd_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lyd_amt_notax)-1 END as sales_comp   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(CURRENT_DATE - INTERVAL '1 YEAR','YYYY-MM-DD')  AND TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') \n AND comp_flag = 'Y' -- The store participating in the comp.\n GROUP BY \n store_code,\n store_name \n HAVING \n    sales_amt >0 \n AND sales_comp > 0 \n ORDER BY \n    sales_comp desc \n;\n ORDER BY \n    sales_comp desc \n;\n\n29",
+    "chunk_order_index": 27,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-f090cf30665ebdb0b5ec84f926378d70": {
+    "tokens": 229,
+    "content": "Query the bottom 10 stores with negative comp growth.\n comp growth：compare with last year.\n \n**question sample**:\nBottom 10 stores with negative comp growth\n\n**SQL query sample**:\n SELECT \n    top 10 \n store_code,\n store_name,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n SUM(lyd_amt_notax) as sales_notax_LYD , \n CASE WHEN SUM(lyd_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lyd_amt_notax)-1 END as sales_comp  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(CURRENT_DATE - INTERVAL '1 YEAR','YYYY-MM-DD')  AND TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')\n AND comp_flag = 'Y' -- The store participating in the comp.\n GROUP BY \n store_code,\n store_name \n HAVING \n    sales_amt >0 \n AND sales_notax_LYD >0 \n AND sales_comp < 0  \n ORDER BY \n    sales_comp  \n;\n\n\n30",
+    "chunk_order_index": 28,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-8fdf2417ac87640c3bf6152219d66bb9": {
+    "tokens": 432,
+    "content": "Query how many stores contribute to 80% of the monthly sales.\n\n**question sample**:\nHow many stores are there to contribute 80% of monthly sales in CNBH?\n\n**SQL query sample**:\nWith MonthlyStoreSales as (\n SELECT \n    month_id,\n    store_code,\n    SUM(amt) as amt \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    country = 'Mainland' \n AND store_type = 'BH' \n GROUP BY \n month_id,\n  store_code\n),\nMonthlyTotalSales as (\n SELECT \n    month_id,\n    SUM(amt) as total_amt \n FROM \n    MonthlyStoreSales \n GROUP BY \n month_id\n),\nStoreContributions as (\n SELECT \n    store_sales.month_id,\n store_sales.store_code,\n SUM(store_sales.amt) as store_amt,\n MonthlyTotalSales.total_amt,\n    SUM(store_sales.amt) / MonthlyTotalSales.total_amt * 100.0 AS contribution_percentage \n FROM \n    MonthlyStoreSales store_sales inner join MonthlyTotalSales on store_sales.month_id = MonthlyTotalSales.month_id \n GROUP BY \n store_sales.month_id,\n store_sales.store_code,\n MonthlyTotalSales.total_amt\n),\nCumulativeContributions AS (\n    SELECT \n        sc.month_id,\n        sc.store_code,\n        sc.contribution_percentage,\n        SUM(sc.store_amt) OVER (PARTITION BY sc.month_id  ORDER BY sc.store_amt DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_sales \n    FROM \n        StoreContributions sc\n),\nStoresContribution80Percent AS (\n    SELECT \n        cc.month_id,\n        COUNT(DISTINCT cc.store_code) AS contributing_stores_80_percent \n    FROM \n        CumulativeContributions cc\n    JOIN \n        MonthlyTotalSales m ON cc.month_id = m.month_id\n    WHERE \n        cc.cumulative_sales <= m.total_amt * 0.8\n    GROUP BY \n        cc.month_id\n)\nSELECT \n    month_id,\n    contributing_stores_80_percent \n FROM \n    StoresContribution80Percent \n ORDER BY \n    month_id desc\n;\n\n\n31",
+    "chunk_order_index": 29,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-20912f91ebcfc273fcf3f2d7a05a6376": {
+    "tokens": 192,
+    "content": "Query the territory with the best sales performance.\nterritory:categorize by country/channel/store_type;\nPerformance criteria: best achievement rate last week.\n\n**question sample**:\nWhich territory perform best?\n\n**SQL query sample**:\n SELECT \n    top 1 \n country,\n channel,\n store_type,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax ,\n SUM(amt_notax_target) as amt_notax_target, \n case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  {last week} \n GROUP BY \n country,\n channel,\n store_type \n HAVING \n    sales_amt >0 \n AND amt_ach is not null \n ORDER BY \n    amt_ach desc \n;\n\n\n32.1",
+    "chunk_order_index": 30,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-5e28352c2889ee9fd7a4ca32bf185bae": {
+    "tokens": 131,
+    "content": "Query the daily sales trend of a store for 30days.\n\n**question sample**:\nShow me the daily sales trend of tiktok?\n\n**SQL query sample**:\n SELECT \n    date_code,\n    SUM(amt) as sales_amt \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') \n AND (store_code like '%tiktok%' or  store_name like '%tiktok%')\n GROUP BY \n date_code\n ORDER BY \n    date_code\n;\n\n\n32.2",
+    "chunk_order_index": 31,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-0dcb489500add6f9f862eaced3823148": {
+    "tokens": 169,
+    "content": "Query the average basket size。（AOV）\n\n**question sample**:\nShow me the daily sales trend of tiktok? What is the average basket size?\n\n**SQL query sample**:\nWith daily_aov as (    \n SELECT \n     date_code,\n    CASE WHEN SUM(trans) = 0 then 0 ELSE SUM(amt_notax)/SUM(trans) END as AOV    \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') \n AND (store_code like '%tiktok%' or  store_name like '%tiktok%')  \n  GROUP BY \n    date_code\n )\n SELECT \n    avg(AOV) \n FROM daily_aov\n;\n\n\n32.2",
+    "chunk_order_index": 32,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-387d85953c1e4b1bbb46f2346b3fb8e2": {
+    "tokens": 167,
+    "content": "Query the average basket size。（AOV）\n\n**question sample**:\nShow me the daily sales trend of tiktok? What is the average basket size?\n\n**SQL query sample**:\nWith daily_aov as (    \n SELECT \n     date_code,\n    CASE WHEN SUM(trans) = 0 then 0 ELSE SUM(amt_notax)/SUM(trans) END as AOV    \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') \n AND (store_code like '%tiktok%' or  store_name like '%tiktok%')  \n  GROUP BY \n    date_code\n )\n SELECT \n    avg(AOV) \n FROM daily_aov\n;\n\n\n34",
+    "chunk_order_index": 33,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-3028065e784c7c5dab44db6b9fc73026": {
+    "tokens": 357,
+    "content": "Query the number of stores under each partner. Find the partner with the most stores and determine the partner sales percentage.\n\n**question sample**:\nWhich partner has the greatest number of BH partner store in CN? How many is it? What is its sales SOB%?\n\n**SQL query sample**:\n\nWITH PartnerBHStores AS (\n    SELECT \n        customer_name,\n        COUNT(*) AS bh_store_count\n    FROM \n        edw_dim_store_prod \n WHERE \n        date_code =TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') \n        AND  store_type = 'BH'\n        AND country = 'mainland'\n  AND channel = 'FP'\n    GROUP BY \n        customer_name\n),\nRankedPartners AS (\n    SELECT \n        customer_name,\n        bh_store_count,\n        RANK() OVER (ORDER BY bh_store_count DESC) AS rank\n    FROM \n        PartnerBHStores\n),\nPartnerSales AS (\n    SELECT \n        customer_name,\n        SUM(amt) AS total_sales\n    FROM \n        dm_fact_sales_chatbi\n    WHERE \n        customer_name IN (SELECT customer_name FROM RankedPartners WHERE rank = 1)\n    GROUP BY \n        customer_name\n),\nAllSales AS (\n    SELECT \n        SUM(amt) AS all_sales\n    FROM \n        dm_fact_sales_chatbi\n    WHERE\n        store_type = 'BH'\n        AND country = 'mainland'\n  AND channel = 'FP'\n)\nSELECT \n    RankedPartners.customer_name,\n    RankedPartners.bh_store_count,\n PartnerSales.total_sales as customer_sales,\n PartnerSales.total_sales/AllSales.all_sales * 100.0 AS sob_percentage \n FROM \n    RankedPartners ,\n PartnerSales,\n AllSales \n WHERE \n    rank = 1;\n\n\n35",
+    "chunk_order_index": 34,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-99e78c528535e614b21cfa35d1a34611": {
+    "tokens": 193,
+    "content": "Calculate the store age using the closing date and the opening date. If there is no closing date, use today's date\n\n**question sample**:\nWhat is the average age of our BH stores?\n\n**SQL query sample**:\nWITH StoreAges AS (\n    SELECT \n        store_last_code,\n        store_type,\n        cast(DATEDIFF(month,(CASE WHEN (open_date is null or open_date ='9999-12-31') THEN CURRENT_DATE ELSE open_date END),CASE WHEN (close_date is null or close_date ='9999-12-31') THEN CURRENT_DATE ELSE close_date END)/12 as decimal(7,1)) AS store_age\n    FROM \n        edw_dim_store store inner join edw_dim_channel channel \n  on store.channel_sid = channel.channel_sid \n    WHERE \n        store_type = 'BH' \n)\nSELECT \n    AVG(store_age) AS average_age \n FROM \n    StoreAges;\n\n\n36",
+    "chunk_order_index": 35,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-f7c0346faedbd65a209631b55aeaf568": {
+    "tokens": 231,
+    "content": "Query the average store productivity (effi).\nQuery the store productivity (effi).\nEffi=yearly sales(usd)/area*10.7639104\n\n**question sample**:\nWhat is the average store productivity of CN O&O BH as of Oct 2024?\n\n**SQL query sample**:\n    \nWith Store_effi as (\n SELECT \n country,\n channel,\n store_type,\n area,\n  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code <='2024-10-31'  \n AND country = 'Mainland' \n AND channel = 'O&O'  \n AND store_type = 'BH' \n GROUP BY \n country,\n channel,\n store_type,\n store_code,\n area\n)\nSELECT \n    AVG(effi) as Avg_effi \n FROM Store_effi\n;\n\n37",
+    "chunk_order_index": 36,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-c2dac4d1dc265533543b03029f0e8d5b": {
+    "tokens": 247,
+    "content": "Query the average comp store productivity (effi).\nQuery the comp store productivity (effi).\nEffi=yearly sales(usd)/area*10.7639104\n\n**question sample**:\nWhat is the average comp store productivity of CN O&O BH as of Oct 2024?\n\n**SQL query sample**:\nWith Store_effi as (\n SELECT \n country,\n channel,\n store_type,\n area,\n  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code <='2024-10-31' \n AND country = 'Mainland' \n AND channel = 'O&O'  \n AND store_type = 'BH' \n AND comp_flag ='Y' -- The store participating in the comp.\n GROUP BY \n country,\n channel,\n store_type,\n store_code,\n area\n)\nSELECT \n    AVG(effi) as Avg_effi \n FROM Store_effi\n;\n\n\n38",
+    "chunk_order_index": 37,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-2870c6bfbbe0d43340115e54a3b7e835": {
+    "tokens": 96,
+    "content": "Query the area（Size） of stores.\n\n**question sample**:\nWhat is the total store size in square feet for all the opening BH?\n\n**SQL query sample**:\n SELECT \n country,\n sum(area) as total_size\n FROM \n    edw_dim_store_prod \n WHERE \n    date_code =TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')  \n AND store_type = 'BH' \n AND open_flag ='open'\n GROUP BY \n country\n;\n\n\n39.1",
+    "chunk_order_index": 38,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-62968284ca90b684e9c3a2dfaa95f8db": {
+    "tokens": 78,
+    "content": "Query sales quantities by product attributes.\n\n**question sample**:\nHow many units do we sell in week 27? What is the division split?\n\n**SQL query sample**:\n SELECT \n division,\n    SUM(qty) as Units \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n week_id ='202527'  \n GROUP BY \n    division\n;\n\n\n39.2",
+    "chunk_order_index": 39,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-3c8bca7e29fd5fb4bcd7c7971cadb3c4": {
+    "tokens": 31,
+    "content": "Query the sales units group by gender.\n\n**question sample**:\nHow many units do we sell in week 27? What is the gender split?",
+    "chunk_order_index": 40,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-132650198b3473c8f7707cc8395164a6": {
+    "tokens": 57,
+    "content": "Query the sales units group by gender.\n\n**SQL query sample**:\n SELECT \n gender,\n    SUM(qty) as Units \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n week_id ='202527'  \n GROUP BY \n    gender\n;\n\n\n39.3",
+    "chunk_order_index": 41,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-9f2b2f037a9307feee7c38416677aad3": {
+    "tokens": 98,
+    "content": "Query the top performing products in a categories .\n\n**question sample**:\nWhich are the top 3 driving sports categories in week 27? \n\n**SQL query sample**:\n SELECT \n top 3 \n product_name,\n    SUM(amt) as sales \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n week_id ='202527'  \n AND key_stories like '%sports%' \n GROUP BY \n    product_name\n ORDER BY\n    sales desc\n;\n\n\n40",
+    "chunk_order_index": 42,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-3687b75627c85496af98a2c5673c8db1": {
+    "tokens": 768,
+    "content": "Query the store which weekly sales(WOW) drop, and show traffic/CR/ASP/UPT  of these stores.\n\n**question sample**:\nWhich KPI drive the weekly sales drop, traffic? CR? ASP? UPT?\n\n**SQL query sample**:\n SELECT \n country,\n SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n CASE WHEN SUM(COALESCE(lw_amt_notax,0)) =0 then 0 ELSE SUM(amt_notax)/SUM(COALESCE(lw_amt_notax,0))-1 END as sales_notax_wow , \n SUM(traffic) as traffic,  \n CASE WHEN SUM(COALESCE(lw_traffic,0)) =0 then 0 ELSE SUM(traffic)/SUM(COALESCE(lw_traffic,0))-1 END as traffic_wow ,  \n CASE WHEN SUM(COALESCE(traffic,0)) =0 then 0 ELSE SUM(case when traffic is not null  THEN trans else 0 END)/SUM(COALESCE(traffic,0)) END as CR , \n CASE WHEN SUM(COALESCE(lw_traffic,0)) =0 then 0 ELSE SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lw_traffic is not null  THEN lw_trans else 0 END)/SUM(COALESCE(lw_traffic,0)))-1 END as cr_wow, \n CASE WHEN SUM(COALESCE(trans,0))=0 THEN 0 ELSE  SUM(amt_notax)/SUM(COALESCE(trans,0)) END as AOV , \n CASE WHEN (SUM(COALESCE(trans,0))=0 or SUM(COALESCE(lw_trans,0))=0 or SUM(COALESCE(lw_amt_notax,0))=0) THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(trans,0))/(SUM(COALESCE(lw_amt_notax,0))/SUM(COALESCE(lw_trans,0)))-1 END as aov_wow ,  \n CASE WHEN SUM(COALESCE(qty,0))=0 THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(qty,0)) END as ASP ,  \n CASE WHEN (SUM(COALESCE(lw_qty,0))=0 or SUM(COALESCE(qty,0))=0 or SUM(COALESCE(lw_amt_notax,0))=0) THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(qty,0))/(SUM(COALESCE(lw_amt_notax,0))/SUM(COALESCE(lw_qty,0)))-1 END as asp_wow ,  \n CASE WHEN SUM(COALESCE(trans,0))=0 THEN 0 ELSE SUM(qty)/SUM(COALESCE(trans,0)) END as UPT ,\n CASE WHEN (SUM(COALESCE(lw_qty,0))=0 or SUM(COALESCE(trans,0))=0 or SUM(COALESCE(lw_trans,0))=0) THEN 0 ELSE SUM(qty)/SUM(COALESCE(trans,0))/(SUM(COALESCE(lw_qty,0))/SUM(COALESCE(lw_trans,0)))-1 END as UPT_wow   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today} \n GROUP BY \n    country\n HAVING\n    sales_notax_wow_per <0 \n ORDER BY \n    sales_notax_wow_per\n;\n\n\n41",
+    "chunk_order_index": 43,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-4553cfff197bfe9f94d88b1a83c7a61b": {
+    "tokens": 179,
+    "content": "Query the weekly sales growth rate for each country.\n\n**question sample**:\nWhich countries drive the weekly sales drop?\n\n**SQL query sample**:\n SELECT \n country,\n    SUM(amt) as sales_amt, \n SUM(amt_notax) as Sales_notax , \n SUM(lw_amt_notax) as Sales_notax_LW ,\n CASE WHEN SUM(COALESCE(lw_amt_notax,0)) =0 then 0 ELSE SUM(amt_notax)/SUM(COALESCE(lw_amt_notax,0))-1 END as sales_notax_wow_per   \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND {Today} \n GROUP BY \n    country\n HAVING\n    sales_notax_wow_per <0 \n ORDER BY \n    sales_notax_wow_per\n;\n\n\n42",
+    "chunk_order_index": 44,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-b5cc98488e3f2db1deead2394be8a009": {
+    "tokens": 203,
+    "content": "Query the average store productivity (effi).\nQuery the store productivity (effi).\nEffi=yearly sales(usd)/area*10.7639104\n\n**question sample**:\nWhat is the average store productivity for store opened equal or less than 1 year? \n\n**SQL query sample**:\nWith Store_effi as (\n SELECT \n store_code,\n area,\n  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    open_date >= DATEADD(year,-1,CURRENT_DATE)  \n AND open_flag ='open'   \n GROUP BY \n store_code,\n area\n)\nSELECT \n    AVG(effi) as Avg_effi\nFROM Store_effi\n;\n\n\n43",
+    "chunk_order_index": 45,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-0c98afc6725232094520bba35679a63c": {
+    "tokens": 240,
+    "content": "Query the store's sales and its share of the market within the respective country channel.\n\n**question sample**:\nHow In77 sales is comparing to country channel average?\n\n**SQL query sample**:\nWith store_sales as (    \n SELECT \n    country,\n channel,\n    store_code,\n store_name,\n    SUM(amt) as store_sales     \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    (store_code like '%In77%' or  store_name like '%In77%') \n  GROUP BY \n    country,\n channel,\n    store_code,\n store_name\n ),\n country_channel_sales as (  \n SELECT \n    total.country,\n total.channel,\n    SUM(total.amt) as total_sales    \n FROM \n    dm_fact_sales_chatbi total \n inner join store_sales store \n on total.country = store.country and total.channel = store.channel \n  GROUP BY \n    total.country,\n total.channel\n )\n SELECT \n    store_sales.country,\n store_sales.channel,\n    store_sales.store_code,\n store_sales.store_name,\n store_sales.store_sales,\n country_channel_sales.total_sales,\n store_sales.store_sales/country_channel_sales.total_sales as SOB\n FROM \n store_sales,\n country_channel_sales\n;\n\n\n44",
+    "chunk_order_index": 46,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-9d5725a2ff3da59a2d5e14de0ca06f18": {
+    "tokens": 411,
+    "content": "Query the sell-through rate of the product by country.\nProduct info could be the product's name, division, category(key_stories), or material.\n\n**question sample**:\nHow slipsspeed mega was performing in week 26 – week 27?\nWhich country had the best sell-through?\n\n**SQL query sample**:\nWith salesQty as (\n SELECT \n country,\n    SUM(qty) as sales_units \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n    week_id in ('202526','202527')\n AND (\n     product_name like '%slipspeed%' OR\n  division like '%slipspeed%' OR\n  key_stories like '%slipspeed%' OR\n  material like '%slipspeed%'\n )\n GROUP BY \n country\n),\nInvOfLastSaturday as (\n-- Get the onhand inventory of the most recent Saturday before the transaction starts.\n  SELECT \n country,\n    SUM(stock) as onhand_inv  \n FROM \n    dm_fact_onhand_chatbi \n WHERE \n    date_code =\n(Select \n TO_CHAR(MAX(date_code),'YYYY-MM-DD') -- edw_dim_calendar.date_code:type of date;dm_fact_onhand_chatbi.date_code:type of String(YYYY-MM-DD).\n FROM edw_dim_calendar \n WHERE \n week_id <'202526' AND weekday_name ='Saturday') \n AND (\n     product_name like '%slipspeed%' OR\n  division like '%slipspeed%' OR\n  key_stories like '%slipspeed%' OR\n  material like '%slipspeed%'\n )\n GROUP BY \n country\n)\nSelect \n top 1 \n sales.country,\n sales.sales_units,\n stock.onhand_inv,\n CASE WHEN stock.onhand_inv = 0 THEN 0 ELSE CAST(sales.sales_units*100.00/stock.onhand_inv as decimal(18,2)) END || '%' as sell_through \n FROM salesQty sales inner join InvOfLastSaturday stock \n on sales.country = stock.country\n ORDER BY\n sell_through DESC\n;\n\n\n45",
+    "chunk_order_index": 47,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-6c3893b3edbcff9b56ad201a19a094b4": {
+    "tokens": 593,
+    "content": "Query the performance of products in a specific category across different channels.\n\n**question sample**:\nWhat is the SOB of curry brand product in O&O BH, O&O FH and EC? In sale perspective and in unit perspective\n\n**SQL query sample**:\nWith OOBHsales  as (\n SELECT \n 'OOBH' as title ,\n sum(qty) as units, \n    SUM(amt) as sales\n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n    key_stories like '%curry%' \n AND channel = 'O&O' \n AND store_type = 'BH' \n ),\n OOFHsales  as (\n  SELECT \n  'OOFH' as title ,\n   sum(qty) as units,\n    SUM(amt) as sales \n FROM \n    dm_fact_sales_sku_chatbi \n WHERE \n    key_stories like '%curry%' \n  AND channel = 'O&O' \n  AND store_type = 'FH' \n ),\n  ECsales  as (\n  SELECT \n   'EC' as title , \n   sum(qty) as units,\n   SUM(amt) as sales  \n  FROM \n    dm_fact_sales_sku_chatbi \n  WHERE \n    key_stories like '%curry%' \n  AND channel = 'EC'  \n ),\n TotalSales as (\n  SELECT \n    sum(qty) as units, \n    SUM(amt) as sales \n  FROM \n    dm_fact_sales_sku_chatbi \n  WHERE \n    key_stories like '%curry%' \n AND\n ((channel = 'O&O' \n AND store_type = 'BH' ) or\n (channel = 'O&O' \n AND store_type = 'FH' ) or \n (channel = 'EC'  ))  \n )\n SELECT \n  OOBHsales.units as OOBH_units,\n  CAST(OOBHsales.units*1.00/TotalSales.units as decimal(18,2)) as OOBH_units_SOB,\n  OOBHsales.sales as OOBH_sales,\n  OOBHsales.sales/TotalSales.sales as OOBH_sales_SOB,\n  OOFHsales.units as OOFH_units,\n  CAST(OOFHsales.units*1.00/TotalSales.units as decimal(18,2)) as OOFH_units_SOB,\n  OOFHsales.sales as OOFH_sales,\n  OOFHsales.sales/TotalSales.sales as OOFH_sales_SOB,\n  ECsales.units as EC_units,\n  CAST(ECsales.units*1.00/TotalSales.units as decimal(18,2)) as EC_units_SOB,\n  ECsales.sales as EC_sales,\n  ECsales.sales/TotalSales.sales as EC_sales_SOB\n FROM\n  OOBHsales,\n  OOFHsales,\n  ECsales,\n  TotalSales\n;\n\n\n46",
+    "chunk_order_index": 48,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-a9acb5f9124edf223c82a2fc033962ad": {
+    "tokens": 125,
+    "content": "Query the number of new members recruited in period.\n\n**question sample**:\nHow many new members did we recruited in Sep 2024? \n\n**SQL query sample**:\n SELECT \n  count(distinct member_code)\n FROM\n  dm_member_chatbi\n WHERE \n  register_date_str between '2024-09-01' AND '2024-09-30';\n  \n\nThe fields and their data types that can be used in the table dm_member_chatbi.\n  birthday:string;format(YYYY-MM-DD).\n  register_date_str:date.\n  regist_date:String;format(YYYY-MM-DD).\n\n\n47",
+    "chunk_order_index": 49,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-e044b7e504a7e3cc554e4d79458f4454": {
+    "tokens": 240,
+    "content": "Query the number of return customers during a certain period.\nNumber of members who purchased during this period and had also purchased before this period.\n\n**question sample**:\nHow many return customers did we have in Sep 2024?\n\n**SQL query sample**:\nWITH PreviousPurchases AS (\n    SELECT DISTINCT member_code\n    FROM dm_member_sales_chatbi\n    WHERE transaction_date < '2024-09-01'\n),\n\nCurrentPurchases AS (\n    SELECT DISTINCT member_code\n    FROM dm_member_sales_chatbi\n    WHERE transaction_date BETWEEN '2024-09-01' AND '2024-09-30'\n)\n\n SELECT COUNT(DISTINCT CurrentPurchases.member_code)\n FROM CurrentPurchases\n JOIN PreviousPurchases\n ON CurrentPurchases.member_code = PreviousPurchases.member_code;\n \n\nThe fields and their data types that can be used in the table dm_member_sales_chatbi.\n  member_code:String.\n  transaction_date:date.\n  birthday:string;format(YYYY-MM-DD).\n  register_date_str:date.\n  regist_date:String;format(YYYY-MM-DD).\n\n\n48**question sample**:\nHow many repeat customers did we have in Sep 2024?",
+    "chunk_order_index": 50,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-1a2785fd7135475fe2f3bce65a0e1d76": {
+    "tokens": 134,
+    "content": "Query the number of repeat customers during a certain period.\nQuery the number of customers who made more than two purchases during this period.\n\n**SQL query sample**:\nWITH repeatMember AS (\n  SELECT DISTINCT\n    t1.member_code \n  FROM\n    dm_member_sales_chatbi t1 \n  WHERE\n    t1.transaction_date BETWEEN '2024-09-01' \n    AND '2024-09-30' \n  GROUP BY\n    t1.member_code \n  HAVING\n    COUNT ( t1.member_code ) > 1 \n) SELECT COUNT \n(member_code) AS repeat_member_count \n FROM\n  repeatMember;\n\n\n49",
+    "chunk_order_index": 51,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-69b69d3ab301d8939316d17a48929c72": {
+    "tokens": 604,
+    "content": "Query the distribution of new customers, return customers, and repeat customers during September 2024, and request a comparison with September 2023.\nNew Customers: Refers to customers making their first purchase.\nReturn Customers: Refers to customers who have made at least one previous purchase and made another purchase during the current period.\nRepeat Customers: Refers to customers who made multiple purchases during the current period.\n\n**question sample**:\nWhat is the customer split between new, return and repeat customer in Sep 2024? How does it compare to Sep 2023?\n\n**SQL query sample**:\nWITH Sep2024Transactions AS (\n SELECT *\n FROM dm_member_sales_chatbi\n WHERE transaction_date BETWEEN '2024-09-01' AND '2024-09-30'\n),\nSep2024HistoricalTransactions AS (\n SELECT DISTINCT member_code\n FROM dm_member_sales_chatbi\n WHERE transaction_date < '2024-09-01'\n),\nSep2024FirstTimeCustomers AS (\n SELECT DISTINCT member_code\n FROM Sep2024Transactions\n WHERE member_code NOT IN (SELECT member_code FROM Sep2024HistoricalTransactions)\n),\nSep2024ReturningCustomers AS (\n SELECT DISTINCT member_code\n FROM Sep2024Transactions\n WHERE member_code IN (SELECT member_code FROM Sep2024HistoricalTransactions)\n),\nSep2024RepeatCustomers AS (\n SELECT member_code\n FROM Sep2024Transactions\n GROUP BY member_code\n HAVING COUNT(*) > 1\n),\nSep2023Transactions AS (\nSELECT *\n FROM dm_member_sales_chatbi\n WHERE transaction_date BETWEEN '2023-09-01' AND '2023-09-30'\n),\nSep2023HistoricalTransactions AS (\nSELECT DISTINCT member_code \n FROM dm_member_sales_chatbi\n WHERE transaction_date < '2023-09-01'\n),\nSep2023FirstTimeCustomers AS (\n SELECT DISTINCT member_code\n FROM Sep2023Transactions\n WHERE member_code NOT IN (SELECT member_code FROM Sep2023HistoricalTransactions)\n),\n\nSep2023ReturningCustomers AS (\n SELECT DISTINCT member_code\n FROM Sep2023Transactions\n WHERE member_code IN (SELECT member_code FROM Sep2023HistoricalTransactions)\n),\n\nSep2023RepeatCustomers AS (\n SELECT member_code\n FROM Sep2023Transactions\n GROUP BY member_code\n HAVING COUNT(*) > 1\n)\nSELECT \n (SELECT COUNT(DISTINCT member_code) FROM Sep2024FirstTimeCustomers) AS Sep2024NewCustomers,\n (SELECT COUNT(DISTINCT member_code) FROM Sep2024ReturningCustomers) AS Sep2024ReturningCustomers,\n (SELECT COUNT(DISTINCT member_code) FROM Sep2024RepeatCustomers) AS Sep2024RepeatCustomers,\n (SELECT COUNT(DISTINCT member_code) FROM Sep2023FirstTimeCustomers) Sep2023NewCustomers,\n (SELECT COUNT(DISTINCT member_code) FROM Sep2023ReturningCustomers) AS Sep2023ReturningCustomers,\n (SELECT COUNT(DISTINCT member_code) FROM Sep2023RepeatCustomers) AS Sep2023RepeatCustomers;\n\n\n50",
+    "chunk_order_index": 52,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-81fd7ac2344ca6b16416bbcd699eb1c8": {
+    "tokens": 273,
+    "content": "Query the sales proportion of MFO products.\nSeason: Selling time from January to June is SS + the last two digits of the year (e.g., SS24); Selling time from July to December is FW + the last two digits of the year (e.g., FW24).\n\n**question sample**:\nWhat is the in-season MFO%? Today is 2024-11-01.\nWhat is the MFO% last week.\n\n**SQL query sample**:\nWith MFOSales as (    \n SELECT \n    'MFO' as title,\n    SUM(amt) as mfo_amt   \n FROM \n    dm_fact_sales_sku_chatbi  \n WHERE \n    date_code between '2024-07-01' AND '2024-11-01' \n\tAND product_line ='MFO' \n ),\n  TotalSales as (    \n SELECT \n    'Total' as title,\n    SUM(amt) as total_amt  \n FROM \n    dm_fact_sales_sku_chatbi  \n WHERE \n    date_code between '2024-07-01' AND '2024-11-01' \n )\n SELECT \n\t mfo_amt,\n\t total_amt,\n     CASE WHEN total_amt =0 THEN 0 ELSE mfo_amt/total_amt END as MFO_percent   \n FROM \n MFOSales,\n TotalSales\n;\n\n\n\n51",
+    "chunk_order_index": 53,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-b1d6fcec134475ca40c837345db1e00c": {
+    "tokens": 110,
+    "content": "Query data related to dates, including weekid, monthid, yearid, and weekdayname.\n\n**question sample**:\nQuery the weekend of FY week 27.\n\n**SQL query sample**:\nSelect \n date_code \n FROM edw_dim_calendar \n WHERE \n week_id ='202525' AND weekday_name ='Saturday'\n;\n\n**question sample**:\nQuery the week id of date.\n\n**SQL query sample**:\nSelect \n week_id \n FROM edw_dim_calendar \n WHERE \n date_code ='2024-10-25'\n;\n\n\n52",
+    "chunk_order_index": 54,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  },
+  "chunk-4062d0915416e50068fb9d9a566dfa97": {
+    "tokens": 141,
+    "content": "Query the demand sales .\nThe formula for the sales demand is: sales amt+return amt .\n\n**question sample**:\nwhat is the sales demand by store in week 34.\nwhat is the sales demand on store xxxx.\n\n**SQL query sample**:\n SELECT \n store_code,\n store_name,\n SUM(amt+amt_return) as demand_amt,\n SUM(amt_notax+amt_return_notax) as demand_amt_withouttax,\n SUM(amt_usd_notax+amt_return_usd_notax) as demand_amt_usd_withouttax \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    week_id = '202534' \n GROUP BY \n store_code,\n store_name\n ;",
+    "chunk_order_index": 55,
+    "full_doc_id": "doc-5493bf640009df365cc23bc6acfddd99"
+  }
+}

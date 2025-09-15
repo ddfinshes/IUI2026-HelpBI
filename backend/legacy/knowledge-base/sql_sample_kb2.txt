@@ -1,0 +1,395 @@
+### ID1 **description**:
+Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+-WTD / MTD / QTD / YTD sales vs Target?
+-what is the MTD sales achievement for China FP?
+-WTD / MTD / QTD / YTD sales vs F1 (target)? Means the target use the f1 target.
+
+### ID2 **description**:
+Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+Weekly comp growth % for sales / traffic / CR / AOV / ASP / UPT.
+what is the weekly sales comp in week 34?
+
+### ID3 **description**:
+Query the sales growth situation for a specific month, and certain conditions such as countries and channels can be specified. The comparison formula is: sales of this month / sales of last month - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What is the sales MOM% for APAC EC?
+
+### ID4 **description**:
+Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What is the % to go to achieve the month revenue?
+
+### ID5 **description**:
+Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+WoW growth% of sales / traffic / CR / AOV / ASP / UPT
+
+### ID6 **description**:
+Query the sales growth in a certain month, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this month / sales amount of last month - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+MoM growth% of sales / traffic / CR / AOV / ASP / UPT
+
+### ID7 **description**:
+Calculate the sales proportion according to the division attribute of the product, and at the same time compare it with the sales proportion of last week. Of course, it's also possible to only query the sales proportion. The sales proportion is displayed as a percentage with two decimal places. 
+
+**question sample**:
+SOB of APP / FTW / ACCS and how does it compare to last week?
+
+
+### ID8 **description**:
+Calculate the sales proportion according to certain key attributes of the products, and at the same time compare it with the proportions of sales amount and sales quantity of last week. Of course, it's also possible to only query the proportion of sales amount or the proportion of sales quantity. The proportion of sales amount is displayed as a percentage with two decimal places. 
+
+**question sample**:
+Key category sales SOB / Unit SOB and its performance vs  last week.
+
+### ID9 **description**:
+Query the sales proportion situation of MFO products. The sales proportion is displayed as a percentage with two decimal places. 
+
+**question sample**:
+What is the MFO% in week 27? How does it compare to last week and last year average?
+
+
+### ID10 **description**:
+Query the sales and target on store code or store name  and calculate the achievement rate.
+The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What was yesterday sales on store '1234'? Does it meet sales target?
+
+
+### ID11 **description**:
+Query the store which has the best wow sales growth%.
+
+**question sample**:
+Which store has the best wow sales growth%?
+
+
+### ID12 **description**:
+Query the store which  has the worst wow sales growth%.
+
+**question sample**:
+Which store has the worst wow sales growth%?
+
+
+### ID13 **description**:
+Query the product categories that contribute significantly to the weekly sales.
+
+**question sample**:
+Which category drive China BH revenue in week 27?
+
+
+### ID14 **description**:
+Query the sell-through rate of the product as of today.
+Query the sell through of the weekly frequency of commodities.
+sell-through: sales units( from last Sunday to today ) /(Inventory quantity of last Saturday + sales units( from last Sunday to today )),Display with two decimal places in percentage..
+
+**question sample**:
+What is the sell-through of 'CURRY' as of today?
+'CURRY' could be the product's name, division, category, or material.
+
+
+### ID15 **description**:
+Query the number of stores that have reached their weekly sales targets and calculate the percentage.
+Display with two decimal places in percentage.
+
+**question sample**:
+How many stores reach weekly sales target? Absolute store count and % of total
+
+
+### ID16 **description**:
+Query the discount level of this week.
+And show the Comparison to last week and last year channel average.
+
+**question sample**:
+What is the discount level of this week? How does it compare to last week and last year channel average?
+
+
+### ID17 **description**:
+Query the number of opening stores as of a date.
+
+**question sample**:
+How many opening stores do we have as of yyyymmdd?
+
+
+### ID18 **description**:
+Query the number of comp stores as of a date.
+
+**question sample**:
+How many comp stores do we have as of yyyymmdd?
+
+### ID19 **description**:
+Query the average store size .
+
+**question sample**:
+What is average China BH store size in FY24? What is average China BH comp store size in FY24?
+
+
+### ID20 **description**:
+Query the number of the new stores.
+The store information in edw_dim_store_prod is at a daily granularity, meaning the store information is repeated daily.
+
+**question sample**:
+How many new stores do we have in FY24?
+
+
+### ID21 **description**:
+Query the sales and target for stores , and calculate the achievement rate.
+amt_ach >0 : achieve the target；
+amt_ach <0 :did not achieve the target.
+
+**question sample**:
+Which stores did not meet sales target last week?
+
+### ID22 **description**:
+Query the sales and target for stores , and calculate the achievement rate.
+Query the sales performance after the store opened .
+
+**question sample**:
+Do we have any new store opened last week? When did it open and how did it perform?
+
+
+
+### ID23 **description**:
+Retrieve the traffic from the previous year for analysis.
+
+**question sample**:
+What is CN BH average monthly traffic per store?
+
+
+### ID24 **description**:
+Query the average opening time of store.
+
+**question sample**:
+What is the average opening time for existing CN BH?
+
+
+### ID25 **description**:
+Query the number of new stores opened within a specific time period.
+
+**question sample**:
+How many stores did we open in 2023?
+
+
+
+### ID27 **description**:
+Query the sales and target for stores , and calculate the achievement rate.
+
+**question sample**:
+Which one is the best performing EC platform in week 27? How good is it?
+
+
+### ID28 **description**:
+Query Top 10 stores with positive comp growth.
+ comp growth：compare with last year.
+ 
+**question sample**:
+Top 10 stores with positive comp growth
+
+### ID29 **description**:
+Query the bottom 10 stores with negative comp growth.
+ comp growth：compare with last year.
+ 
+**question sample**:
+Bottom 10 stores with negative comp growth
+
+
+### ID30 **description**:
+Query how many stores contribute to 80% of the monthly sales.
+
+**question sample**:
+How many stores are there to contribute 80% of monthly sales in CNBH?
+
+
+### ID31 **description**:
+Query the territory with the best sales performance.
+territory:categorize by country/channel/store_type;
+Performance criteria: best achievement rate last week.
+
+**question sample**:
+Which territory perform best?
+
+
+### ID32.1 **description**:
+Query the daily sales trend of a store for 30days.
+
+**question sample**:
+Show me the daily sales trend of tiktok?
+
+
+### ID32.2 **description**:
+Query the average basket size。（AOV）
+
+**question sample**:
+Show me the daily sales trend of tiktok? What is the average basket size?
+
+
+### ID34 **description**:
+Query the number of stores under each partner. Find the partner with the most stores and determine the partner sales percentage.
+
+**question sample**:
+Which partner has the greatest number of BH partner store in CN? How many is it? What is its sales SOB%?
+
+
+
+### ID35 **description**:
+Calculate the store age using the closing date and the opening date. If there is no closing date, use today's date
+
+**question sample**:
+What is the average age of our BH stores?
+
+
+
+### ID36 **description**:
+Query the average store productivity (effi).
+Query the store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average store productivity of CN O&O BH as of Oct 2024?
+
+### ID37 **description**:
+Query the average comp store productivity (effi).
+Query the comp store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average comp store productivity of CN O&O BH as of Oct 2024?
+
+
+
+### ID38 **description**:
+Query the area（Size） of stores.
+
+**question sample**:
+What is the total store size in square feet for all the opening BH?
+
+
+
+### ID39.1 **description**:
+Query sales quantities by product attributes.
+
+**question sample**:
+How many units do we sell in week 27? What is the division split?
+
+### ID39.2 **description**:
+Query the sales units group by gender.
+
+**question sample**:
+How many units do we sell in week 27? What is the gender split?
+
+ **description**:
+Query the sales units group by gender.
+
+
+
+### ID39.3 **description**:
+Query the top performing products in a categories .
+
+**question sample**:
+Which are the top 3 driving sports categories in week 27? 
+
+### ID40 **description**:
+Query the store which weekly sales(WOW) drop, and show traffic/CR/ASP/UPT  of these stores.
+
+**question sample**:
+Which KPI drive the weekly sales drop, traffic? CR? ASP? UPT?
+
+### ID41 **description**:
+Query the weekly sales growth rate for each country.
+
+**question sample**:
+Which countries drive the weekly sales drop?
+
+### ID42 **description**:
+Query the average store productivity (effi).
+Query the store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average store productivity for store opened equal or less than 1 year? 
+
+### ID43 **description**:
+Query the store's sales and its share of the market within the respective country channel.
+
+**question sample**:
+How In77 sales is comparing to country channel average?
+
+### ID44 **description**:
+Query the sell-through rate of the product by country.
+Product info could be the product's name, division, category(key_stories), or material.
+
+**question sample**:
+How slipsspeed mega was performing in week 26 – week 27?
+Which country had the best sell-through?
+
+### ID45 **description**:
+Query the performance of products in a specific category across different channels.
+
+**question sample**:
+What is the SOB of curry brand product in O&O BH, O&O FH and EC? In sale perspective and in unit perspective
+
+### ID46 **description**:
+Query the number of new members recruited in period.
+
+**question sample**:
+How many new members did we recruited in Sep 2024? 
+
+### ID47 **description**:
+Query the number of return customers during a certain period.
+Number of members who purchased during this period and had also purchased before this period.
+
+**question sample**:
+How many return customers did we have in Sep 2024?
+
+
+### ID48**question sample**:
+How many repeat customers did we have in Sep 2024?
+
+ **description**:
+Query the number of repeat customers during a certain period.
+Query the number of customers who made more than two purchases during this period.
+
+
+### ID49 **description**:
+Query the distribution of new customers, return customers, and repeat customers during September 2024, and request a comparison with September 2023.
+New Customers: Refers to customers making their first purchase.
+Return Customers: Refers to customers who have made at least one previous purchase and made another purchase during the current period.
+Repeat Customers: Refers to customers who made multiple purchases during the current period.
+
+**question sample**:
+What is the customer split between new, return and repeat customer in Sep 2024? How does it compare to Sep 2023?
+
+### ID50 **description**:
+Query the sales proportion of MFO products.
+Season: Selling time from January to June is SS + the last two digits of the year (e.g., SS24); Selling time from July to December is FW + the last two digits of the year (e.g., FW24).
+
+**question sample**:
+What is the in-season MFO%? Today is 2024-11-01.
+What is the MFO% last week.
+
+### ID51 **description**:
+Query data related to dates, including weekid, monthid, yearid, and weekdayname.
+
+**question sample**:
+Query the weekend of FY week 27.
+
+### ID52 **description**:
+Query the demand sales .
+The formula for the sales demand is: sales amt+return amt .
+
+**question sample**:
+what is the sales demand by store in week 34.
+what is the sales demand on store xxxx.
+
+
+
+
+

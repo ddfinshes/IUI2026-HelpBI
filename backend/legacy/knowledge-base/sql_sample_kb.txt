@@ -1,0 +1,1914 @@
+1**description**:
+Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+WTD: this week (from last Sunday to  yesterday).
+MTD:this month (from the 1st of this month to yesterday).
+QTD: this quarter (from the start of this quarter to yesterday) .
+YTD: this year (from the start of this year to yesterday) .
+Select the correct target fields required according to the user's questions:
+-F1 target:amt_notax_target_f1;
+-F2 target:amt_notax_target_f2;
+-F3 target:amt_notax_target_f3;
+-F4 target:amt_notax_target_f4.
+
+**question sample**:
+-WTD / MTD / QTD / YTD sales vs Target?
+-what is the MTD sales achievement for China FP?
+-WTD / MTD / QTD / YTD sales vs F1 (target)? Means the target use the f1 target.
+
+**SQL query sample**:
+ SELECT 
+ 'WTD' as period,
+ SUM(amt_notax) as withouttax_amount,
+ SUM(amt_notax_target) as target_amount,
+    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND CURRENT_DATE - INTERVAL '1 day'
+ UNION ALL 
+
+ SELECT 
+ 'MTD'  as period,
+ SUM(amt_notax) as withouttax_amount,
+ SUM(amt_notax_target) as target_amount,
+    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day'  
+
+ UNION ALL 
+
+ SELECT 
+ 'QTD' as period,
+ SUM(amt_notax) as withouttax_amount,
+ SUM(amt_notax_target) as target_amount,
+    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(DATE_TRUNC(QUARTER', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' 
+ 
+ UNION ALL 
+
+ SELECT 
+ 'YTD' as period,
+ SUM(amt_notax) as withouttax_amount,
+ SUM(amt_notax_target) as target_amount,
+    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(DATE_TRUNC('YEAR', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' 
+;
+
+2**description**:
+Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+Weekly comp growth % for sales / traffic / CR / AOV / ASP / UPT.
+what is the weekly sales comp in week 34?
+
+**SQL query sample**:
+ SELECT 
+ week_id,
+    SUM(amt) as sales_amt,  
+ SUM(amt_notax) as Sales_notax , 
+ SUM(amt_notax)/SUM(lyd_amt_notax)-1 as sales_comp_per ,  
+    SUM(traffic) as traffic,    
+ SUM(traffic)/SUM(lyd_traffic)-1 as traffic_comp_per , 
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lyd_traffic is not null  THEN lyd_trans else 0 END)/SUM(lyd_traffic))-1 as cr_comp_per , 
+ SUM(amt_notax)/SUM(trans) as AOV ,
+ SUM(amt_notax)/SUM(trans)/(SUM(lyd_amt_notax)/SUM(lyd_trans))-1 as aov_comp_per ,   
+ SUM(amt_notax)/SUM(qty) as ASP,  
+ SUM(amt_notax)/SUM(qty)/(SUM(lyd_amt_notax)/SUM(lyd_qty))-1 as asp_comp_per ,  
+ SUM(qty)/SUM(trans) as UPT ,
+ SUM(qty)/SUM(trans)/(SUM(lyd_qty)/SUM(lyd_trans))-1 as UPT_comp_per   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    week_id ='202534'  
+    AND comp_flag ='Y' -- The store participating in the comp. 
+ GROUP BY 
+    week_id
+;
+
+
+3**description**:
+Query the sales growth situation for a specific month, and certain conditions such as countries and channels can be specified. The comparison formula is: sales of this month / sales of last month - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What is the sales MOM% for APAC EC?
+
+**SQL query sample**:
+ SELECT 
+ month_id,
+    SUM(amt) as sales_amt,  
+ SUM(amt_notax) as Sales_notax , 
+ SUM(amt_notax)/SUM(lm_amt_notax)-1 as sales_notax_mom_per   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  
+ GROUP BY 
+    month_id
+;
+
+
+4**description**:
+Query the achievement rate of sales within a certain period of time. The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What is the % to go to achieve the month revenue?
+
+**SQL query sample**:
+ SELECT 
+ TO_CHAR(CURRENT_DATE, 'YYYY-MM') AS title,
+    SUM(amt) as amt, 
+ SUM(amt_notax) as amt_notax , 
+ SUM(amt_notax_target) as amt_notax_target,
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code BETWEEN TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  
+ GROUP BY 
+    TO_CHAR(CURRENT_DATE, 'YYYY-MM')
+;
+
+
+5**description**:
+Query the sales growth in a certain week, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this week / sales amount of last week - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+WoW growth% of sales / traffic / CR / AOV / ASP / UPT
+
+**SQL query sample**:
+ SELECT 
+ week_id,
+    SUM(amt) as amt, 
+ SUM(amt_notax) as amt_notax ,
+ SUM(amt_notax)/SUM(lw_amt_notax)-1 as sales_notax_wow_per ,  
+    SUM(traffic) as traffic,   
+ SUM(traffic)/SUM(lw_traffic)-1 as traffic_wow_per ,   
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lw_traffic is not null  THEN lw_trans else 0 END)/SUM(lw_traffic))-1 as cr_wow_per ,  
+ SUM(amt_notax)/SUM(trans) as AOV ,  
+ SUM(amt_notax)/SUM(trans)/(SUM(lw_amt_notax)/SUM(lw_trans))-1 as aov_wow_per ,  
+ SUM(amt_notax)/SUM(qty) as ASP, 
+ SUM(amt_notax)/SUM(qty)/(SUM(lw_amt_notax)/SUM(lw_qty))-1 as asp_wow_per ,   
+ SUM(qty)/SUM(trans) as UPT ,
+ SUM(qty)/SUM(trans)/(SUM(lw_qty)/SUM(lw_trans))-1 as UPT_wow_per   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today} 
+ GROUP BY 
+    week_id
+;
+
+
+6**description**:
+Query the sales growth in a certain month, including indicators such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), UPT (Units Per Transaction), etc. Of course, it's also possible to query only one of these indicators. The comparison formula is: sales amount of this month / sales amount of last month - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+MoM growth% of sales / traffic / CR / AOV / ASP / UPT
+
+**SQL query sample**:
+ SELECT 
+ month_id,
+    SUM(amt) as amt, 
+ SUM(amt_notax) as amt_notax , 
+ SUM(amt_notax)/SUM(lm_amt_notax)-1 as amt_notax_mom_per ,  
+    SUM(traffic) as traffic,  
+ SUM(traffic)/SUM(lm_traffic)-1 as traffic_mom_per ,   
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR ,  
+ SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lm_traffic is not null  THEN lm_trans else 0 END)/SUM(lm_traffic))-1 as cr_mom_per ,  
+ SUM(amt_notax)/SUM(trans) as AOV ,
+ SUM(amt_notax)/SUM(trans)/(SUM(lm_amt_notax)/SUM(lm_trans))-1 as aov_mom_per ,   
+ SUM(amt_notax)/SUM(qty) as ASP,  
+ SUM(amt_notax)/SUM(qty)/(SUM(lm_amt_notax)/SUM(lm_qty))-1 as asp_mom_per ,   
+ SUM(qty)/SUM(trans) as UPT ,
+ SUM(qty)/SUM(trans)/(SUM(lm_qty)/SUM(lm_trans))-1 as UPT_mom_per    
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  
+ GROUP BY 
+    month_id
+;
+
+
+7**description**:
+Calculate the sales proportion according to the division attribute of the product, and at the same time compare it with the sales proportion of last week. Of course, it's also possible to only query the sales proportion. The sales proportion is displayed as a percentage with two decimal places. 
+
+**question sample**:
+SOB of APP / FTW / ACCS and how does it compare to last week?
+
+**SQL query sample**:
+WITH DivisionSales AS (
+ SELECT 
+ division,
+    SUM(amt) as TotalAmount, 
+    SUM(lw_amt) as LWTotalAmount 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+ date_code  Between {1st of this week} AND {Today} 
+    AND division in ('Apparel','Footwear','Accessories')   
+ GROUP BY 
+    division
+ ),
+ TotalSales AS (
+    SELECT 
+        SUM(TotalAmount) AS GrandTotal,
+  SUM(LWTotalAmount) AS LWGrandTotal 
+    FROM 
+        DivisionSales
+)
+SELECT 
+    ds.division,
+    ds.TotalAmount,
+    CAST(ds.TotalAmount / ts.GrandTotal * 100.0 as decimal(7,2))  ||'%' AS PercentageOfTotal,
+ ds.LWTotalAmount,
+    CAST(ds.LWTotalAmount / ts.LWGrandTotal * 100.0 as decimal(7,2))  ||'%' AS LWPercentageOfTotal  
+ FROM 
+    DivisionSales ds,
+    TotalSales ts
+ ORDER BY 
+    ds.TotalAmount DESC;
+
+
+8**description**:
+Calculate the sales proportion according to certain key attributes of the products, and at the same time compare it with the proportions of sales amount and sales quantity of last week. Of course, it's also possible to only query the proportion of sales amount or the proportion of sales quantity. The proportion of sales amount is displayed as a percentage with two decimal places. 
+
+**question sample**:
+Key category sales SOB / Unit SOB and its performance vs  last week.
+
+**SQL query sample**:
+WITH categorySales AS (
+ SELECT 
+ key_stories,
+    SUM(amt) as TotalAmount,
+    SUM(lw_amt) as LWTotalAmount 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+ date_code  Between {1st of this week} AND {Today} 
+ GROUP BY 
+    key_stories
+ ),
+ TotalSales AS (
+    SELECT 
+        SUM(TotalAmount) AS GrandTotal,
+  SUM(LWTotalAmount) AS LWGrandTotal 
+    FROM 
+        categorySales
+)
+SELECT 
+    ds.key_stories,
+    ds.TotalAmount,
+    CAST(ds.TotalAmount / ts.GrandTotal * 100.0 as decimal(7,2))  ||'%' AS PercentageOfTotal,
+ ds.LWTotalAmount,
+    CAST(ds.LWTotalAmount / ts.LWGrandTotal * 100.0 as decimal(7,2))  ||'%' AS LWPercentageOfTotal 
+ FROM 
+    categorySales ds,
+    TotalSales ts
+ ORDER BY 
+    ds.TotalAmount DESC;
+ 
+
+9**description**:
+Query the sales proportion situation of MFO products. The sales proportion is displayed as a percentage with two decimal places. 
+
+**question sample**:
+What is the MFO% in week 27? How does it compare to last week and last year average?
+
+**SQL query sample**:
+WITH MFOSales202527 AS ( SELECT 'MFO' AS title, SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  
+week_id = '202527' AND product_line = 'MFO' ),
+TotalSales202527 AS ( SELECT 'Total' AS title, SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  
+ week_id = '202527' ),
+MFOSales202526 AS ( SELECT SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  
+ week_id = '202526' AND product_line = 'MFO' ),
+TotalSales202526 AS ( SELECT SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  
+ week_id = '202526' ),
+MFOSalesly AS ( SELECT SUM ( amt ) AS mfo_amt FROM dm_fact_sales_sku_chatbi WHERE  
+ year_id = '2024' AND product_line = 'MFO' ),
+TotalSalesly AS ( SELECT SUM ( amt ) AS total_amt FROM dm_fact_sales_sku_chatbi WHERE  
+ year_id = '2024' ) SELECT
+( SELECT CASE WHEN TotalSales202527.total_amt = 0 THEN 0 ELSE MFOSales202527.mfo_amt / TotalSales202527.total_amt END  FROM MFOSales202527, TotalSales202527 ) AS MFO_amt_per202527,
+( SELECT CASE WHEN TotalSales202526.total_amt = 0 THEN 0 ELSE MFOSales202526.mfo_amt / TotalSales202526.total_amt END  FROM MFOSales202526, TotalSales202526 ) AS MFO_amt_per202526,
+( SELECT CASE WHEN TotalSalesly.total_amt = 0 THEN 0 ELSE MFOSalesly.mfo_amt / TotalSalesly.total_amt END  FROM MFOSalesly, TotalSalesly ) AS MFO_amt_perlastyear
+;
+
+
+10**description**:
+Query the sales and target on store code or store name  and calculate the achievement rate.
+The formula for the sales achievement rate is: sales amount / target sales amount - 1, and it is displayed as a percentage with two decimal places.
+
+**question sample**:
+What was yesterday sales on store '1234'? Does it meet sales target?
+
+**SQL query sample**:
+ SELECT 
+ date_code,
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax ,
+ SUM(amt_notax_target),
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code = TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')  
+    AND (store_code like '%1234%'   
+     OR store_name like '%1234%' )  
+ GROUP BY 
+    date_code,
+ store_code,
+ store_name
+ ;
+
+
+11**description**:
+Query the store which has the best wow sales growth%.
+
+**question sample**:
+Which store has the best wow sales growth%?
+
+**SQL query sample**:
+ SELECT 
+    top 5 
+ week_id,
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt,
+ SUM(amt_notax) as Sales_notax , 
+ SUM(lw_amt_notax) as LW_sales_notax , 
+ case when SUM(lw_amt_notax) =0 then 0 else  SUM(amt_notax)/SUM(lw_amt_notax)-1 end as sales_notax_wow_per  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today}
+ AND lw_amt_notax >0 
+    AND amt_notax >0 
+ GROUP BY 
+    week_id,
+ store_code,
+ store_name
+ ORDER BY 
+    sales_notax_wow_per DESC
+;
+
+
+12**description**:
+Query the store which  has the worst wow sales growth%.
+
+**question sample**:
+Which store has the worst wow sales growth%?
+
+**SQL query sample**:
+ SELECT 
+    top 5 
+ week_id,
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(lw_amt_notax) as LW_sales_notax , 
+ case when SUM(lw_amt_notax) =0 then 0 else  SUM(amt_notax)/SUM(lw_amt_notax)-1 end as sales_notax_wow_per 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today} 
+ AND lw_amt_notax >0 
+    AND amt_notax >0 
+ GROUP BY 
+    week_id,
+ store_code,
+ store_name
+ ORDER BY 
+    sales_notax_wow_per ASC
+;
+
+
+13**description**:
+Query the product categories that contribute significantly to the weekly sales.
+
+**question sample**:
+Which category drive China BH revenue in week 27?
+
+**SQL query sample**:
+ SELECT 
+    top 5 
+ key_stories,
+    SUM(amt) as sales_amt 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+    week_id ='202527' 
+ AND country = 'Mainland' 
+ AND store_type = 'BH' 
+ GROUP BY 
+ key_stories
+ ORDER BY 
+    SUM(amt) DESC
+;
+
+
+14**description**:
+Query the sell-through rate of the product as of today.
+Query the sell through of the weekly frequency of commodities.
+sell-through: sales units( from last Sunday to today ) /(Inventory quantity of last Saturday + sales units( from last Sunday to today )),Display with two decimal places in percentage..
+
+**question sample**:
+What is the sell-through of 'CURRY' as of today?
+'CURRY' could be the product's name, division, category, or material.
+
+**SQL query sample**:
+With salesQty as (
+ SELECT 
+ product_name,
+    SUM(qty) as sales_units 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+    date_code between {1st of this week} AND {today}
+ AND (
+     product_name like '%CURRY%' OR
+  division like '%CURRY%' OR
+  key_stories like '%CURRY%' OR
+  material like '%CURRY%'
+ )
+ GROUP BY 
+ product_name
+),
+InvOfLastSaturday as (
+-- Get the onhand inventory of the most recent Saturday before the transaction starts.
+  SELECT 
+ country,
+    SUM(stock) as onhand_inv  
+ FROM 
+    dm_fact_onhand_chatbi 
+ WHERE 
+    date_code =
+(Select 
+ TO_CHAR(MAX(date_code),'YYYY-MM-DD') -- edw_dim_calendar.date_code:type of date;dm_fact_onhand_chatbi.date_code:type of String(YYYY-MM-DD).
+ FROM edw_dim_calendar 
+ WHERE 
+ date_code <{today} AND weekday_name ='Saturday') 
+ AND (
+     product_name like '%CURRY%' OR
+  division like '%CURRY%' OR
+  key_stories like '%CURRY%' OR
+  material like '%CURRY%'
+ )
+ GROUP BY 
+ product_name
+)
+ Select 
+ sales.product_name,
+ sales.sales_units,
+ stock.onhand_inv,
+ CASE WHEN stock.onhand_inv = 0 THEN 0 ELSE CAST(sales.sales_units*100.00/stock.onhand_inv as decimal(18,2)) END || '%' as sell_through 
+ FROM salesQty sales inner join InvOfLastSaturday stock 
+ on sales.product_name = stock.product_name
+;
+
+
+15**description**:
+Query the number of stores that have reached their weekly sales targets and calculate the percentage.
+Display with two decimal places in percentage.
+
+**question sample**:
+How many stores reach weekly sales target? Absolute store count and % of total
+
+**SQL query sample**:
+WITH StoreSales AS (
+ SELECT 
+ store_code,
+    SUM(amt_notax) as TotalAmountNet,
+    SUM(amt_notax_target) as TotalTargetNet 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+ date_code  Between {1st of this week} AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') 
+ GROUP BY 
+    store_code
+ ),
+ ReachStore AS (
+    SELECT 
+        count(DISTINCT store_code) as reachcount 
+    FROM 
+        StoreSales
+ WHERE 
+     TotalAmountNet>=TotalTargetNet
+),
+ ALLStore AS (
+    SELECT 
+        count(DISTINCT store_code) as allcount 
+    FROM 
+        StoreSales
+)
+SELECT 
+    ds.reachcount as reached_store,
+    ts.allcount as all_store,
+    CAST(ds.reachcount*1.00 / ts.allcount*100.0 as decimal(7,2)) ||'%' AS PercentageOfTotal 
+ FROM 
+    ReachStore ds,
+    ALLStore ts;
+
+
+16**description**:
+Query the discount level of this week.
+And show the Comparison to last week and last year channel average.
+
+**question sample**:
+What is the discount level of this week? How does it compare to last week and last year channel average?
+
+**SQL query sample**:
+With twdis as (
+    SELECT
+ week_id,
+ channel,
+    SUM(amt)/SUM(orig_price)-1 as tw_discount  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today} 
+ GROUP BY 
+    week_id,
+ channel
+),
+    Lwdis as (
+ SELECT
+ channel,
+    SUM(amt)/SUM(orig_price)-1 as lw_discount 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between DATEADD(day,-7,{last Sunday}) AND DATEADD(day,-7,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) 
+ GROUP BY 
+ channel
+),
+LMdis as (
+    SELECT
+ channel,
+    SUM(amt)/SUM(orig_price)-1 as lm_discount 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between DATEADD(month,-1,{1st of this week}) AND DATEADD(month,-1,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) 
+ GROUP BY 
+ channel
+),
+LYdis as (
+SELECT
+ channel,
+    SUM(amt)/SUM(orig_price)-1 as ly_discount 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between DATEADD(year,-1,{1st of this week}) AND DATEADD(year,-1,TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')) 
+ GROUP BY 
+ channel
+)
+
+ SELECT 
+ tw.week_id,
+ tw.channel,
+    tw.tw_discount , 
+ lw.lw_discount , 
+ lm.lm_discount ,  
+    ly.ly_discount  
+ FROM 
+    twdis tw left join lwdis lw on tw.channel=lw.channel 
+    left join lmdis lm on tw.channel=lm.channel 
+    left join lydis ly on tw.channel=ly.channel 
+;
+
+
+17**description**:
+Query the number of opening stores as of a date.
+
+**question sample**:
+How many opening stores do we have as of yyyymmdd?
+
+**SQL query sample**:
+ SELECT 
+    store.country,
+ count(store.store_code) as storecount 
+ FROM 
+    edw_dim_store_prod store inner join edw_dim_calendar calendar
+ on store.date_sid = calendar.date_sid
+ WHERE 
+    calendar.date_code = 'yyyy-mm-dd' 
+    AND store.open_flag ='open' 
+ GROUP BY 
+    store.country
+ ORDER BY 
+    count(store.store_code) DESC
+;
+
+18**description**:
+Query the number of comp stores as of a date.
+
+**question sample**:
+How many comp stores do we have as of yyyymmdd?
+
+**SQL query sample**:
+ SELECT 
+    store.country,
+ count(store.store_code) as storecount 
+ FROM 
+    edw_dim_store_prod store inner join edw_dim_calendar calendar
+ on store.date_sid = calendar.date_sid
+ WHERE 
+    calendar.date_code = 'yyyy-mm-dd' 
+    AND store.comp_flag ='Y' -- The store participating in the comp.
+ GROUP BY 
+    store.country
+ ORDER BY 
+    count(store.store_code) DESC
+;
+
+19**description**:
+Query the average store size .
+
+**question sample**:
+What is average China BH store size in FY24? What is average China BH comp store size in FY24?
+
+**SQL query sample**:
+ SELECT 
+    'FY24store' as title,
+ AVG(store.area) as storearea 
+ FROM 
+    edw_dim_store_prod store inner join edw_dim_calendar calendar
+ on store.date_sid = calendar.date_sid
+ WHERE 
+    calendar.date_code between '2023-04-01' AND '2024-03-31' 
+ AND store.store_type = 'BH' 
+ UNION ALL 
+ SELECT 
+    'FY24compstore' as title,
+ AVG(store.area) as storearea 
+ FROM 
+    edw_dim_store_prod store inner join edw_dim_calendar calendar
+ on store.date_sid = calendar.date_sid
+ WHERE 
+    calendar.date_code between '2023-04-01' AND '2024-03-31' 
+ AND store.store_type = 'BH' 
+ AND store.comp_flag = 'Y' -- The store participating in the comp.
+;
+
+
+20**description**:
+Query the number of the new stores.
+The store information in edw_dim_store_prod is at a daily granularity, meaning the store information is repeated daily.
+
+**question sample**:
+How many new stores do we have in FY24?
+
+**SQL query sample**:
+With openstore as (
+    SELECT 
+ store.store_master_code,
+ min(store.open_date) as open_date 
+ FROM 
+    edw_dim_store_prod store inner join edw_dim_calendar calendar
+ on store.date_sid = calendar.date_sid
+ WHERE 
+    calendar.date_code between '2023-04-01' AND '2024-03-31' 
+ GROUP BY 
+    store.store_master_code
+)
+ SELECT 
+ count(store_master_code) 
+ FROM 
+    openstore
+ WHERE 
+    open_date between '2023-04-01' AND '2024-03-31'
+;
+
+
+21**description**:
+Query the sales and target for stores , and calculate the achievement rate.
+amt_ach >0 : achieve the target；
+amt_ach <0 :did not achieve the target.
+
+**question sample**:
+Which stores did not meet sales target last week?
+
+**SQL query sample**:
+ SELECT 
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(amt_notax_target) as amt_notax_target, 
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  {last last Sunday} and {last Saturday} 
+ GROUP BY 
+ store_code,
+ store_name
+ HAVING 
+    amt_ach >0 
+ ORDER BY 
+    amt_ach desc
+;
+
+
+22**description**:
+Query the sales and target for stores , and calculate the achievement rate.
+Query the sales performance after the store opened .
+
+**question sample**:
+Do we have any new store opened last week? When did it open and how did it perform?
+
+**SQL query sample**:
+ SELECT 
+ store_code,
+ store_name,
+ open_date,
+    SUM(amt) as sales_amt_ToNow, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(amt_notax_target) as amt_notax_target, 
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code >= {last last Sunday}
+    AND open_date between  {last last Sunday} and {last Saturday} 
+ GROUP BY 
+ store_code,
+ store_name,
+ open_date
+ ORDER BY 
+    SUM(amt) desc
+;
+
+
+23**description**:
+Retrieve the traffic from the previous year for analysis.
+
+**question sample**:
+What is CN BH average monthly traffic per store?
+
+**SQL query sample**:
+With Store_traffic_monthly as (
+ SELECT 
+    country,
+ channel,
+ store_type,
+ store_code,
+    SUM(traffic)/12 as traffic_monthly  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  {last year day} and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') 
+ AND country = 'Mainland' 
+ AND store_type = 'BH' 
+ GROUP BY 
+ country,
+ channel,
+ store_type,
+ store_code
+)
+SELECT 
+    country,
+ channel,
+ store_type,
+    AVG(traffic_monthly) as Avg_traffic_monthly  
+ FROM Store_traffic_monthly 
+ GROUP BY 
+    country,
+ channel,
+ store_type
+;
+
+
+24**description**:
+Query the average opening time of store.
+
+**question sample**:
+What is the average opening time for existing CN BH?
+
+**SQL query sample**:
+With Store_opentime as (
+ SELECT 
+    store.country,
+ channel.channel_name as channel,
+ store.store_type,
+ store.store_last_code as store_code,
+    DATEDIFF(day, store.open_date, CASE WHEN (store.close_date is null or store.close_date ='9999-12-31') THEN CURRENT_DATE ELSE store.close_date END) as open_day   
+ FROM 
+    edw_dim_store store inner join edw_dim_channel channel on store.channel_sid = channel.channel_sid 
+ WHERE 
+    store.country = 'Mainland' 
+ AND store.store_type = 'BH' 
+ GROUP BY 
+ store.country,
+ channel.channel_name,
+ store.store_type,
+ store.store_last_code,
+    store.open_date,
+    store.close_date
+)
+SELECT 
+    country,
+ channel,
+ store_type,
+    AVG(open_day) as Avg_open_time 
+ FROM Store_opentime
+ GROUP BY 
+    country,
+ channel,
+ store_type
+;
+
+
+25**description**:
+Query the number of new stores opened within a specific time period.
+
+**question sample**:
+How many stores did we open in 2023?
+
+**SQL query sample**:
+    SELECT 
+ store.country,
+ count(distinct store.store_master_code) as storecount 
+ FROM 
+    edw_dim_store_prod store
+ WHERE 
+    store.open_date between '2023-01-01' AND '2023-12-31' 
+ AND store.store_master_code not in (
+ Select distinct store_master_code from edw_dim_store_prod where open_date < '2023-01-01' AND open_flag ='open')
+ GROUP BY 
+    store.country
+;
+
+
+27**description**:
+Query the sales and target for stores , and calculate the achievement rate.
+
+**question sample**:
+Which one is the best performing EC platform in week 27? How good is it?
+
+**SQL query sample**:
+ SELECT 
+    top 1 
+ week_id,
+ store_code,
+ store_name,
+ SUM(amt) as sales_amt,
+ SUM(amt_notax) as Sales_notax ,
+ SUM(amt_notax_target) as amt_notax_target, 
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach,  
+ SUM(lw_amt_notax) as sales_notax_LW ,  
+ CASE WHEN SUM(lw_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lw_amt_notax)-1 END as sales_notax_wow_per  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    week_id ='202527' 
+ AND channel = 'EC' 
+ GROUP BY 
+ week_id,
+ store_code,
+ store_name 
+ HAVING 
+    sales_amt >0 
+ AND amt_ach is not null 
+ ORDER BY 
+    amt_ach desc 
+;
+
+28**description**:
+Query Top 10 stores with positive comp growth.
+ comp growth：compare with last year.
+ 
+**question sample**:
+Top 10 stores with positive comp growth
+
+**SQL query sample**:
+ SELECT 
+    top 10 
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(lyd_amt_notax) as sales_notax_LYD , 
+ CASE WHEN SUM(lyd_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lyd_amt_notax)-1 END as sales_comp   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(CURRENT_DATE - INTERVAL '1 YEAR','YYYY-MM-DD')  AND TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') 
+ AND comp_flag = 'Y' -- The store participating in the comp.
+ GROUP BY 
+ store_code,
+ store_name 
+ HAVING 
+    sales_amt >0 
+ AND sales_comp > 0 
+ ORDER BY 
+    sales_comp desc 
+;
+ ORDER BY 
+    sales_comp desc 
+;
+
+29**description**:
+Query the bottom 10 stores with negative comp growth.
+ comp growth：compare with last year.
+ 
+**question sample**:
+Bottom 10 stores with negative comp growth
+
+**SQL query sample**:
+ SELECT 
+    top 10 
+ store_code,
+ store_name,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(lyd_amt_notax) as sales_notax_LYD , 
+ CASE WHEN SUM(lyd_amt_notax) =0 then 0 else SUM(amt_notax)/SUM(lyd_amt_notax)-1 END as sales_comp  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between TO_CHAR(CURRENT_DATE - INTERVAL '1 YEAR','YYYY-MM-DD')  AND TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+ AND comp_flag = 'Y' -- The store participating in the comp.
+ GROUP BY 
+ store_code,
+ store_name 
+ HAVING 
+    sales_amt >0 
+ AND sales_notax_LYD >0 
+ AND sales_comp < 0  
+ ORDER BY 
+    sales_comp  
+;
+
+
+30**description**:
+Query how many stores contribute to 80% of the monthly sales.
+
+**question sample**:
+How many stores are there to contribute 80% of monthly sales in CNBH?
+
+**SQL query sample**:
+With MonthlyStoreSales as (
+ SELECT 
+    month_id,
+    store_code,
+    SUM(amt) as amt 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    country = 'Mainland' 
+ AND store_type = 'BH' 
+ GROUP BY 
+ month_id,
+  store_code
+),
+MonthlyTotalSales as (
+ SELECT 
+    month_id,
+    SUM(amt) as total_amt 
+ FROM 
+    MonthlyStoreSales 
+ GROUP BY 
+ month_id
+),
+StoreContributions as (
+ SELECT 
+    store_sales.month_id,
+ store_sales.store_code,
+ SUM(store_sales.amt) as store_amt,
+ MonthlyTotalSales.total_amt,
+    SUM(store_sales.amt) / MonthlyTotalSales.total_amt * 100.0 AS contribution_percentage 
+ FROM 
+    MonthlyStoreSales store_sales inner join MonthlyTotalSales on store_sales.month_id = MonthlyTotalSales.month_id 
+ GROUP BY 
+ store_sales.month_id,
+ store_sales.store_code,
+ MonthlyTotalSales.total_amt
+),
+CumulativeContributions AS (
+    SELECT 
+        sc.month_id,
+        sc.store_code,
+        sc.contribution_percentage,
+        SUM(sc.store_amt) OVER (PARTITION BY sc.month_id  ORDER BY sc.store_amt DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_sales 
+    FROM 
+        StoreContributions sc
+),
+StoresContribution80Percent AS (
+    SELECT 
+        cc.month_id,
+        COUNT(DISTINCT cc.store_code) AS contributing_stores_80_percent 
+    FROM 
+        CumulativeContributions cc
+    JOIN 
+        MonthlyTotalSales m ON cc.month_id = m.month_id
+    WHERE 
+        cc.cumulative_sales <= m.total_amt * 0.8
+    GROUP BY 
+        cc.month_id
+)
+SELECT 
+    month_id,
+    contributing_stores_80_percent 
+ FROM 
+    StoresContribution80Percent 
+ ORDER BY 
+    month_id desc
+;
+
+
+31**description**:
+Query the territory with the best sales performance.
+territory:categorize by country/channel/store_type;
+Performance criteria: best achievement rate last week.
+
+**question sample**:
+Which territory perform best?
+
+**SQL query sample**:
+ SELECT 
+    top 1 
+ country,
+ channel,
+ store_type,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax ,
+ SUM(amt_notax_target) as amt_notax_target, 
+ case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as amt_ach  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  {last week} 
+ GROUP BY 
+ country,
+ channel,
+ store_type 
+ HAVING 
+    sales_amt >0 
+ AND amt_ach is not null 
+ ORDER BY 
+    amt_ach desc 
+;
+
+
+32.1**description**:
+Query the daily sales trend of a store for 30days.
+
+**question sample**:
+Show me the daily sales trend of tiktok?
+
+**SQL query sample**:
+ SELECT 
+    date_code,
+    SUM(amt) as sales_amt 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') 
+ AND (store_code like '%tiktok%' or  store_name like '%tiktok%')
+ GROUP BY 
+ date_code
+ ORDER BY 
+    date_code
+;
+
+
+32.2**description**:
+Query the average basket size。（AOV）
+
+**question sample**:
+Show me the daily sales trend of tiktok? What is the average basket size?
+
+**SQL query sample**:
+With daily_aov as (    
+ SELECT 
+     date_code,
+    CASE WHEN SUM(trans) = 0 then 0 ELSE SUM(amt_notax)/SUM(trans) END as AOV    
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') 
+ AND (store_code like '%tiktok%' or  store_name like '%tiktok%')  
+  GROUP BY 
+    date_code
+ )
+ SELECT 
+    avg(AOV) 
+ FROM daily_aov
+;
+
+
+32.2**description**:
+Query the average basket size。（AOV）
+
+**question sample**:
+Show me the daily sales trend of tiktok? What is the average basket size?
+
+**SQL query sample**:
+With daily_aov as (    
+ SELECT 
+     date_code,
+    CASE WHEN SUM(trans) = 0 then 0 ELSE SUM(amt_notax)/SUM(trans) END as AOV    
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code between  DATEADD(day,-31,CURRENT_DATE) and TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD') 
+ AND (store_code like '%tiktok%' or  store_name like '%tiktok%')  
+  GROUP BY 
+    date_code
+ )
+ SELECT 
+    avg(AOV) 
+ FROM daily_aov
+;
+
+
+34**description**:
+Query the number of stores under each partner. Find the partner with the most stores and determine the partner sales percentage.
+
+**question sample**:
+Which partner has the greatest number of BH partner store in CN? How many is it? What is its sales SOB%?
+
+**SQL query sample**:
+
+WITH PartnerBHStores AS (
+    SELECT 
+        customer_name,
+        COUNT(*) AS bh_store_count
+    FROM 
+        edw_dim_store_prod 
+ WHERE 
+        date_code =TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') 
+        AND  store_type = 'BH'
+        AND country = 'mainland'
+  AND channel = 'FP'
+    GROUP BY 
+        customer_name
+),
+RankedPartners AS (
+    SELECT 
+        customer_name,
+        bh_store_count,
+        RANK() OVER (ORDER BY bh_store_count DESC) AS rank
+    FROM 
+        PartnerBHStores
+),
+PartnerSales AS (
+    SELECT 
+        customer_name,
+        SUM(amt) AS total_sales
+    FROM 
+        dm_fact_sales_chatbi
+    WHERE 
+        customer_name IN (SELECT customer_name FROM RankedPartners WHERE rank = 1)
+    GROUP BY 
+        customer_name
+),
+AllSales AS (
+    SELECT 
+        SUM(amt) AS all_sales
+    FROM 
+        dm_fact_sales_chatbi
+    WHERE
+        store_type = 'BH'
+        AND country = 'mainland'
+  AND channel = 'FP'
+)
+SELECT 
+    RankedPartners.customer_name,
+    RankedPartners.bh_store_count,
+ PartnerSales.total_sales as customer_sales,
+ PartnerSales.total_sales/AllSales.all_sales * 100.0 AS sob_percentage 
+ FROM 
+    RankedPartners ,
+ PartnerSales,
+ AllSales 
+ WHERE 
+    rank = 1;
+
+
+35**description**:
+Calculate the store age using the closing date and the opening date. If there is no closing date, use today's date
+
+**question sample**:
+What is the average age of our BH stores?
+
+**SQL query sample**:
+WITH StoreAges AS (
+    SELECT 
+        store_last_code,
+        store_type,
+        cast(DATEDIFF(month,(CASE WHEN (open_date is null or open_date ='9999-12-31') THEN CURRENT_DATE ELSE open_date END),CASE WHEN (close_date is null or close_date ='9999-12-31') THEN CURRENT_DATE ELSE close_date END)/12 as decimal(7,1)) AS store_age
+    FROM 
+        edw_dim_store store inner join edw_dim_channel channel 
+  on store.channel_sid = channel.channel_sid 
+    WHERE 
+        store_type = 'BH' 
+)
+SELECT 
+    AVG(store_age) AS average_age 
+ FROM 
+    StoreAges;
+
+
+36**description**:
+Query the average store productivity (effi).
+Query the store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average store productivity of CN O&O BH as of Oct 2024?
+
+**SQL query sample**:
+    
+With Store_effi as (
+ SELECT 
+ country,
+ channel,
+ store_type,
+ area,
+  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code <='2024-10-31'  
+ AND country = 'Mainland' 
+ AND channel = 'O&O'  
+ AND store_type = 'BH' 
+ GROUP BY 
+ country,
+ channel,
+ store_type,
+ store_code,
+ area
+)
+SELECT 
+    AVG(effi) as Avg_effi 
+ FROM Store_effi
+;
+
+37**description**:
+Query the average comp store productivity (effi).
+Query the comp store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average comp store productivity of CN O&O BH as of Oct 2024?
+
+**SQL query sample**:
+With Store_effi as (
+ SELECT 
+ country,
+ channel,
+ store_type,
+ area,
+  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi  
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code <='2024-10-31' 
+ AND country = 'Mainland' 
+ AND channel = 'O&O'  
+ AND store_type = 'BH' 
+ AND comp_flag ='Y' -- The store participating in the comp.
+ GROUP BY 
+ country,
+ channel,
+ store_type,
+ store_code,
+ area
+)
+SELECT 
+    AVG(effi) as Avg_effi 
+ FROM Store_effi
+;
+
+
+38**description**:
+Query the area（Size） of stores.
+
+**question sample**:
+What is the total store size in square feet for all the opening BH?
+
+**SQL query sample**:
+ SELECT 
+ country,
+ sum(area) as total_size
+ FROM 
+    edw_dim_store_prod 
+ WHERE 
+    date_code =TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')  
+ AND store_type = 'BH' 
+ AND open_flag ='open'
+ GROUP BY 
+ country
+;
+
+
+39.1**description**:
+Query sales quantities by product attributes.
+
+**question sample**:
+How many units do we sell in week 27? What is the division split?
+
+**SQL query sample**:
+ SELECT 
+ division,
+    SUM(qty) as Units 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+ week_id ='202527'  
+ GROUP BY 
+    division
+;
+
+
+39.2**description**:
+Query the sales units group by gender.
+
+**question sample**:
+How many units do we sell in week 27? What is the gender split?
+
+**description**:
+Query the sales units group by gender.
+
+**SQL query sample**:
+ SELECT 
+ gender,
+    SUM(qty) as Units 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+ week_id ='202527'  
+ GROUP BY 
+    gender
+;
+
+
+39.3**description**:
+Query the top performing products in a categories .
+
+**question sample**:
+Which are the top 3 driving sports categories in week 27? 
+
+**SQL query sample**:
+ SELECT 
+ top 3 
+ product_name,
+    SUM(amt) as sales 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+ week_id ='202527'  
+ AND key_stories like '%sports%' 
+ GROUP BY 
+    product_name
+ ORDER BY
+    sales desc
+;
+
+
+40**description**:
+Query the store which weekly sales(WOW) drop, and show traffic/CR/ASP/UPT  of these stores.
+
+**question sample**:
+Which KPI drive the weekly sales drop, traffic? CR? ASP? UPT?
+
+**SQL query sample**:
+ SELECT 
+ country,
+ SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ CASE WHEN SUM(COALESCE(lw_amt_notax,0)) =0 then 0 ELSE SUM(amt_notax)/SUM(COALESCE(lw_amt_notax,0))-1 END as sales_notax_wow , 
+ SUM(traffic) as traffic,  
+ CASE WHEN SUM(COALESCE(lw_traffic,0)) =0 then 0 ELSE SUM(traffic)/SUM(COALESCE(lw_traffic,0))-1 END as traffic_wow ,  
+ CASE WHEN SUM(COALESCE(traffic,0)) =0 then 0 ELSE SUM(case when traffic is not null  THEN trans else 0 END)/SUM(COALESCE(traffic,0)) END as CR , 
+ CASE WHEN SUM(COALESCE(lw_traffic,0)) =0 then 0 ELSE SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lw_traffic is not null  THEN lw_trans else 0 END)/SUM(COALESCE(lw_traffic,0)))-1 END as cr_wow, 
+ CASE WHEN SUM(COALESCE(trans,0))=0 THEN 0 ELSE  SUM(amt_notax)/SUM(COALESCE(trans,0)) END as AOV , 
+ CASE WHEN (SUM(COALESCE(trans,0))=0 or SUM(COALESCE(lw_trans,0))=0 or SUM(COALESCE(lw_amt_notax,0))=0) THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(trans,0))/(SUM(COALESCE(lw_amt_notax,0))/SUM(COALESCE(lw_trans,0)))-1 END as aov_wow ,  
+ CASE WHEN SUM(COALESCE(qty,0))=0 THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(qty,0)) END as ASP ,  
+ CASE WHEN (SUM(COALESCE(lw_qty,0))=0 or SUM(COALESCE(qty,0))=0 or SUM(COALESCE(lw_amt_notax,0))=0) THEN 0 ELSE SUM(amt_notax)/SUM(COALESCE(qty,0))/(SUM(COALESCE(lw_amt_notax,0))/SUM(COALESCE(lw_qty,0)))-1 END as asp_wow ,  
+ CASE WHEN SUM(COALESCE(trans,0))=0 THEN 0 ELSE SUM(qty)/SUM(COALESCE(trans,0)) END as UPT ,
+ CASE WHEN (SUM(COALESCE(lw_qty,0))=0 or SUM(COALESCE(trans,0))=0 or SUM(COALESCE(lw_trans,0))=0) THEN 0 ELSE SUM(qty)/SUM(COALESCE(trans,0))/(SUM(COALESCE(lw_qty,0))/SUM(COALESCE(lw_trans,0)))-1 END as UPT_wow   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today} 
+ GROUP BY 
+    country
+ HAVING
+    sales_notax_wow_per <0 
+ ORDER BY 
+    sales_notax_wow_per
+;
+
+
+41**description**:
+Query the weekly sales growth rate for each country.
+
+**question sample**:
+Which countries drive the weekly sales drop?
+
+**SQL query sample**:
+ SELECT 
+ country,
+    SUM(amt) as sales_amt, 
+ SUM(amt_notax) as Sales_notax , 
+ SUM(lw_amt_notax) as Sales_notax_LW ,
+ CASE WHEN SUM(COALESCE(lw_amt_notax,0)) =0 then 0 ELSE SUM(amt_notax)/SUM(COALESCE(lw_amt_notax,0))-1 END as sales_notax_wow_per   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between {1st of this week} AND {Today} 
+ GROUP BY 
+    country
+ HAVING
+    sales_notax_wow_per <0 
+ ORDER BY 
+    sales_notax_wow_per
+;
+
+
+42**description**:
+Query the average store productivity (effi).
+Query the store productivity (effi).
+Effi=yearly sales(usd)/area*10.7639104
+
+**question sample**:
+What is the average store productivity for store opened equal or less than 1 year? 
+
+**SQL query sample**:
+With Store_effi as (
+ SELECT 
+ store_code,
+ area,
+  CASE WHEN (COALESCE(area,'')='' or cast(area as decimal(18,2)) =0) THEN 0 ELSE  AVG(COALESCE(amt_usd_notax,0))*365/cast(area as decimal(18,2)) *10.7639104  END as effi 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    open_date >= DATEADD(year,-1,CURRENT_DATE)  
+ AND open_flag ='open'   
+ GROUP BY 
+ store_code,
+ area
+)
+SELECT 
+    AVG(effi) as Avg_effi
+FROM Store_effi
+;
+
+
+43**description**:
+Query the store's sales and its share of the market within the respective country channel.
+
+**question sample**:
+How In77 sales is comparing to country channel average?
+
+**SQL query sample**:
+With store_sales as (    
+ SELECT 
+    country,
+ channel,
+    store_code,
+ store_name,
+    SUM(amt) as store_sales     
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    (store_code like '%In77%' or  store_name like '%In77%') 
+  GROUP BY 
+    country,
+ channel,
+    store_code,
+ store_name
+ ),
+ country_channel_sales as (  
+ SELECT 
+    total.country,
+ total.channel,
+    SUM(total.amt) as total_sales    
+ FROM 
+    dm_fact_sales_chatbi total 
+ inner join store_sales store 
+ on total.country = store.country and total.channel = store.channel 
+  GROUP BY 
+    total.country,
+ total.channel
+ )
+ SELECT 
+    store_sales.country,
+ store_sales.channel,
+    store_sales.store_code,
+ store_sales.store_name,
+ store_sales.store_sales,
+ country_channel_sales.total_sales,
+ store_sales.store_sales/country_channel_sales.total_sales as SOB
+ FROM 
+ store_sales,
+ country_channel_sales
+;
+
+
+44**description**:
+Query the sell-through rate of the product by country.
+Product info could be the product's name, division, category(key_stories), or material.
+
+**question sample**:
+How slipsspeed mega was performing in week 26 – week 27?
+Which country had the best sell-through?
+
+**SQL query sample**:
+With salesQty as (
+ SELECT 
+ country,
+    SUM(qty) as sales_units 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+    week_id in ('202526','202527')
+ AND (
+     product_name like '%slipspeed%' OR
+  division like '%slipspeed%' OR
+  key_stories like '%slipspeed%' OR
+  material like '%slipspeed%'
+ )
+ GROUP BY 
+ country
+),
+InvOfLastSaturday as (
+-- Get the onhand inventory of the most recent Saturday before the transaction starts.
+  SELECT 
+ country,
+    SUM(stock) as onhand_inv  
+ FROM 
+    dm_fact_onhand_chatbi 
+ WHERE 
+    date_code =
+(Select 
+ TO_CHAR(MAX(date_code),'YYYY-MM-DD') -- edw_dim_calendar.date_code:type of date;dm_fact_onhand_chatbi.date_code:type of String(YYYY-MM-DD).
+ FROM edw_dim_calendar 
+ WHERE 
+ week_id <'202526' AND weekday_name ='Saturday') 
+ AND (
+     product_name like '%slipspeed%' OR
+  division like '%slipspeed%' OR
+  key_stories like '%slipspeed%' OR
+  material like '%slipspeed%'
+ )
+ GROUP BY 
+ country
+)
+Select 
+ top 1 
+ sales.country,
+ sales.sales_units,
+ stock.onhand_inv,
+ CASE WHEN stock.onhand_inv = 0 THEN 0 ELSE CAST(sales.sales_units*100.00/stock.onhand_inv as decimal(18,2)) END || '%' as sell_through 
+ FROM salesQty sales inner join InvOfLastSaturday stock 
+ on sales.country = stock.country
+ ORDER BY
+ sell_through DESC
+;
+
+
+45**description**:
+Query the performance of products in a specific category across different channels.
+
+**question sample**:
+What is the SOB of curry brand product in O&O BH, O&O FH and EC? In sale perspective and in unit perspective
+
+**SQL query sample**:
+With OOBHsales  as (
+ SELECT 
+ 'OOBH' as title ,
+ sum(qty) as units, 
+    SUM(amt) as sales
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+    key_stories like '%curry%' 
+ AND channel = 'O&O' 
+ AND store_type = 'BH' 
+ ),
+ OOFHsales  as (
+  SELECT 
+  'OOFH' as title ,
+   sum(qty) as units,
+    SUM(amt) as sales 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+    key_stories like '%curry%' 
+  AND channel = 'O&O' 
+  AND store_type = 'FH' 
+ ),
+  ECsales  as (
+  SELECT 
+   'EC' as title , 
+   sum(qty) as units,
+   SUM(amt) as sales  
+  FROM 
+    dm_fact_sales_sku_chatbi 
+  WHERE 
+    key_stories like '%curry%' 
+  AND channel = 'EC'  
+ ),
+ TotalSales as (
+  SELECT 
+    sum(qty) as units, 
+    SUM(amt) as sales 
+  FROM 
+    dm_fact_sales_sku_chatbi 
+  WHERE 
+    key_stories like '%curry%' 
+ AND
+ ((channel = 'O&O' 
+ AND store_type = 'BH' ) or
+ (channel = 'O&O' 
+ AND store_type = 'FH' ) or 
+ (channel = 'EC'  ))  
+ )
+ SELECT 
+  OOBHsales.units as OOBH_units,
+  CAST(OOBHsales.units*1.00/TotalSales.units as decimal(18,2)) as OOBH_units_SOB,
+  OOBHsales.sales as OOBH_sales,
+  OOBHsales.sales/TotalSales.sales as OOBH_sales_SOB,
+  OOFHsales.units as OOFH_units,
+  CAST(OOFHsales.units*1.00/TotalSales.units as decimal(18,2)) as OOFH_units_SOB,
+  OOFHsales.sales as OOFH_sales,
+  OOFHsales.sales/TotalSales.sales as OOFH_sales_SOB,
+  ECsales.units as EC_units,
+  CAST(ECsales.units*1.00/TotalSales.units as decimal(18,2)) as EC_units_SOB,
+  ECsales.sales as EC_sales,
+  ECsales.sales/TotalSales.sales as EC_sales_SOB
+ FROM
+  OOBHsales,
+  OOFHsales,
+  ECsales,
+  TotalSales
+;
+
+
+46**description**:
+Query the number of new members recruited in period.
+
+**question sample**:
+How many new members did we recruited in Sep 2024? 
+
+**SQL query sample**:
+ SELECT 
+  count(distinct member_code)
+ FROM
+  dm_member_chatbi
+ WHERE 
+  register_date_str between '2024-09-01' AND '2024-09-30';
+  
+
+The fields and their data types that can be used in the table dm_member_chatbi.
+  birthday:string;format(YYYY-MM-DD).
+  register_date_str:date.
+  regist_date:String;format(YYYY-MM-DD).
+
+
+47**description**:
+Query the number of return customers during a certain period.
+Number of members who purchased during this period and had also purchased before this period.
+
+**question sample**:
+How many return customers did we have in Sep 2024?
+
+**SQL query sample**:
+WITH PreviousPurchases AS (
+    SELECT DISTINCT member_code
+    FROM dm_member_sales_chatbi
+    WHERE transaction_date < '2024-09-01'
+),
+
+CurrentPurchases AS (
+    SELECT DISTINCT member_code
+    FROM dm_member_sales_chatbi
+    WHERE transaction_date BETWEEN '2024-09-01' AND '2024-09-30'
+)
+
+ SELECT COUNT(DISTINCT CurrentPurchases.member_code)
+ FROM CurrentPurchases
+ JOIN PreviousPurchases
+ ON CurrentPurchases.member_code = PreviousPurchases.member_code;
+ 
+
+The fields and their data types that can be used in the table dm_member_sales_chatbi.
+  member_code:String.
+  transaction_date:date.
+  birthday:string;format(YYYY-MM-DD).
+  register_date_str:date.
+  regist_date:String;format(YYYY-MM-DD).
+
+
+48**question sample**:
+How many repeat customers did we have in Sep 2024?
+
+**description**:
+Query the number of repeat customers during a certain period.
+Query the number of customers who made more than two purchases during this period.
+
+**SQL query sample**:
+WITH repeatMember AS (
+  SELECT DISTINCT
+    t1.member_code 
+  FROM
+    dm_member_sales_chatbi t1 
+  WHERE
+    t1.transaction_date BETWEEN '2024-09-01' 
+    AND '2024-09-30' 
+  GROUP BY
+    t1.member_code 
+  HAVING
+    COUNT ( t1.member_code ) > 1 
+) SELECT COUNT 
+(member_code) AS repeat_member_count 
+ FROM
+  repeatMember;
+
+
+49**description**:
+Query the distribution of new customers, return customers, and repeat customers during September 2024, and request a comparison with September 2023.
+New Customers: Refers to customers making their first purchase.
+Return Customers: Refers to customers who have made at least one previous purchase and made another purchase during the current period.
+Repeat Customers: Refers to customers who made multiple purchases during the current period.
+
+**question sample**:
+What is the customer split between new, return and repeat customer in Sep 2024? How does it compare to Sep 2023?
+
+**SQL query sample**:
+WITH Sep2024Transactions AS (
+ SELECT *
+ FROM dm_member_sales_chatbi
+ WHERE transaction_date BETWEEN '2024-09-01' AND '2024-09-30'
+),
+Sep2024HistoricalTransactions AS (
+ SELECT DISTINCT member_code
+ FROM dm_member_sales_chatbi
+ WHERE transaction_date < '2024-09-01'
+),
+Sep2024FirstTimeCustomers AS (
+ SELECT DISTINCT member_code
+ FROM Sep2024Transactions
+ WHERE member_code NOT IN (SELECT member_code FROM Sep2024HistoricalTransactions)
+),
+Sep2024ReturningCustomers AS (
+ SELECT DISTINCT member_code
+ FROM Sep2024Transactions
+ WHERE member_code IN (SELECT member_code FROM Sep2024HistoricalTransactions)
+),
+Sep2024RepeatCustomers AS (
+ SELECT member_code
+ FROM Sep2024Transactions
+ GROUP BY member_code
+ HAVING COUNT(*) > 1
+),
+Sep2023Transactions AS (
+SELECT *
+ FROM dm_member_sales_chatbi
+ WHERE transaction_date BETWEEN '2023-09-01' AND '2023-09-30'
+),
+Sep2023HistoricalTransactions AS (
+SELECT DISTINCT member_code 
+ FROM dm_member_sales_chatbi
+ WHERE transaction_date < '2023-09-01'
+),
+Sep2023FirstTimeCustomers AS (
+ SELECT DISTINCT member_code
+ FROM Sep2023Transactions
+ WHERE member_code NOT IN (SELECT member_code FROM Sep2023HistoricalTransactions)
+),
+
+Sep2023ReturningCustomers AS (
+ SELECT DISTINCT member_code
+ FROM Sep2023Transactions
+ WHERE member_code IN (SELECT member_code FROM Sep2023HistoricalTransactions)
+),
+
+Sep2023RepeatCustomers AS (
+ SELECT member_code
+ FROM Sep2023Transactions
+ GROUP BY member_code
+ HAVING COUNT(*) > 1
+)
+SELECT 
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2024FirstTimeCustomers) AS Sep2024NewCustomers,
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2024ReturningCustomers) AS Sep2024ReturningCustomers,
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2024RepeatCustomers) AS Sep2024RepeatCustomers,
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2023FirstTimeCustomers) Sep2023NewCustomers,
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2023ReturningCustomers) AS Sep2023ReturningCustomers,
+ (SELECT COUNT(DISTINCT member_code) FROM Sep2023RepeatCustomers) AS Sep2023RepeatCustomers;
+
+
+50**description**:
+Query the sales proportion of MFO products.
+Season: Selling time from January to June is SS + the last two digits of the year (e.g., SS24); Selling time from July to December is FW + the last two digits of the year (e.g., FW24).
+
+**question sample**:
+What is the in-season MFO%? Today is 2024-11-01.
+What is the MFO% last week.
+
+**SQL query sample**:
+With MFOSales as (    
+ SELECT 
+    'MFO' as title,
+    SUM(amt) as mfo_amt   
+ FROM 
+    dm_fact_sales_sku_chatbi  
+ WHERE 
+    date_code between '2024-07-01' AND '2024-11-01' 
+	AND product_line ='MFO' 
+ ),
+  TotalSales as (    
+ SELECT 
+    'Total' as title,
+    SUM(amt) as total_amt  
+ FROM 
+    dm_fact_sales_sku_chatbi  
+ WHERE 
+    date_code between '2024-07-01' AND '2024-11-01' 
+ )
+ SELECT 
+	 mfo_amt,
+	 total_amt,
+     CASE WHEN total_amt =0 THEN 0 ELSE mfo_amt/total_amt END as MFO_percent   
+ FROM 
+ MFOSales,
+ TotalSales
+;
+
+
+
+51**description**:
+Query data related to dates, including weekid, monthid, yearid, and weekdayname.
+
+**question sample**:
+Query the weekend of FY week 27.
+
+**SQL query sample**:
+Select 
+ date_code 
+ FROM edw_dim_calendar 
+ WHERE 
+ week_id ='202525' AND weekday_name ='Saturday'
+;
+
+**question sample**:
+Query the week id of date.
+
+**SQL query sample**:
+Select 
+ week_id 
+ FROM edw_dim_calendar 
+ WHERE 
+ date_code ='2024-10-25'
+;
+
+
+52**description**:
+Query the demand sales .
+The formula for the sales demand is: sales amt+return amt .
+
+**question sample**:
+what is the sales demand by store in week 34.
+what is the sales demand on store xxxx.
+
+**SQL query sample**:
+ SELECT 
+ store_code,
+ store_name,
+ SUM(amt+amt_return) as demand_amt,
+ SUM(amt_notax+amt_return_notax) as demand_amt_withouttax,
+ SUM(amt_usd_notax+amt_return_usd_notax) as demand_amt_usd_withouttax 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    week_id = '202534' 
+ GROUP BY 
+ store_code,
+ store_name
+ ;
+
+
+
+
+

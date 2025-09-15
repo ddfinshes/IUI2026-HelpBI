@@ -1,0 +1,3 @@
+select * from dm_fact_sales_chatbi where date_code = '2025-02-10' and country='Taiwan' limit 1000;
+select * from dm_fact_sales_chatbi where date_code = '2025-02-10' and country='Hongkong' limit 1000;
+select * from dm_fact_sales_chatbi where date_code = '2025-02-10' and country='Mainland' limit 1000;

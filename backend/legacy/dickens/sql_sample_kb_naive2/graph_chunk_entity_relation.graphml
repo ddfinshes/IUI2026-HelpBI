@@ -1,0 +1,777 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d5" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d4" for="edge" attr.name="description" attr.type="string"/>
+<key id="d3" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="&quot;FY24STORE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"FY24store represents the fiscal year 2024 time period in the context of store operations."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;FY24&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"FY24 is used to denote the fiscal year 2024 and serves as a time period for financial analysis."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;CHANNEL&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Channel serves as one of the parameters in categorizing territories to assess their sales performance last week."&lt;SEP&gt;"Channels used to open or manage the stores."&lt;SEP&gt;"channel represents the sales category through which In77's products are distributed in various countries."</data>
+  <data key="d2">chunk-76f2a43bbd6112b0860b0f2def007e72&lt;SEP&gt;chunk-6fc8763cd1eb9afa1a0363c08f6e7551&lt;SEP&gt;chunk-04f948caef0bfdef71976d166b1ec297</data>
+</node>
+<node id="&quot;LW_AMT_NOTAX&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"Last week's amount without tax, used in calculating sales performance."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;DM_FACT_SALES_CHATBI&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The fact table used for sales analysis is named dm_fact_sales_chatbi."&lt;SEP&gt;"dm_fact_sales_chatbi is a dataset containing sales data for In77 and its comparison to country channel averages."</data>
+  <data key="d2">chunk-d66243868d3dfa9e4f8e7b6d20019c6b&lt;SEP&gt;chunk-04f948caef0bfdef71976d166b1ec297</data>
+</node>
+<node id="&quot;IN77&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"In77 is a store organization with specific sales metrics in its country channel."</data>
+  <data key="d2">chunk-04f948caef0bfdef71976d166b1ec297</data>
+</node>
+<node id="&quot;ORGANIZATION&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Organization encompasses the entity managing and analyzing sales data for its various product divisions."&lt;SEP&gt;"The text refers to 'store' as an organization involved in sales activities."</data>
+  <data key="d2">chunk-c1ee24c8d931973ebfd9aae48111b0d1&lt;SEP&gt;chunk-ece23f1dab6cc0f78ce7afc7e86ceffa</data>
+</node>
+<node id="&quot;NEW STORES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"New Stores represents a subset of stores that have been opened within the specified time period."</data>
+  <data key="d2">chunk-cd502ca97e6795b562b4435b8168f5db</data>
+</node>
+<node id="&quot;SALES&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"A general category encompassing various sales metrics and performance indicators."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;YTD&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"YTD is a yearly period from the start of this year to yesterday."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;TIKTOK&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"TikTok is an online platform mentioned in the context of sales trends."</data>
+  <data key="d2">chunk-d66243868d3dfa9e4f8e7b6d20019c6b</data>
+</node>
+<node id="&quot;NAME&quot;">
+  <data key="d0">"TYPE"</data>
+  <data key="d1">"description"</data>
+  <data key="d2">chunk-76f2a43bbd6112b0860b0f2def007e72</data>
+</node>
+<node id="&quot;COUNTRY&quot;|">
+  <data key="d0">"GEO"|</data>
+  <data key="d1">"Each country involved in the sales data analysis."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;OPEN_DAY&quot;">
+  <data key="d0">"NUMERIC VALUE"</data>
+  <data key="d1">"The number of days a store has been open before closing."</data>
+  <data key="d2">chunk-76f2a43bbd6112b0860b0f2def007e72</data>
+</node>
+<node id="&quot;SS&quot;">
+  <data key="d0">"NOT PROVIDED"</data>
+  <data key="d1">"</data>
+  <data key="d2">chunk-6f3ae5568f61363fc4ba9183892f6e0e</data>
+</node>
+<node id="&quot;SALES_AMT&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"Total sales amount recorded weekly."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;AMT_NOTAX_TARGET_F1&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"specific target field used in SQL queries for sales calculations."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;SALES_NOTAX&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"Sales without tax, a specific metric analyzed for performance."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;STORES&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Stores are organizations categorized under store_type 'BH' contributing to monthly sales in CNBH."&lt;SEP&gt;"Stores are organizations that have reached their weekly sales targets and calculate the percentage of stores meeting these targets."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866&lt;SEP&gt;chunk-455040e6c773cd0377b75564d850bea9</data>
+</node>
+<node id="&quot;IN-SEASON&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The period from January to June is SS, and from July to December is FW, used for analyzing sales proportions."</data>
+  <data key="d2">chunk-6f3ae5568f61363fc4ba9183892f6e0e</data>
+</node>
+<node id="&quot;TERRITORY&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Territory is categorized based on specific attributes including country, channel, and store_type to evaluate its sales performance last week."</data>
+  <data key="d2">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</node>
+<node id="&quot;SALES_ACHIEVEMENT_RATE&quot;|">
+  <data key="d0">"EVENT"|</data>
+  <data key="d1">"The sales achievement rate represents the percentage difference between actual and target sales for stores, indicating performance levels."</data>
+  <data key="d2">chunk-34de4a2e3b8b1a455d2ef0ec8d29c07a</data>
+</node>
+<node id="&quot;MTD&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"MTD is a monthly period from the 1st of this month to yesterday."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;QTD&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"QTD is a quarterly period from the start of this quarter to yesterday."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;DM_FACT_SALES_SKU_CHATBI&quot;">
+  <data key="d0">"ORGANIZATION"/"CATEGORY"</data>
+  <data key="d1">"dm_fact_sales_sku_chatbi is a table used in calculating sales proportions, likely part of data categorization."</data>
+  <data key="d2">chunk-a82384ec654e7721717c39bdd55236c1</data>
+</node>
+<node id="&quot;APAC EC&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"APAC EC represents a geographic entity in Asia-Pacific excluding China."</data>
+  <data key="d2">chunk-c0985af5d527d34f0b8861b355af6c37</data>
+</node>
+<node id="&quot;MONTHLY SALES&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Monthly sales data is analyzed to determine the contribution of stores towards 80% of total sales in CNBH."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</node>
+<node id="&quot;CNBH&quot;">
+  <data key="d0">"LOCATION"</data>
+  <data key="d1">"CNBH represents a geographical location where monthly sales and store contributions are tracked."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</node>
+<node id="&quot;APP&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"APP represents the Apparel division of an organization, part of the product structure used for sales calculations."</data>
+  <data key="d2">chunk-c1ee24c8d931973ebfd9aae48111b0d1</data>
+</node>
+<node id="&quot;STORE_TYPE'">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Store type 'BH' is a specific category of stores used in the sales analysis for CNBH."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</node>
+<node id="&quot;CUMULATIVE SALES CONTRIBUTION (80%)">
+  <data key="d0">"CONCEPT"</data>
+  <data key="d1">"Cumulative sales contribution represents 80% of monthly sales achieved by stores in CNBH."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</node>
+<node id="&quot;EDW_DIM_CALENDAR&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"EDW_dim_calendar denotes a calendar dimension within the same analytics database schema."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;KEY_STORIES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Key Stories represent specific product categories identified as significant contributors to revenue in a given geographic location over a defined period."&lt;SEP&gt;"key_stories are product categories identified as significant contributors to revenue in China BH over a given week."&lt;SEP&gt;"key_stories refers to attributes related to product categories and their performance metrics."</data>
+  <data key="d2">chunk-a82384ec654e7721717c39bdd55236c1&lt;SEP&gt;chunk-5c13ca10aaf2cf6fd4f3dd417a29058b</data>
+</node>
+<node id="&quot;AMT_NOTAX_TARGET_F4&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"specific target field used in SQL queries for sales calculations."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;O&amp;O FH&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"O&amp;O FH is another location where curry brand products are sold, showing similar sales activity to O&amp;O BH."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;MONTH_ID&quot;">
+  <data key="d0">"IDENTIFIER"</data>
+  <data key="d1">"Month ID is a unique identifier for each month used in the sales analysis to track store contributions over time."</data>
+  <data key="d2">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</node>
+<node id="&quot; O&amp;O BH&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">" O&amp;O BH is a location where curry brand products are sold, indicated by its presence in the sales data."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;ALEX&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Alex is a leader of a team attempting first contact with an unknown intelligence."&lt;SEP&gt;"Alex is leading a team exploring first contact with an unknown intelligence."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;SAM RIVERA&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Sam Rivera is part of the team attempting first contact with an unknown intelligence, showing awe and anxiety."&lt;SEP&gt;"Sam Rivera is part of the team exploring communication with an unknown intelligence, showing awe and anxiety."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;STORE_TYPE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Store_type is another parameter used in categorizing territories based on their sales performance metrics last week."</data>
+  <data key="d2">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</node>
+<node id="&quot;CONTROL&quot;">
+  <data key="d0">"CONCEPT"</data>
+  <data key="d1">"Control refers to abilities or rules that are being challenged by an unknown intelligence."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;INTELLIGENCE&quot;">
+  <data key="d0">"CONCEPT"</data>
+  <data key="d1">"An unknown entity capable of communicating and learning from humanity."&lt;SEP&gt;"An unknown entity capable of communication and learning from humanity."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;FIRST CONTACT&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The initial communication attempt between humanity and the unknown intelligence."&lt;SEP&gt;"The initial contact between humanity and the unknown intelligence attempted by Alex's team."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;REVENUE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Revenue is the total income generated from sales activities, particularly relevant in contexts where product categories are analyzed for their contribution to financial outcomes."</data>
+  <data key="d2">chunk-5c13ca10aaf2cf6fd4f3dd417a29058b</data>
+</node>
+<node id="&quot;HUMANITY'S RESPONSE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The collective action taken by Alex's team in response to an unknown intelligence."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;WEEKLY SALES&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Weekly sales refer to the performance metrics measured over a specific week, impacting the identification of key Stories (categories) driving revenue in locations like China BH."</data>
+  <data key="d2">chunk-5c13ca10aaf2cf6fd4f3dd417a29058b</data>
+</node>
+<node id="&quot;THE DEVICE&quot;">
+  <data key="d0">"TECHNOLOGY"</data>
+  <data key="d1">"A device central to communicating with an unknown intelligence."</data>
+  <data key="d2">chunk-c4ca4238a0b923820dcc509a6f75849b</data>
+</node>
+<node id="&quot;EC&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"EC represents an additional channel for selling curry brand products, contributing to overall sales performance."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;RECRUITMENT EVENT&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"The recruitment event refers to the process of hiring new members during September 2024."</data>
+  <data key="d2">chunk-0cca21ae6b86bf6b4e15226ec8d2e83c</data>
+</node>
+<node id="&quot;AMT_NOTAX_TARGET_F3&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"specific target field used in SQL queries for sales calculations."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;WEEKLY SALES TARGET&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Weekly sales target refers to the specific amount set for each store's sales performance during a given week."</data>
+  <data key="d2">chunk-455040e6c773cd0377b75564d850bea9</data>
+</node>
+<node id="&quot;YEARLY SALES (USD)&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Yearly sales are measured in US dollars, which influence the efficiency calculation along with other factors."</data>
+  <data key="d2">chunk-6aa71331665284759f907817a90f8f9c</data>
+</node>
+<node id="&quot;CHINA FP&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"a specific region or division within an organization related to China."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;STORE_NAME&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Each store_name represents an organization's name being analyzed for comp growth."&lt;SEP&gt;"store_name refers to the name of a store, which is grouped with others based on their performance metrics."&lt;SEP&gt;"store_name refers to the name of each individual store, potentially representing an organization or entity."&lt;SEP&gt;"store_name refers to the name of each store associated with a particular store_code."</data>
+  <data key="d2">chunk-34de4a2e3b8b1a455d2ef0ec8d29c07a&lt;SEP&gt;chunk-02c00ec58b62c43ffaf185c7e603a044&lt;SEP&gt;chunk-5e5cafd61559f2310350595182a6d382</data>
+</node>
+<node id="&quot;PERFORMANCE CRITERIA&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Performance Criteria refers to the metrics used to evaluate sales performance, including best achievement rate last week."</data>
+  <data key="d2">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</node>
+<node id="&quot;SALES TARGET&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Sales target is the goal that stores aim to achieve in terms of weekly sales amounts."</data>
+  <data key="d2">chunk-455040e6c773cd0377b75564d850bea9</data>
+</node>
+<node id="&quot;STORE&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"A business organization where sales and operations occur, classified based on specific metrics like store age."&lt;SEP&gt;"Store refers to a business entity established for the sale of goods or services, with specific details about its opening date and initial performance."&lt;SEP&gt;"Store refers to a business entity managed within an organization, specifically within the database schema of 'edw_dim_store_prod'."&lt;SEP&gt;"Stores are points of operation within an organization."&lt;SEP&gt;"The term 'store' refers to In77, specifically indicating the organizational structure of the business."&lt;SEP&gt;"stores are points of operation within an organization."</data>
+  <data key="d2">chunk-f6a6f04d559e1518c436702a6d45916e&lt;SEP&gt;chunk-04f948caef0bfdef71976d166b1ec297&lt;SEP&gt;chunk-4c0cc9a97a231f3bbeb4f07286c39566&lt;SEP&gt;chunk-60b79e7065d14a99aa993dfe6249de35&lt;SEP&gt;chunk-cd502ca97e6795b562b4435b8168f5db</data>
+</node>
+<node id="&quot; EC&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">" EC represents an additional channel for selling curry brand products, contributing to overall sales performance."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;CLOSING DATE&quot;">
+  <data key="d0">"NONE"</data>
+  <data key="d1">"The date when the store is closed or no longer operational."</data>
+  <data key="d2">chunk-4c0cc9a97a231f3bbeb4f07286c39566</data>
+</node>
+<node id="&quot;OPENING DATE&quot;">
+  <data key="d0">"NONE"</data>
+  <data key="d1">"The date when the store opened for business.</data>
+  <data key="d2">chunk-4c0cc9a97a231f3bbeb4f07286c39566</data>
+</node>
+<node id="&quot;CN BH&quot;">
+  <data key="d0">"STORE TYPE"</data>
+  <data key="d1">"A specific category of stores, identified as CN BH."</data>
+  <data key="d2">chunk-76f2a43bbd6112b0860b0f2def007e72</data>
+</node>
+<node id="&quot;BEST ACHIEVEMENT RATE LAST WEEK&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"This is a specific metric used as part of the Performance Criteria to assess sales performance in the previous week."</data>
+  <data key="d2">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</node>
+<node id="&quot;SALES_NOTAX_WOW_PER&quot;|">
+  <data key="d0">"CATEGORY"|</data>
+  <data key="d1">"A calculated metric representing the percentage change in non-taxable sales compared to last week."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;STORE AGE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"A metric calculated using opening and closing dates, representing the duration a store has been operational."</data>
+  <data key="d2">chunk-4c0cc9a97a231f3bbeb4f07286c39566</data>
+</node>
+<node id="&quot;COUNTRY&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"Country is used as a categorization attribute within the territory's sales data for evaluating performance criteria."&lt;SEP&gt;"country refers to the geographical region where In77 operates, impacting its market share and sales performance."&lt;SEP&gt;"country represents a geographical location where stores operate."</data>
+  <data key="d2">chunk-6fc8763cd1eb9afa1a0363c08f6e7551&lt;SEP&gt;chunk-60b79e7065d14a99aa993dfe6249de35&lt;SEP&gt;chunk-04f948caef0bfdef71976d166b1ec297</data>
+</node>
+<node id="&quot;AMT_NOTAX_TARGET_F2&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"specific target field used in SQL queries for sales calculations."</data>
+  <data key="d2">chunk-62da60457269867e515daff8e77d91e1</data>
+</node>
+<node id="&quot;OPEN_FLAG&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"open_flag indicates whether a store is open or closed on a given date."</data>
+  <data key="d2">chunk-60b79e7065d14a99aa993dfe6249de35</data>
+</node>
+<node id="&quot;DATE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Date represents the specific point in time when store openings are counted."</data>
+  <data key="d2">chunk-60b79e7065d14a99aa993dfe6249de35</data>
+</node>
+<node id="&quot;STORE EFFICIENCIES&quot;|">
+  <data key="d0">"ORGANIZATION"|</data>
+  <data key="d1">"Grouped by country, channel, store_type, etc., these represent organized categorization of store productivity across different regions and channels."</data>
+  <data key="d2">chunk-9b8e5a4ec448b75c694e9b98154bd180</data>
+</node>
+<node id="&quot;AOV&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Average Order Value (AOV) is a key metric calculated as the average basket size for online transactions."</data>
+  <data key="d2">chunk-d66243868d3dfa9e4f8e7b6d20019c6b</data>
+</node>
+<node id="&quot;QTY&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"quantity of products sold, used to calculate units."</data>
+  <data key="d2">chunk-8c57624576f453937934ae83adbdadf8</data>
+</node>
+<node id="&quot;DIVISION&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"division represents metrics used in grouping and analyzing sales data."</data>
+  <data key="d2">chunk-8c57624576f453937934ae83adbdadf8</data>
+</node>
+<node id="&quot;EDW DIMENSION STORE PRODUCTION&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Edw Dimension Store Production is the specific database table used to track store information."</data>
+  <data key="d2">chunk-cd502ca97e6795b562b4435b8168f5db</data>
+</node>
+<node id="&quot;UNITS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"total quantity of products sold, derived from sum of qty."</data>
+  <data key="d2">chunk-8c57624576f453937934ae83adbdadf8</data>
+</node>
+<node id="&quot;MAINLAND&quot;">
+  <data key="d0">"COUNTRY"</data>
+  <data key="d1">"The country where stores are located and whose store opening times are being calculated."</data>
+  <data key="d2">chunk-76f2a43bbd6112b0860b0f2def007e72</data>
+</node>
+<node id="&quot;ACCS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"ACCS represents Accessories division within an organization, part of the product divisions used in sales analysis."</data>
+  <data key="d2">chunk-c1ee24c8d931973ebfd9aae48111b0d1</data>
+</node>
+<node id="&quot;WEEK_ID&quot;">
+  <data key="d0">"ATTRIBUTE"</data>
+  <data key="d1">"a variable specifying the week identifier in the WHERE clause."</data>
+  <data key="d2">chunk-8c57624576f453937934ae83adbdadf8</data>
+</node>
+<node id="&quot;WEEKLY SALES DROP&quot;|">
+  <data key="d0">"EVENT"|</data>
+  <data key="d1">"An analysis of weekly sales performance across different countries, focusing on drops in sales metrics."&lt;SEP&gt;"An analysis of weekly sales performance, focusing on drops across different countries."</data>
+  <data key="d2">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</node>
+<node id="&quot;SALES ACHIEVEMENT RATE&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"The sales achievement rate is a metric calculated as (sales amount / target sales amount - 1) and displayed as a percentage with two decimal places."</data>
+  <data key="d2">chunk-ce51a68ad34beec3efeb3f33dbe123e0</data>
+</node>
+<node id="&quot;SUM(AMT)&quot;">
+  <data key="d0">"METRIC"</data>
+  <data key="d1">"The sum of sales amounts processed by the organizational entity dm_fact_sales_chatbi."</data>
+  <data key="d2">chunk-ce51a68ad34beec3efeb3f33dbe123e0</data>
+</node>
+<node id="&quot;SUM(AMT_NOTAX)&quot;">
+  <data key="d0">"METRIC"</data>
+  <data key="d1">"The sum of sales amounts excluding taxes, used in calculating the achievement rate."</data>
+  <data key="d2">chunk-ce51a68ad34beec3efeb3f33dbe123e0</data>
+</node>
+<node id="&quot;CHINA BH&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"China BH represents a geographic location associated with specific sales data and product categories contributing to revenue."</data>
+  <data key="d2">chunk-5c13ca10aaf2cf6fd4f3dd417a29058b</data>
+</node>
+<node id="&quot;SUM(AMT_NOTAX_TARGET)&quot;">
+  <data key="d0">"METRIC"</data>
+  <data key="d1">"The sum of target sales amounts excluding taxes, against which the achievement rate is calculated."</data>
+  <data key="d2">chunk-ce51a68ad34beec3efeb3f33dbe123e0</data>
+</node>
+<node id="&quot;FY24COMPSTORE&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"FY24compstore indicates a comparison-focused time frame within the fiscal year 2024 analysis."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;CASE WHEN SUM(AMT_NOTAX_TARGET) = 0 THEN 0 ELSE...&quot;">
+  <data key="d0">"FORMULA"</data>
+  <data key="d1">"A conditional formula used to calculate the sales achievement rate, handling division by zero scenarios."</data>
+  <data key="d2">chunk-ce51a68ad34beec3efeb3f33dbe123e0</data>
+</node>
+<node id="&quot;EDW_DIM_STORE_PROD&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"EDW_dim_store_prod refers to a store production dimension in an analytics database schema."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;STORE.AREA&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"store.area represents the geographical coverage or footprint of each store location."</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;SALES UNITS&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"Sales Units represent a group within an organization dedicated to selling products or services."</data>
+  <data key="d2">chunk-cc2f73f76ad6626570c0487ca656f966</data>
+</node>
+<node id="&quot;CURRY BRAND PRODUCT&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"curry brand product refers to a specific product category used in sales data across different channels."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;GENDER&quot;">
+  <data key="d0">"PERSON"</data>
+  <data key="d1">"Gender refers to the categories used for analyzing sales data, such as male, female, and non-binary in this context."</data>
+  <data key="d2">chunk-cc2f73f76ad6626570c0487ca656f966</data>
+</node>
+<node id="&quot;STRING&quot;">
+  <data key="d0">"STORE_CODE"</data>
+  <data key="d1">"A unique identifier for each week during which data is recorded."&lt;SEP&gt;"The name of each store, such as 'Store A' or 'Retail Hub'."&lt;SEP&gt;"The specific code representing each store in the dataset."</data>
+  <data key="d2">chunk-ece23f1dab6cc0f78ce7afc7e86ceffa</data>
+</node>
+<node id="&quot;SALES GROWTH SITUATION&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Sales growth situation refers to the analysis of sales performance over time, often used for forecasting and decision-making."</data>
+  <data key="d2">chunk-c0985af5d527d34f0b8861b355af6c37</data>
+</node>
+<node id="&quot;SPORTS&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Sports category is a main focus of interest in the query, indicating emphasis on specific product groups."</data>
+  <data key="d2">chunk-17aabdf8774156e171bfd277438e80a8</data>
+</node>
+<node id="&quot; O&amp;O FH&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">" O&amp;O FH is another location where curry brand products are sold, showing similar sales activity to O&amp;O BH."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;SPECIFIC TIME PERIOD&quot;">
+  <data key="d0">"EVENT"</data>
+  <data key="d1">"Specific Time Period refers to the date range within which new stores were counted, such as '2023'."</data>
+  <data key="d2">chunk-cd502ca97e6795b562b4435b8168f5db</data>
+</node>
+<node id="&quot;O&amp;O BH&quot;">
+  <data key="d0">"GEO"</data>
+  <data key="d1">"O&amp;O BH is a location where curry brand products are sold, indicated by its presence in the sales data."</data>
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</node>
+<node id="&quot;FTW&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"FTW stands for Footwear division within an organization, involved in calculating and comparing sales proportions."</data>
+  <data key="d2">chunk-c1ee24c8d931973ebfd9aae48111b0d1</data>
+</node>
+<node id="&quot;STORE_CODES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Codes representing different stores involved in traffic analysis and reporting."</data>
+  <data key="d2">chunk-744c10a42d0bb921c0e1d5536d3a2b1b</data>
+</node>
+<node id="&quot;PROPORTION&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Proportion refers to calculated percentage values indicating each division's share of total sales."</data>
+  <data key="d2">chunk-c1ee24c8d931973ebfd9aae48111b0d1</data>
+</node>
+<node id="&quot;STORE_TYPES&quot;">
+  <data key="d0">"CATEGORY"</data>
+  <data key="d1">"Categories defining the nature or type of stores relevant to the analysis."</data>
+  <data key="d2">chunk-744c10a42d0bb921c0e1d5536d3a2b1b</data>
+</node>
+<node id="&quot;BH&quot;">
+  <data key="d0">"ORGANIZATION"</data>
+  <data key="d1">"BH refers to an organization that may be issuing a query or managing stores for size calculations."</data>
+  <data key="d2">chunk-ffd64dd913a95f6ad6b6bdde02e12e2b</data>
+</node>
+<node id="NAME">
+  <data key="d0">TYPE</data>
+  <data key="d1">description</data>
+  <data key="d2">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</node>
+<node id="&quot;EFFICIENCY (EFFI)&quot;|">
+  <data key="d2">chunk-9b8e5a4ec448b75c694e9b98154bd180</data>
+  <data key="d1">"The average efficiency is calculated from grouped store data, reflecting overall productivity trends across various stores.|</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;TARGET ACHIEVEMENT RATE&quot;">
+  <data key="d2">chunk-f6a6f04d559e1518c436702a6d45916e</data>
+  <data key="d1">"The store's ability to meet or exceed its target achievement rate indicates its operational efficiency and customer satisfaction levels."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SALES PERFORMANCE&quot;">
+  <data key="d2">chunk-f6a6f04d559e1518c436702a6d45916e</data>
+  <data key="d1">"The store's sales performance is analyzed post-opening to evaluate its effectiveness in achieving targets and overall success."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SUM(AREA)&quot;">
+  <data key="d2">chunk-ffd64dd913a95f6ad6b6bdde02e12e2b</data>
+  <data key="d1">"Summing the area of stores by country to calculate total size."&lt;SEP&gt;"The total area of BH stores by country is being queried for queries related to store sizes."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;PRODUCTS&quot;">
+  <data key="d2">chunk-17aabdf8774156e171bfd277438e80a8</data>
+  <data key="d1">"The 'sports' category drives queries related to product performance and sales within time periods like week 27."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;EACH STORE ENTITY IS PART OF THE BROADER EC PLATFORMS ORGANIZATION, CONTRIBUTING TO ITS SALES AND TARGET PERFORMANCE.&quot;">
+  <data key="d2">chunk-8009e441b0407c04a0ca681ab8b04bce</data>
+  <data key="d1">"organization membership"</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;STORE&quot;&lt;/|&gt;&quot;EC PLATFORMS&quot;">
+  <data key="d2">chunk-8009e441b0407c04a0ca681ab8b04bce</data>
+  <data key="d1">"organization membership"</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;STORE_CODE&quot;">
+  <data key="d2">chunk-ece23f1dab6cc0f78ce7afc7e86ceffa</data>
+  <data key="d1">"Grouping by week_id, store_code, and store_name relates time periods with specific store data."&lt;SEP&gt;"The grouping by week_id and store_code allows analysis of sales data over time for each store."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;CHINA&quot;">
+  <data key="d2">chunk-c8b25dea6e527892996609aeb295f0b3</data>
+  <data key="d1">"Stores operate within the Chinese market (mainland)."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;SALES PERCENTAGE&quot;">
+  <data key="d2">chunk-c8b25dea6e527892996609aeb295f0b3</data>
+  <data key="d1">"Sales percentage is calculated based on Store performance."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot;PERCENTAGE&quot;">
+  <data key="d2">chunk-455040e6c773cd0377b75564d850bea9</data>
+  <data key="d1">"The percentage of stores that meet their weekly sales targets is calculated based on the total number of stores and those that achieve their goals."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<node id="&quot; CURRY BRAND PRODUCT&quot;">
+  <data key="d2">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+  <data key="d1">" curry brand product is sold in location O&amp;O BH, influencing the sales data observed at this entity."</data>
+  <data key="d0">"UNKNOWN"</data>
+</node>
+<edge source="&quot;FY24&quot;" target="&quot;CHINA BH&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The store chain China BH operates within the fiscal year FY24, indicating its involvement in that specific time frame."</data>
+  <data key="d5">"store operations, financial analysis"</data>
+  <data key="d6">chunk-9c0bc5340400a0553f970e3c54fbb684</data>
+</edge>
+<edge source="&quot;CHANNEL&quot;" target="&quot;TERRITORY&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"Territory's channel parameter affects its sales performance last week."</data>
+  <data key="d5">"parameter influence"</data>
+  <data key="d6">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</edge>
+<edge source="&quot;IN77&quot;" target="&quot;COUNTRY&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"In77's sales performance is directly related to the market share within its specific country channel, impacting the overall comparison analysis."</data>
+  <data key="d5">"sales performance, market share, comparison analysis"</data>
+  <data key="d6">chunk-04f948caef0bfdef71976d166b1ec297</data>
+</edge>
+<edge source="&quot;COUNTRY&quot;|" target="&quot;WEEKLY SALES DROP&quot;|">
+  <data key="d3">16.0</data>
+  <data key="d4">"Each country contributes specific sales data to the analysis of weekly sales drops.|&lt;SEP&gt;"Each country's specific sales data, including metrics like sales_amt and Sales_notax, contribute to the overall weekly sales drop analysis.|</data>
+  <data key="d5">"sales contribution"|&lt;SEP&gt;"sales contribution, event participation"|</data>
+  <data key="d6">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</edge>
+<edge source="&quot;STORES&quot;" target="&quot;MONTHLY SALES&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Stores contribute to monthly sales data in CNBH."</data>
+  <data key="d5">"sales contribution, monthly tracking"</data>
+  <data key="d6">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</edge>
+<edge source="&quot;STORES&quot;" target="&quot;STORE_TYPE'">
+  <data key="d3">7.0</data>
+  <data key="d4">"Stores under category 'BH' are analyzed for their contribution to monthly sales in CNBH."</data>
+  <data key="d5">"category analysis, sales breakdown"</data>
+  <data key="d6">chunk-7744044190f2d7d30b3d9375b40f1866</data>
+</edge>
+<edge source="&quot;STORES&quot;" target="&quot;WEEKLY SALES TARGET&quot;">
+  <data key="d3">20.0</data>
+  <data key="d4">"Stores are evaluated against their weekly sales targets to determine how many have met or exceeded them."</data>
+  <data key="d5">"evaluation, performance metrics"</data>
+  <data key="d6">chunk-455040e6c773cd0377b75564d850bea9</data>
+</edge>
+<edge source="&quot;STORES&quot;" target="&quot;PERCENTAGE&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"The percentage of stores that meet their weekly sales targets is calculated based on the total number of stores and those that achieve their goals."</data>
+  <data key="d5">"statistical calculation, performance tracking"</data>
+  <data key="d6">chunk-455040e6c773cd0377b75564d850bea9</data>
+</edge>
+<edge source="&quot;TERRITORY&quot;" target="&quot;STORE_TYPE&quot;">
+  <data key="d3">12.0</data>
+  <data key="d4">"Territory's store_type attribute contributes to its sales performance last week."</data>
+  <data key="d5">"attribute inclusion"</data>
+  <data key="d6">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</edge>
+<edge source="&quot;TERRITORY&quot;" target="&quot;COUNTRY&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"Territory's categorization includes country, influencing its sales performance last week."</data>
+  <data key="d5">"categorization, performance"</data>
+  <data key="d6">chunk-6fc8763cd1eb9afa1a0363c08f6e7551</data>
+</edge>
+<edge source="&quot;SALES_ACHIEVEMENT_RATE&quot;|" target="&quot;STORE_NAME&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"The store_name represents the entity for which performance metrics, including achievement rates, are calculated."|</data>
+  <data key="d5">"grouping factor"|</data>
+  <data key="d6">chunk-34de4a2e3b8b1a455d2ef0ec8d29c07a</data>
+</edge>
+<edge source="&quot;SALES_ACHIEVEMENT_RATE&quot;|" target="&quot;STORE_CODE&quot;">
+  <data key="d3">12.0</data>
+  <data key="d4">"The store_code is a specific identifier used to calculate its sales achievement rate against targets."|</data>
+  <data key="d5">"performance calculation"|</data>
+  <data key="d6">chunk-34de4a2e3b8b1a455d2ef0ec8d29c07a</data>
+</edge>
+<edge source="&quot;DM_FACT_SALES_SKU_CHATBI&quot;" target="&quot;DIVISION&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"Data from dm_fact_sales_sku_chatbi is grouped by division for analysis."</data>
+  <data key="d5">"data aggregation, sales grouping"</data>
+  <data key="d6">chunk-8c57624576f453937934ae83adbdadf8</data>
+</edge>
+<edge source="&quot;KEY_STORIES&quot;" target="&quot;CHINA BH&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The geographic location of China BH drives significant contributions from key Stories (categories) to weekly sales performance."</data>
+  <data key="d5">"geographic influence, sales contribution"</data>
+  <data key="d6">chunk-5c13ca10aaf2cf6fd4f3dd417a29058b</data>
+</edge>
+<edge source="&quot;O&amp;O FH&quot;" target="&quot;CURRY BRAND PRODUCT&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"curry brand product is sold in location O&amp;O FH, contributing to its sales performance and metrics."</data>
+  <data key="d5">"location contribution, sales metrics"</data>
+  <data key="d6">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</edge>
+<edge source="&quot; O&amp;O BH&quot;" target="&quot; CURRY BRAND PRODUCT&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">" curry brand product is sold in location O&amp;O BH, influencing the sales data observed at this entity."</data>
+  <data key="d5">" sales influence, location impact "</data>
+  <data key="d6">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</edge>
+<edge source="&quot;EC&quot;" target="&quot;CURRY BRAND PRODUCT&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"curry brand product is also sold in location EC, affecting the overall sales figures and analysis."</data>
+  <data key="d5">"location contribution, sales data impact"</data>
+  <data key="d6">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</edge>
+<edge source="&quot;EC&quot;" target="&quot;O&amp;O BH&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"Location O&amp;O BH contributes to total sales performance when combined with other channels like EC."</data>
+  <data key="d5">"channel interaction, sales aggregation"</data>
+  <data key="d6">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</edge>
+<edge source="&quot;STORE_NAME&quot;" target="&quot;STORE_CODE&quot;">
+  <data key="d3">14.0</data>
+  <data key="d4">"The code corresponds to the name of each store during specific weeks."&lt;SEP&gt;"The store code corresponds to the name of a specific store during a particular week."</data>
+  <data key="d5">"code-naming, specificity"&lt;SEP&gt;"correspondence, specificity"</data>
+  <data key="d6">chunk-ece23f1dab6cc0f78ce7afc7e86ceffa</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;TARGET ACHIEVEMENT RATE&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"The store's ability to meet or exceed its target achievement rate indicates its operational efficiency and customer satisfaction levels."</data>
+  <data key="d5">"operational efficiency, customer satisfaction"</data>
+  <data key="d6">chunk-f6a6f04d559e1518c436702a6d45916e</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;SALES PERFORMANCE&quot;">
+  <data key="d3">9.0</data>
+  <data key="d4">"The store's sales performance is analyzed post-opening to evaluate its effectiveness in achieving targets and overall success."</data>
+  <data key="d5">"performance evaluation, target achievement"</data>
+  <data key="d6">chunk-f6a6f04d559e1518c436702a6d45916e</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;CHINA&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Stores operate within the Chinese market (mainland)."</data>
+  <data key="d5">|&gt;7</data>
+  <data key="d6">chunk-c8b25dea6e527892996609aeb295f0b3</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;SALES PERCENTAGE&quot;">
+  <data key="d3">1.0</data>
+  <data key="d4">"Sales percentage is calculated based on Store performance."</data>
+  <data key="d5">|&gt;6</data>
+  <data key="d6">chunk-c8b25dea6e527892996609aeb295f0b3</data>
+</edge>
+<edge source="&quot;STORE&quot;" target="&quot;STORE AGE&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"The Store's operational duration is determined by calculating the difference between its Closing Date and Opening Date."|&gt;|&gt;store_aging_process)</data>
+  <data key="d5">7</data>
+  <data key="d6">chunk-4c0cc9a97a231f3bbeb4f07286c39566</data>
+</edge>
+<edge source="&quot;SALES_NOTAX_WOW_PER&quot;|" target="&quot;WEEKLY SALES DROP&quot;|">
+  <data key="d3">18.0</data>
+  <data key="d4">"The weekly sales drop event is analyzed using the calculated metric of sales_notax_wow_per to understand changes in non-taxable sales performance.|&lt;SEP&gt;"The weekly sales drop event is analyzed using the calculated metric of sales_notax_wow_per, indicating changes in non-taxable sales performance.|</data>
+  <data key="d5">"performance analysis, sales metrics"|</data>
+  <data key="d6">chunk-7baf4aba61fe0ccbd9841c0917f87de4</data>
+</edge>
+<edge source="&quot;COUNTRY&quot;" target="&quot;OPEN_FLAG&quot;">
+  <data key="d3">7.0</data>
+  <data key="d4">"The number of open stores varies by country, reflecting different operational statuses across geographical regions."</data>
+  <data key="d5">"open/close status, geographical variation"</data>
+  <data key="d6">chunk-60b79e7065d14a99aa993dfe6249de35</data>
+</edge>
+<edge source="&quot;COUNTRY&quot;" target="&quot;SUM(AREA)&quot;">
+  <data key="d3">24.0</data>
+  <data key="d4">"Summing the area of stores by country to calculate total size."&lt;SEP&gt;"The total area of BH stores by country is being queried for queries related to store sizes."</data>
+  <data key="d5">"aggregate query, data summation"</data>
+  <data key="d6">chunk-ffd64dd913a95f6ad6b6bdde02e12e2b</data>
+</edge>
+<edge source="&quot;STORE EFFICIENCIES&quot;|" target="&quot;EFFICIENCY (EFFI)&quot;|">
+  <data key="d3">8.0</data>
+  <data key="d4">"The average efficiency is calculated from grouped store data, reflecting overall productivity trends across various stores.|</data>
+  <data key="d5">"average calculation, grouped data"|</data>
+  <data key="d6">chunk-9b8e5a4ec448b75c694e9b98154bd180</data>
+</edge>
+<edge source="&quot;WEEK_ID&quot;" target="&quot;STORE_CODE&quot;">
+  <data key="d3">16.0</data>
+  <data key="d4">"Grouping by week_id, store_code, and store_name relates time periods with specific store data."&lt;SEP&gt;"The grouping by week_id and store_code allows analysis of sales data over time for each store."</data>
+  <data key="d5">"time-based grouping, data analysis"&lt;SEP&gt;"time-based grouping, dataset analysis"</data>
+  <data key="d6">chunk-ece23f1dab6cc0f78ce7afc7e86ceffa</data>
+</edge>
+<edge source="&quot;SALES UNITS&quot;" target="&quot;GENDER&quot;">
+  <data key="d3">10.0</data>
+  <data key="d4">"The sales units are analyzed based on their gender distribution.</data>
+  <data key="d5">"sales analysis, gender distribution"</data>
+  <data key="d6">chunk-cc2f73f76ad6626570c0487ca656f966</data>
+</edge>
+<edge source="&quot;CURRY BRAND PRODUCT&quot;" target="&quot;O&amp;O BH&quot;">
+  <data key="d3">8.0</data>
+  <data key="d4">"curry brand product is sold in location O&amp;O BH, influencing the sales data observed at this entity."</data>
+  <data key="d5">"sales influence, location impact"</data>
+  <data key="d6">chunk-724eb30628a95e05a82c9e40455fe6de</data>
+</edge>
+<edge source="&quot;SPORTS&quot;" target="&quot;PRODUCTS&quot;">
+  <data key="d3">6.0</data>
+  <data key="d4">"The 'sports' category drives queries related to product performance and sales within time periods like week 27."</data>
+  <data key="d5">"sales performance, category focus"</data>
+  <data key="d6">chunk-17aabdf8774156e171bfd277438e80a8</data>
+</edge>
+<edge source="&quot;EACH STORE ENTITY IS PART OF THE BROADER EC PLATFORMS ORGANIZATION, CONTRIBUTING TO ITS SALES AND TARGET PERFORMANCE.&quot;" target="&quot;STORE&quot;&lt;/|&gt;&quot;EC PLATFORMS&quot;">
+  <data key="d3">5.0</data>
+  <data key="d4">"organization membership"</data>
+  <data key="d5">5</data>
+  <data key="d6">chunk-8009e441b0407c04a0ca681ab8b04bce</data>
+</edge>
+</graph></graphml>
