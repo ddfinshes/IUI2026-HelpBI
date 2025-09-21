@@ -1,0 +1,1 @@
+select * from dm_member_sales_chatbi where transaction_date < '2025-02-09 16:15:04' order by transaction_date desc limit 1000;

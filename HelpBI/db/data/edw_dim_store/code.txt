@@ -1,0 +1,1 @@
+select DISTINCT * from edw_dim_store where to_char(update_date, 'YYYY-MM-DD')= '2025-02-10' and (country='Mainland' or country='Hongkong' or country='Taiwan') limit 500;

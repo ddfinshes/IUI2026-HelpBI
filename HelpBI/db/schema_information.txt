@@ -1,0 +1,435 @@
+table_schema	table_name	column_name	data_type	character_maximum_length	is_nullable	column_default
+public	dm_dim_holiday_chatbi	date_code	character varying	18	YES	None
+public	dm_dim_holiday_chatbi	week_day	character varying	60	YES	None
+public	dm_dim_holiday_chatbi	holiday_flag	character varying	10	YES	None
+public	dm_fact_onhand_chatbi	store_code	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	store_name	character varying	604	YES	None
+public	dm_fact_onhand_chatbi	customer_name	character varying	604	YES	None
+public	dm_fact_onhand_chatbi	channel	character varying	64	YES	None
+public	dm_fact_onhand_chatbi	store_type	character varying	64	YES	None
+public	dm_fact_onhand_chatbi	country	character varying	64	YES	None
+public	dm_fact_onhand_chatbi	region	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	province	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	short_name	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	city	character varying	604	YES	None
+public	dm_fact_onhand_chatbi	area	numeric	None	YES	None
+public	dm_fact_onhand_chatbi	cluster	character varying	64	YES	None
+public	dm_fact_onhand_chatbi	date_code	character varying	22	YES	None
+public	dm_fact_onhand_chatbi	division	character varying	64	YES	None
+public	dm_fact_onhand_chatbi	gender	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	material	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	product_name	character varying	604	YES	None
+public	dm_fact_onhand_chatbi	enduse	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	silhouette	character varying	304	YES	None
+public	dm_fact_onhand_chatbi	sub_silhouette	character varying	604	YES	None
+public	dm_fact_onhand_chatbi	fit_type	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	key_items	character varying	154	YES	None
+public	dm_fact_onhand_chatbi	key_stories	character varying	1504	YES	None
+public	dm_fact_onhand_chatbi	product_line	character varying	304	YES	None
+public	dm_fact_onhand_chatbi	stock	bigint	None	YES	None
+public	dm_fact_onhand_chatbi	intransit	bigint	None	YES	None
+public	dm_fact_onhand_chatbi	stock_amt	numeric	None	YES	None
+public	dm_fact_onhand_chatbi	intransit_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	date_code	character varying	18	YES	None
+public	dm_fact_sales_chatbi	week_id	integer	None	YES	None
+public	dm_fact_sales_chatbi	weekday_id	integer	None	YES	None
+public	dm_fact_sales_chatbi	month_id	integer	None	YES	None
+public	dm_fact_sales_chatbi	year_id	integer	None	YES	None
+public	dm_fact_sales_chatbi	customer_name	character varying	600	YES	None
+public	dm_fact_sales_chatbi	customer_sort	integer	None	YES	None
+public	dm_fact_sales_chatbi	store_master_code	character varying	600	YES	None
+public	dm_fact_sales_chatbi	store_code	character varying	600	YES	None
+public	dm_fact_sales_chatbi	store_name	character varying	600	YES	None
+public	dm_fact_sales_chatbi	short_name	character varying	600	YES	None
+public	dm_fact_sales_chatbi	country	character varying	150	YES	None
+public	dm_fact_sales_chatbi	region	character varying	150	YES	None
+public	dm_fact_sales_chatbi	province	character varying	150	YES	None
+public	dm_fact_sales_chatbi	city	character varying	600	YES	None
+public	dm_fact_sales_chatbi	store_type	character varying	150	YES	None
+public	dm_fact_sales_chatbi	district_manager	character varying	150	YES	None
+public	dm_fact_sales_chatbi	sub_channel	character varying	11	YES	None
+public	dm_fact_sales_chatbi	comp_flag	character varying	3	YES	None
+public	dm_fact_sales_chatbi	currency	character varying	60	YES	None
+public	dm_fact_sales_chatbi	lyd_trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	lyd_qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_orig_price	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_usd	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_orig_price_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_disc_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_disc_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_disc_amt_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_qty_return	integer	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_return	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_return_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_amt_return_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_trans_return	integer	None	YES	None
+public	dm_fact_sales_chatbi	lyw_trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	lyw_qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyw_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyw_amt_usd	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyw_amt_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	ld_trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	ld_qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	ld_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	ld_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	ld_amt_usd	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lw_trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	lw_qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lw_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lw_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lw_amt_usd	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lm_trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	lm_qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lm_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lm_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lm_amt_usd	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans	integer	None	YES	None
+public	dm_fact_sales_chatbi	traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyd_traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lyw_traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	orig_price	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	orig_price_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	disc_amt	numeric	None	YES	None
+public	dm_fact_sales_chatbi	disc_amt_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	disc_amt_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_return	integer	None	YES	None
+public	dm_fact_sales_chatbi	amt_return	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_return_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_return_usd_notax	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_return	integer	None	YES	None
+public	dm_fact_sales_chatbi	ld_traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lw_traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	lm_traffic	numeric	None	YES	None
+public	dm_fact_sales_chatbi	avg_monthly_sales	numeric	None	YES	None
+public	dm_fact_sales_chatbi	channel	character varying	60	YES	None
+public	dm_fact_sales_chatbi	day_comp	character varying	3	YES	None
+public	dm_fact_sales_chatbi	week_comp	character varying	3	YES	None
+public	dm_fact_sales_chatbi	area	character varying	60	YES	None
+public	dm_fact_sales_chatbi	cluster	character varying	60	YES	None
+public	dm_fact_sales_chatbi	finance_comp	character varying	3	YES	None
+public	dm_fact_sales_chatbi	open_date	character varying	18	YES	None
+public	dm_fact_sales_chatbi	msrp	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target_f1	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target_f0	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target_f2	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target_f3	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target_f4	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	qty_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	trans_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	traffic_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_usd_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	amt_notax_usd_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	cr_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	asp_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	upt_target	numeric	None	YES	None
+public	dm_fact_sales_chatbi	atv_target	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	date_code	character varying	18	YES	None
+public	dm_fact_sales_sku_chatbi	year_id	integer	None	YES	None
+public	dm_fact_sales_sku_chatbi	month_id	integer	None	YES	None
+public	dm_fact_sales_sku_chatbi	week_id	integer	None	YES	None
+public	dm_fact_sales_sku_chatbi	store_code	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	store_name	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	customer_name	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	channel	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	store_type	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	country	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	region	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	province	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	short_name	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	city	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	area	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	cluster	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	sub_channel	character varying	11	YES	None
+public	dm_fact_sales_sku_chatbi	material	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	product_name	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	key_items	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	sku	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	style	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	division	character varying	60	YES	None
+public	dm_fact_sales_sku_chatbi	gender	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	enduse	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	silhouette	character varying	300	YES	None
+public	dm_fact_sales_sku_chatbi	sub_silhouette	character varying	600	YES	None
+public	dm_fact_sales_sku_chatbi	fit_type	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	qty	bigint	None	YES	None
+public	dm_fact_sales_sku_chatbi	lw_qty	bigint	None	YES	None
+public	dm_fact_sales_sku_chatbi	lm_qty	bigint	None	YES	None
+public	dm_fact_sales_sku_chatbi	amt	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	lw_amt	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	lm_amt	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	season_code	character varying	150	YES	None
+public	dm_fact_sales_sku_chatbi	msrp	numeric	None	YES	None
+public	dm_fact_sales_sku_chatbi	key_stories	character varying	1500	YES	None
+public	dm_fact_sales_sku_chatbi	product_line	character varying	300	YES	None
+public	dm_member_chatbi	member_id	character varying	300	NO	None
+public	dm_member_chatbi	member_code	character varying	900	YES	None
+public	dm_member_chatbi	full_name	character varying	900	YES	None
+public	dm_member_chatbi	mobile	character varying	900	YES	None
+public	dm_member_chatbi	email	character varying	900	YES	None
+public	dm_member_chatbi	douyin_hashmobile	character varying	600	YES	None
+public	dm_member_chatbi	birthday	character varying	10	YES	None
+public	dm_member_chatbi	age	integer	None	YES	None
+public	dm_member_chatbi	gender_id	integer	None	YES	None
+public	dm_member_chatbi	gender	character varying	7	YES	None
+public	dm_member_chatbi	register_date_str	timestamp without time zone	None	YES	None
+public	dm_member_chatbi	regist_date	character varying	10	YES	None
+public	dm_member_chatbi	register_channel_id	character varying	300	YES	None
+public	dm_member_chatbi	regist_channel	character varying	900	YES	None
+public	dm_member_chatbi	regist_sub_channel	character varying	900	YES	None
+public	dm_member_chatbi	regist_channel3	character varying	900	YES	None
+public	dm_member_chatbi	regist_channel4	character varying	900	YES	None
+public	dm_member_chatbi	channel_code	character varying	900	YES	None
+public	dm_member_chatbi	nick_name	character varying	900	YES	None
+public	dm_member_chatbi	union_id	character varying	900	YES	None
+public	dm_member_chatbi	ouid	character varying	150	YES	None
+public	dm_member_chatbi	xid	character varying	600	YES	None
+public	dm_member_chatbi	douyin_unionid	character varying	600	YES	None
+public	dm_member_chatbi	province_dictionary_id	character varying	300	YES	None
+public	dm_member_chatbi	province	character varying	900	YES	None
+public	dm_member_chatbi	city_dictionary_id	character varying	300	YES	None
+public	dm_member_chatbi	city	character varying	900	YES	None
+public	dm_member_chatbi	register_store_id	character varying	300	YES	None
+public	dm_member_chatbi	regist_store_code	character varying	100	YES	None
+public	dm_member_chatbi	regist_store_type_1	character varying	900	YES	None
+public	dm_member_chatbi	regist_store_type	character varying	900	YES	None
+public	dm_member_chatbi	regist_store_name	character varying	900	YES	None
+public	dm_member_chatbi	binding_date	timestamp without time zone	None	YES	None
+public	dm_member_chatbi	comm_optin	integer	None	YES	None
+public	dm_member_chatbi	isrecpromotional	integer	None	YES	None
+public	dm_member_chatbi	tmall_comm_flag	integer	None	YES	None
+public	dm_member_chatbi	jd_comm_flag	integer	None	YES	None
+public	dm_member_chatbi	dy_comm_flag	integer	None	YES	None
+public	dm_member_chatbi	sms_unsubscribe_flag	integer	None	YES	None
+public	dm_member_chatbi	r12_frequent_channel	character varying	900	YES	None
+public	dm_member_chatbi	r12_frequent_store	character varying	900	YES	None
+public	dm_member_chatbi	r12_frequent_city	character varying	900	YES	None
+public	dm_member_chatbi	jd_historical	integer	None	YES	None
+public	dm_member_chatbi	dy_historical	integer	None	YES	None
+public	dm_member_chatbi	level	character varying	300	YES	None
+public	dm_member_chatbi	level_update_date	timestamp without time zone	None	YES	None
+public	dm_member_chatbi	level_remark	character varying	300	YES	None
+public	dm_member_chatbi	unionid	character varying	900	YES	None
+public	dm_member_chatbi	received_medals	text	None	YES	None
+public	dm_member_chatbi	wearing_medals	character varying	300	YES	None
+public	dm_member_chatbi	mai_member_id	character varying	300	YES	None
+public	dm_member_sales_chatbi	order_store_code	character varying	900	YES	None
+public	dm_member_sales_chatbi	old_store_id	character varying	150	YES	None
+public	dm_member_sales_chatbi	order_store_name_cn	character varying	900	YES	None
+public	dm_member_sales_chatbi	store_name_en	character varying	900	YES	None
+public	dm_member_sales_chatbi	order_store_type	character varying	900	YES	None
+public	dm_member_sales_chatbi	store_address	character varying	900	YES	None
+public	dm_member_sales_chatbi	member_id	character varying	300	YES	None
+public	dm_member_sales_chatbi	mai_member_id	character varying	300	YES	None
+public	dm_member_sales_chatbi	member_code	character varying	900	YES	None
+public	dm_member_sales_chatbi	full_name	character varying	900	YES	None
+public	dm_member_sales_chatbi	mobile	character varying	900	YES	None
+public	dm_member_sales_chatbi	email	character varying	900	YES	None
+public	dm_member_sales_chatbi	birthday	character varying	10	YES	None
+public	dm_member_sales_chatbi	age	integer	None	YES	None
+public	dm_member_sales_chatbi	gender	character varying	7	YES	None
+public	dm_member_sales_chatbi	register_date_str	timestamp without time zone	None	YES	None
+public	dm_member_sales_chatbi	regist_channel	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_sub_channel	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_channel3	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_channel4	character varying	900	YES	None
+public	dm_member_sales_chatbi	channel_code	character varying	900	YES	None
+public	dm_member_sales_chatbi	city	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_store_code	character varying	100	YES	None
+public	dm_member_sales_chatbi	regist_store_type	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_store_type_1	character varying	900	YES	None
+public	dm_member_sales_chatbi	regist_store_name	character varying	900	YES	None
+public	dm_member_sales_chatbi	binding_date	timestamp without time zone	None	YES	None
+public	dm_member_sales_chatbi	level	character varying	300	YES	None
+public	dm_member_sales_chatbi	level_update_date	timestamp without time zone	None	YES	None
+public	dm_member_sales_chatbi	level_remark	character varying	300	YES	None
+public	dm_member_sales_chatbi	province	character varying	900	YES	None
+public	dm_member_sales_chatbi	transaction_id	character varying	300	YES	None
+public	dm_member_sales_chatbi	invoice_no	character varying	9000	YES	None
+public	dm_member_sales_chatbi	original_order_code	character varying	12000	YES	None
+public	dm_member_sales_chatbi	transaction_date	timestamp without time zone	None	YES	None
+public	dm_member_sales_chatbi	trans_type	character varying	13	YES	None
+public	dm_member_sales_chatbi	order_channel	character varying	8	YES	None
+public	dm_member_sales_chatbi	amt_total	numeric	None	YES	None
+public	dm_member_sales_chatbi	amt_real	numeric	None	YES	None
+public	dm_member_sales_chatbi	discount	numeric	None	YES	None
+public	dm_member_sales_chatbi	order_amt	numeric	None	YES	None
+public	dm_member_sales_chatbi	qty_total	numeric	None	YES	None
+public	dm_member_sales_chatbi	is_member_order	character varying	1	YES	None
+public	edw_dim_calendar	date_sid	integer	None	NO	None
+public	edw_dim_calendar	date_code	timestamp without time zone	None	YES	None
+public	edw_dim_calendar	date_name	character varying	150	YES	None
+public	edw_dim_calendar	week_id	integer	None	YES	None
+public	edw_dim_calendar	weekday_id	integer	None	YES	None
+public	edw_dim_calendar	weekday_name	character varying	60	YES	None
+public	edw_dim_calendar	month_id	integer	None	YES	None
+public	edw_dim_calendar	month_name	character varying	60	YES	None
+public	edw_dim_calendar	quarter_id	integer	None	YES	None
+public	edw_dim_calendar	quarter_name	character varying	60	YES	None
+public	edw_dim_calendar	year_id	integer	None	YES	None
+public	edw_dim_calendar	year_name	character varying	60	YES	None
+public	edw_dim_calendar	sales_season	character varying	60	YES	None
+public	edw_dim_calendar	inbound_season	character varying	60	YES	None
+public	edw_dim_calendar	outbound_season	character varying	60	YES	None
+public	edw_dim_calendar	inbound_carry_over	character varying	60	YES	None
+public	edw_dim_calendar	outbound_carry_over	character varying	60	YES	None
+public	edw_dim_calendar	fin_year_id	integer	None	YES	None
+public	edw_dim_calendar	fin_month_id	integer	None	YES	None
+public	edw_dim_calendar	month_id_desc	character varying	765	YES	None
+public	edw_dim_calendar	fin_quarter_id	integer	None	YES	None
+public	edw_dim_calendar	fin_week_id	integer	None	YES	None
+public	edw_dim_calendar	fin_lwk_date_code	timestamp without time zone	None	YES	None
+public	edw_dim_calendar	fin_lwk_date_name	integer	None	YES	None
+public	edw_dim_channel	channel_sid	integer	None	YES	None
+public	edw_dim_channel	channel_name	character varying	60	YES	None
+public	edw_dim_store	store_sid	integer	None	NO	None
+public	edw_dim_store	store_master_code	character varying	600	YES	None
+public	edw_dim_store	store_last_code	character varying	600	YES	None
+public	edw_dim_store	store_last_name	character varying	600	YES	None
+public	edw_dim_store	channel_sid	integer	None	YES	None
+public	edw_dim_store	customer_sid	integer	None	YES	None
+public	edw_dim_store	country	character varying	150	YES	None
+public	edw_dim_store	region	character varying	150	YES	None
+public	edw_dim_store	province	character varying	150	YES	None
+public	edw_dim_store	city	character varying	600	YES	None
+public	edw_dim_store	store_type	character varying	150	YES	None
+public	edw_dim_store	short_name	character varying	600	YES	None
+public	edw_dim_store	space	character varying	600	YES	None
+public	edw_dim_store	b1_wh	character varying	60	YES	None
+public	edw_dim_store	store_branch_type	character varying	60	YES	None
+public	edw_dim_store	ship_to_type	character varying	60	YES	None
+public	edw_dim_store	b1_code	character varying	600	YES	None
+public	edw_dim_store	store_id	character varying	60	YES	None
+public	edw_dim_store	replenishment_arrival_date	character varying	60	YES	None
+public	edw_dim_store	location_id	character varying	150	YES	None
+public	edw_dim_store	open_date	timestamp without time zone	None	YES	None
+public	edw_dim_store	last_dis_manager	character varying	150	YES	None
+public	edw_dim_store	status	character varying	60	YES	None
+public	edw_dim_store	hdetl_date	timestamp without time zone	None	YES	None
+public	edw_dim_store	update_date	timestamp without time zone	None	YES	None
+public	edw_dim_store	process_log_id	integer	None	YES	None
+public	edw_dim_store	area	character varying	60	YES	None
+public	edw_dim_store	cluster	character varying	60	YES	None
+public	edw_dim_store	close_date	timestamp without time zone	None	YES	None
+public	edw_dim_store	sit_code	character varying	60	YES	None
+public	edw_dim_store	comp_keep	character varying	60	YES	None
+public	edw_dim_store	source_sys	character varying	65535	YES	None
+public	edw_dim_store	sap_customer_code	character varying	300	YES	None
+public	edw_dim_store	store_local_name	character varying	765	YES	None
+public	edw_dim_store	address1	character varying	765	YES	None
+public	edw_dim_store	address2	character varying	765	YES	None
+public	edw_dim_store	phone1	character varying	150	YES	None
+public	edw_dim_store	zip	character varying	300	YES	None
+public	edw_dim_store	phone2	character varying	150	YES	None
+public	edw_dim_store	store_no	character varying	300	YES	None
+public	edw_dim_store	subchannel	character varying	60	YES	None
+public	edw_dim_store_prod	ds_sid	bigint	None	YES	None
+public	edw_dim_store_prod	date_sid	integer	None	YES	None
+public	edw_dim_store_prod	store_sid	integer	None	YES	None
+public	edw_dim_store_prod	date_code	timestamp without time zone	None	YES	None
+public	edw_dim_store_prod	store_master_code	character varying	150	YES	None
+public	edw_dim_store_prod	store_code	character varying	150	YES	None
+public	edw_dim_store_prod	store_name	character varying	600	YES	None
+public	edw_dim_store_prod	short_name	character varying	150	YES	None
+public	edw_dim_store_prod	channel	character varying	60	YES	None
+public	edw_dim_store_prod	store_type	character varying	60	YES	None
+public	edw_dim_store_prod	country	character varying	60	YES	None
+public	edw_dim_store_prod	region	character varying	150	YES	None
+public	edw_dim_store_prod	province	character varying	150	YES	None
+public	edw_dim_store_prod	city	character varying	600	YES	None
+public	edw_dim_store_prod	address1	character varying	2400	YES	None
+public	edw_dim_store_prod	address2	character varying	2400	YES	None
+public	edw_dim_store_prod	address3	character varying	2400	YES	None
+public	edw_dim_store_prod	latitude	character varying	150	YES	None
+public	edw_dim_store_prod	longitude	character varying	150	YES	None
+public	edw_dim_store_prod	zip_code	character varying	150	YES	None
+public	edw_dim_store_prod	customer_code	character varying	600	YES	None
+public	edw_dim_store_prod	customer_name	character varying	600	YES	None
+public	edw_dim_store_prod	customer_sort	character varying	300	YES	None
+public	edw_dim_store_prod	warehouse_code	character varying	150	YES	None
+public	edw_dim_store_prod	warehouse_name	character varying	600	YES	None
+public	edw_dim_store_prod	district_manager	character varying	150	YES	None
+public	edw_dim_store_prod	pin_code	character varying	150	YES	None
+public	edw_dim_store_prod	b1_code	character varying	60	YES	None
+public	edw_dim_store_prod	fms_site_code	character varying	150	YES	None
+public	edw_dim_store_prod	sit_code	character varying	150	YES	None
+public	edw_dim_store_prod	sap_customer_code	character varying	150	YES	None
+public	edw_dim_store_prod	area	numeric	None	YES	None
+public	edw_dim_store_prod	cluster	character varying	60	YES	None
+public	edw_dim_store_prod	open_date	timestamp without time zone	None	YES	None
+public	edw_dim_store_prod	close_date	timestamp without time zone	None	YES	None
+public	edw_dim_store_prod	open_flag	character varying	60	YES	None
+public	edw_dim_store_prod	keep_comp	character varying	60	YES	None
+public	edw_dim_store_prod	comp_flag	character varying	3	YES	None
+public	edw_dim_store_prod	finance_comp	character varying	3	YES	None
+public	edw_dim_store_prod	active_flag	integer	None	YES	None
+public	edw_dim_store_prod	source_interface	character varying	300	YES	None
+public	edw_dim_store_prod	source_sys	character varying	1500	YES	None
+public	edw_dim_store_prod	hdetl_date	timestamp without time zone	None	YES	None
+public	edw_dim_store_prod	store_local_name	character varying	765	YES	None
+public	edw_dim_store_prod	phone1	character varying	150	YES	None
+public	edw_dim_store_prod	phone2	character varying	150	YES	None
+public	edw_dim_store_prod	store_no	character varying	300	YES	None
+public	edw_dim_store_prod	subchannel	character varying	60	YES	None
+public	test	id	integer	None	NO	nextval('test_id_seq'::regclass)
+public	test	name	character varying	50	YES	None
+public	test	age	integer	None	YES	None
+public	test	email	character varying	100	YES	None

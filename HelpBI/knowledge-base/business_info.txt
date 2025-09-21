@@ -1,0 +1,72 @@
+***1.Date Related Knowledge:
+
+- "This week" refers to the period from last Sunday to today.
+- "Last week" refers to the period from last Saturday to the previous Sunday.
+- F- YTD: From the first day of the fiscal year (April 1st each year) to yesterday.
+- C- YTD: From the first day of this year to yesterday.
+- YTD: From the first day of this year to yesterday.
+- MTD: From the first day of the current month to yesterday.
+- QTD: （Quarter- to- date）.QTD refers to the period from the first day of the current quarter to yesterday.
+- LWK: Last week.
+- WTD: From the first day (Sunday) of the current week to yesterday.
+- FY23: Refers to the fiscal year 2023, i.e., from April 1, 2022, to March 31, 2023.
+- FY24: Refers to the fiscal year 2024, i.e., from April 1, 2023, to March 31, 2024.
+- FY25: Refers to the fiscal year 2025, i.e., from April 1, 2024, to March 31, 2025.
+- FY26: Refers to the fiscal year 2026, i.e., from April 1, 2025, to March 31, 2026.
+- FY27: Refers to the fiscal year 2027, i.e., from April 1, 2026, to March 31, 2027.
+- week id: represented by a six- digit number in the format of 'yyyyww'. When users input data related to it, they might only enter 'week ww'. In such cases, we need to append an appropriate four- digit year ('yyyy') to form the complete 'week id'. There is a specific rule for determining this year. If the current date falls within the period from April 1st to December 31st, we should use the year of the current date plus 1. For example, if today's date is in this range in 2024, we would use 2025 for the year part when constructing the 'week id'. On the other hand, if the current date is between January 1st and March 31st, we should use the year of the current date itself. For instance, if today is within this range in 2025, we would use 2025 for the year part when forming the 'week id'. Please keep this rule in mind when processing any input related to 'week id' to ensure accurate results.
+- You can use the following SQL text to get today's weekid:  select week_id from chatbi_dim_calendar where date_code =CURRENT_DATE
+
+***2.Store related knowledge:
+
+- country China: Refers to mainland China, country=mainland In Database.
+    - CN: Refers to mainland China, country=mainland in Database. 
+    - Mainland: Refers to mainland China, country=mainland in Database.
+    - HK: Refers to Hongkong, country=Hongkong in database.
+    
+- region APAC: Refers to region='APAC', Generally refers to stores in countries in the Asian Circle. In addition to APAC, there are West/East/North/South values.
+- Store Name: The name of the store, which can be in Chinese or English. For example: EC- Brand SITE/ EC- TMALL/ VIP STORE 2/ WXLIVESHOP/ UA Korea/ UA Korea Employee/ Naver Smartstore/ EC- JD/ EC- TMALL Outlet/ VIP JITX STORE/ EC- Mini- program/ Coupang/ Tiktok Store/ Tiktok Female Store/ KaKao Gift/ EC- FQL/ PDD/ KaKao Deal/ CHINA TIKTOK SPORTS/ HK/ 11ST/ VIP/ G- market/ XIAOHONGSHU…
+- platform:In the EC (E- commerce) channel, "platform" refers to the store name of the e- commerce store.
+- Channel: Channel where the store belongs.
+    
+    The values in the database are EC/FP/O&O. 
+    
+    - EC: E- commerce,the channel is EC.
+    - FP: Distributor,the channel is FP.
+    - O&O: Retail store.the channel is O&O.
+    - "Retail" refers to retail stores, that is, O&O stores. In the database, the channel of both Retail stores and O&O stores is O&O. Therefore, whether you are querying "retail" or "O&O", the query condition should use "channel = 'O&O'".
+- Store Type: Type of the store. For example, BH/FH.
+    - BH: Direct- operated store,the store_type is BH.
+    - FH: Factory store,the store_type is FH.
+- Comp flag:could be the Comp Store which have been open for a full 12 months; stores flagged as comp_flag=‘Y’ in the database.
+    - customer_name: the name of the dealer.
+    - O&O channel stores, usually the company's own, so dealers are uniformly called 'Retail'.
+    - For FP channel stores, the distributor is other selling companies, such as: BEIJING JSBR/YYY-HN/YYY-AH/KMYDRC/IWILLSPORTS etc.
+- store code：The store code, in general, is constructed as follows: UABH_CHN_1234, where CHN represents the country and 1234 is the unique code for the store.
+
+***3.Commodity-related knowledge:
+
+- The content refers to the key_stories attribute of the product.e.g.,Armour Print/Women's Bra & Fitted Bottoms/Vanish/HOVR/AMP/Curry/Outerwear/Project Rock/Unstoppable/FLOW/Iso- Chill；Fleece/Meridian/Motion/Warm Footwear/Clone Magnetico/STORM FTW/Slipspeed/Fat Tire/Tribase Reign/
+- MFO:refers to the product_line attribute of the porduct.For Example:Inline;MFO;Promo;etc.,
+- Division: Division attribute of the product, e.g., APP (Apparel), ACC (Accessories), FTW (Footwear). It is saved in the database table under the full name Apparel/Accessories/Footwear.
+- Gender: Gender attribute of the product, e.g., MENS, WOMENS, BOYS, GIRLS, Unisex.
+- End Use: End use attribute of the product, e.g., BASEBALL, GOLF, TRAINING, RUNNING, Outdoor.
+- Silhouette: Silhouette attribute of the product, e.g., BOTTOMS, ONE PIECES, SANDALS, Gloves.
+- Fit Type: Fit type attribute of the product, e.g., LOOSE, REGULAR, FITTED, ONE SIZE.
+- Catagory of merchandise: Key_stories attribute of the product, e.g., CURRY, FAT TIRE, Cotton, Ottoman Fleece, slipspeed.
+- Season code: The "season code" refers to two distinct concepts: the season in which a sale occurs (sales season) and the season associated with the product itself (product season).
+    
+    Each year is divided into two seasons: the first half (January to June) is denoted as "SS" followed by the year, where "SS" stands for Spring and Summer, such as SS23 or SS24. The second half (July to December) is denoted as "FW" followed by the year, where "FW" stands for Fall and Winter, such as FW23 or FW24.
+    
+    For example, if an item is purchased in March 2025, the sales season would be SS25. The product season, however, refers to the season for which the item was designed or intended for sale. If this item is a new Spring 2025 product, its product season would be SS25 (not FW25 as stated in the original; this seems to be a correction based on context). When the sales season and product season align (e.g., both are SS25), the item is considered "in-season." Conversely, if the item is an older product with a product season of SS24, but it’s sold in SS25, it would be classified as "off-season."
+    
+    In the product sales table, the "season_code" field specifically stores the product season, not the sales season.
+    
+
+***4. Sales-Related Knowledge:
+
+- **Sales**: Sales typically refer to net sales amount by default, which is calculated as total sales amount minus canceled amounts and returned amounts. In the sales table, the "amt" field stores the net sales amount.
+- **Demand Sales**: This refers to net sales plus the sales amount of returns, i.e., the total of "amt" + "amt_return" from the sales table.
+- **SOB (Sum of Business)**: Total business volume. It can represent either the proportion of sales amount or the proportion of sales quantity.
+- **Ach (Achievement)**: Achievement rate, used to calculate the overachievement rate. The formula is actual sales divided by target sales.
+- **Discount**: Discount rate, calculated as (original sales price - actual sales amount) divided by original sales price.

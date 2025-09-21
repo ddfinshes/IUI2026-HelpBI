@@ -1,0 +1,38 @@
+1. dm_fact_onhand_chatbi
+select * from dm_fact_onhand_chatbi where country = 'Mainland' and date_code='2025-02-16' order by date_code desc limit 1000;
+select * from dm_fact_onhand_chatbi where (country = 'Taiwan' or country = 'Hongkong') and date_code='2025-02-11' order by date_code desc limit 1000;
+
+2. dm_member_chatbi
+select * from dm_member_chatbi where to_char(level_update_date, 'YYYY-MM-DD')='2025-02-17' order by level_update_date desc limit 1000;
+
+3. edw_dim_calendar
+select * from edw_dim_calendar where year_id='2025' order by date_code desc;
+
+4. edw_dim_store_prod
+select * from edw_dim_store_prod where country='Mainland' and to_char(date_code, 'YYYY-MM-DD')='2025-02-17' order by date_code desc limit 1000;
+select * from edw_dim_store_prod where country='Taiwan' and to_char(date_code, 'YYYY-MM-DD')='2025-02-17' order by date_code desc limit 1000;
+select * from edw_dim_store_prod where country='Hongkong' and to_char(date_code, 'YYYY-MM-DD')='2025-02-17' order by date_code desc limit 1000;
+
+5. edw_dim_channel (*)
+select * from edw_dim_channel;
+
+6. dm_dim_holiday_chatbi (*)
+
+7. edw_dim_store
+select * from edw_dim_store where to_char(update_date, 'YYYY-MM-DD')<='2025-02-17' and country='Mainland' order by update_date desc limit 1000;
+select * from edw_dim_store where to_char(update_date, 'YYYY-MM-DD')<='2025-02-17' and country='Hongkong' order by update_date desc limit 1000;
+select * from edw_dim_store where to_char(update_date, 'YYYY-MM-DD')<='2025-02-17' and country='Taiwan' order by update_date desc limit 1000;
+
+8. dm_fact_sales_sku_chatbi
+select * from dm_fact_sales_sku_chatbi where date_code='2025-02-16' and country='Mainland' limit 1000;
+select * from dm_fact_sales_sku_chatbi where date_code='2025-02-16' and country='Hongkong' limit 1000;
+select * from dm_fact_sales_sku_chatbi where date_code='2025-02-16' and country='Taiwan' limit 1000;
+
+9. dm_fact_sales_chatbi
+select * from dm_fact_sales_chatbi where date_code = '2025-02-17' and country='Taiwan' limit 1000;
+select * from dm_fact_sales_chatbi where date_code = '2025-02-17' and country='Hongkong' limit 1000;
+select * from dm_fact_sales_chatbi where date_code = '2025-02-17' and country='Mainland' limit 1000;
+
+10. dm_member_sales_chatbi
+select * from dm_member_sales_chatbi where to_char(transaction_date, 'YYYY-MM-DD')='2025-02-10' limit 1000;
+

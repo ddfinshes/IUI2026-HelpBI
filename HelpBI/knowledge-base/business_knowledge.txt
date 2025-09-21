@@ -1,0 +1,115 @@
+Here is the reorganized knowledge base content in a structured key-value format with enhanced explanations:
+
+*
+
+1. Date-Related Definitions
+
+•   This Week: The date range from last Sunday (inclusive) to today (inclusive).
+
+•   Last Week (LWK): The date range from the Saturday of the week before last to the Sunday of last week.
+
+•   Week-to-Date (WTD): The date range from the first day (Sunday) of the current week to yesterday.
+
+•   Month-to-Date (MTD): The date range from the first day of the current month to yesterday.
+
+•   Quarter-to-Date (QTD): The date range from the first day of the current fiscal quarter to yesterday.
+
+•   Year-to-Date (YTD): The date range from the first day of the current calendar year to yesterday.
+
+•   Calendar Year-to-Date (C-YTD): Alias for YTD (From the first day of this year to yesterday).
+
+•   Fiscal Year-to-Date (F-YTD): The date range from the first day of the current fiscal year (April 1st) to yesterday.
+
+•   Fiscal Year 2023 (FY23): The period from April 1, 2022, to March 31, 2023.
+
+•   Fiscal Year 2024 (FY24): The period from April 1, 2023, to March 31, 2024.
+
+•   Fiscal Year 2025 (FY25): The period from April 1, 2024, to March 31, 2025.
+
+•   Fiscal Year 2026 (FY26): The period from April 1, 2025, to March 31, 2026.
+
+•   Fiscal Year 2027 (FY27): The period from April 1, 2026, to March 31, 2027.
+
+•   Week ID: A six-digit identifier in the 'yyyyww' format (e.g., '202505' for the 5th week of 2025).
+
+    ◦   Rule for Year Assignment: If a user inputs only 'ww', the year ('yyyy') is determined as follows:
+
+        ▪   If the current date is between April 1st and December 31st, use the current year + 1.
+
+        ▪   If the current date is between January 1st and March 31st, use the current year.
+
+    ◦   SQL to get today's weekid: SELECT week_id FROM chatbi_dim_calendar WHERE date_code = CURRENT_DATE;
+
+2. Store-Related Definitions
+
+•   Country:
+
+    ◦   China / CN / Mainland: Refers to Mainland China. The database value is country = 'mainland'.
+
+    ◦   HK: Refers to Hong Kong. The database value is country = 'Hongkong'.
+
+•   Region: A geographic classification for stores. Common values include APAC (Asia-Pacific), West, East, North, and South.
+
+•   Channel: The primary sales channel a store belongs to.
+
+    ◦   EC: E-commerce.
+
+    ◦   FP: Distributor (Franchise Partner).
+
+    ◦   O&O: Retail stores (Owned & Operated). Note: Both "Retail" and "O&O" refer to this channel. Always use channel = 'O&O' in queries.
+
+•   Store Type: The operational model of a store.
+
+    ◦   BH: Direct-operated (Brand House) store.
+
+    ◦   FH: Factory store.
+
+•   Platform: (For EC channel) The name of the e-commerce store (e.g., TMALL, JD).
+
+•   Store Name: The specific name of a store (e.g., EC-TMALL, VIP STORE 2, UA Korea, Tiktok Store).
+
+•   Store Code: A unique identifier for a store, typically structured as UABH_CHN_1234, where CHN is the country code and 1234 is a unique store number.
+
+•   Comp Flag: Indicates a comparable store that has been open for a full 12 months. These stores are flagged as comp_flag = 'Y' in the database.
+
+•   Customer Name: The name of the dealer or distributor that operates the store.
+
+    ◦   For O&O channel stores, this is uniformly 'Retail'.
+
+    ◦   For FP channel stores, this is the name of the external partner (e.g., BEIJING JSBR, YYY-HN).
+
+3. Product-Related Definitions
+
+•   Division: The high-level product category. Database values: APP (Apparel), ACC (Accessories), FTW (Footwear).
+
+•   Gender: The target gender for the product (e.g., MENS, WOMENS, BOYS, GIRLS, Unisex).
+
+•   End Use: The intended sport or activity for the product (e.g., TRAINING, RUNNING, BASEBALL, GOLF, Outdoor).
+
+•   Silhouette: The form or shape of the product (e.g., BOTTOMS, ONE PIECES, SANDALS, Gloves).
+
+•   Fit Type: The cut or fit of the product (e.g., LOOSE, REGULAR, FITTED, ONE SIZE).
+
+•   MFO (Material Franchise Offering): A product line attribute (e.g., Inline, MFO, Promo).
+
+•   Key Stories / Category of Merchandise: A marketing or thematic attribute for the product (e.g., Curry, HOVR, Armour Print, Women's Bra & Fitted Bottoms, Fat Tire, Slipspeed).
+
+•   Season Code: Important: This field in the product/sales tables always refers to the Product Season (the season the item was designed for), not the sales season.
+
+    ◦   SSYY (e.g., SS25): Denotes Spring/Summer for the year 'YY'. Product season for items designed for Jan-Jun.
+
+    ◦   FWYY (e.g., FW24): Denotes Fall/Winter for the year 'YY'. Product season for items designed for Jul-Dec.
+
+    ◦   In-Season vs. Off-Season: An item is "in-season" if its Product Season (season_code) matches the Sales Season (the season in which it is sold, determined by the sale date). It is "off-season" if they differ.
+
+4. Sales-Related Metrics
+
+•   Sales (Default): Net Sales Amount. Calculated as total sales minus canceled and returned amounts. This is the amt field in the sales table.
+
+•   Demand Sales: Represents total sales demand. Calculated as Net Sales plus the value of returned goods: amt + amt_return.
+
+•   SOB (Sum of Business): The proportion of total business, which can be based on either sales amount or sales quantity.
+
+•   Ach (Achievement): The achievement rate against a sales target. Formula: (Actual Sales / Target Sales).
+
+•   Discount: The effective discount rate given. Formula: ((Original Price - Actual Sales Amount) / Original Price).
