@@ -11,11 +11,20 @@ curl -s -X POST 'http://127.0.0.1:8000/api/query?query=WTD%/%MTD%/%QTD%/%YTD%sal
 curl -X POST "http://127.0.0.1:8000/api/helpbi" \
   -H "Content-Type: application/json" \
   --data-binary @payload.json
-  
+
 # API接口
 主函数main.py中：
-- /api/query：接收用户query返回右视图（树状图需要的json数据）
-    - json数据格式会持续在format/structure.json中更新
+- /api/query：接收用户query返回左视图数据
+    return：
+        total_info = {
+            "left_view_info": sql_response, # 包含聊天视图返回的信息
+            "left_to_right_info": response_dict # 请求右视图时需要返回给后端的信息
+        }
+- /api/helpbi：接收left_to_right_info，返回右视图数据
+
+
+
+
 
 # 树状图的json格式
 - format/structure.json
