@@ -122,7 +122,7 @@ if __name__ == "__main__":
     # CSV文件路径
     table_name = ''
     CSV_FILE = ""
-    root_path = './data/2025-03-04'
+    root_path = './data/2025-02-23'
     dirs = os.listdir(root_path)
     i = 0
     for dir in dirs:

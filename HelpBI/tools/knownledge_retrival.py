@@ -7,7 +7,8 @@ import json
 import os
 from pathlib import Path
 
-from .my_model import ChatModel
+from tools.my_model import ChatModel
+# from my_model import ChatModel
 
 # 1. 加载知识库
 knowledge_base = {
@@ -159,7 +160,12 @@ class KnowledgeRetriever:
         has_index = self.faiss_index.index is not None
         has_chunks = len(self.knowledge_chunks) > 0
         if has_index and has_chunks and not force_rebuild:
-            return
+            # 验证索引和chunks数量是否匹配
+            if self.faiss_index.index.ntotal == len(self.knowledge_chunks):
+                return
+            else:
+                print(f"Index size ({self.faiss_index.index.ntotal}) doesn't match chunks count ({len(self.knowledge_chunks)}). Rebuilding...")
+                force_rebuild = True
 
         # 预处理知识库
         self.knowledge_chunks = preprocess_knowledge(knowledge_base)
@@ -180,11 +186,20 @@ class KnowledgeRetriever:
             all_vecs.extend(vecs)
 
         embeddings = np.array(all_vecs, dtype="float32")
-        self.faiss_index.add_embeddings(embeddings)
+        
+        # 重新创建索引以确保一致性
+        if force_rebuild or self.faiss_index.index is None:
+            self.faiss_index.index = None  # 清除旧索引
+            self.faiss_index.add_embeddings(embeddings)
+        else:
+            self.faiss_index.add_embeddings(embeddings)
+            
         # 持久化索引
         self.faiss_index.save()
+        
+        print(f"Index built successfully. Chunks: {len(self.knowledge_chunks)}, Index size: {self.faiss_index.index.ntotal}")
     
-    def retrieve(self, queries: List[str], k=3) -> List[List[Dict]]:
+    def retrieve_old(self, queries: List[str], k=5) -> List[List[Dict]]:
         """
         为每个query独立召回top k结果
         Args:
@@ -212,7 +227,12 @@ class KnowledgeRetriever:
         # 2. FAISS批量搜索
         distances, indices = self.faiss_index.search(query_embeddings.astype('float32'), k)  # shapes: (num_queries, k)
 
+
+
         # 3. 为每个query组装结果
+        print(distances)
+        print(indices)
+
         all_results = []
         for query_idx in range(len(queries)):
             query_results = []
@@ -230,6 +250,73 @@ class KnowledgeRetriever:
 
         return all_results
 
+    def retrieve(self, queries: List[str], k=3) -> List[List[Dict]]:
+        """
+        为每个query独立召回top k结果
+        Args:
+            queries: 多个查询字符串的列表
+            k: 每个query返回的结果数量
+        Returns:
+            List[List[Dict]]: 每个query对应的top k结果列表
+        """
+        if not queries:
+            return []
+
+        # 1. 生成所有query的embedding
+        try:
+            # 假设my_embedding直接返回numpy数组
+            emb_json = self.model.my_embedding(queries)  # shape: (num_queries, embedding_dim)
+            emb_obj = json.loads(emb_json)
+            query_embeddings = [item["embedding"] for item in emb_obj["data"]]
+            query_embeddings = np.array(query_embeddings, dtype="float32")
+            if not isinstance(query_embeddings, np.ndarray):
+                raise ValueError("Embeddings must be numpy array")
+        except Exception as e:
+            print(f"Embedding generation failed: {str(e)}")
+            return [[] for _ in queries]
+
+        # 2. FAISS批量搜索
+        distances, indices = self.faiss_index.search(query_embeddings.astype('float32'), k)  # shapes: (num_queries, k)
+        distances, indices = distances[0], indices[0]
+
+        # 3. 为每个query组装结果
+        print(f"Distances: {distances}")
+        print(f"Indices: {indices}")
+
+        all_results = []
+        for d, i in zip(distances, indices):
+            # print(i)
+            result = self.knowledge_chunks[i].copy()['metadata']
+            # print(result['metadata'])
+            cur_set = {
+                "id": f"k{i}",
+                "type": "Keyword",
+                "score": float(1 - d),
+                "keyword": result['key'],
+                "NL": result['value'],
+                "Table": {},
+                "operation": { 
+                "type": "Keyword",
+                "condition": [result["keyword"]],
+                "activate_edges": ["edge1", f"edge_k_{i}"] # 起点到当前知识节点
+                }
+            }
+            all_results.append(cur_set)
+        # for query_idx in range(len(queries)):
+        #     query_results = []
+        #     for rank_idx in range(k):
+        #         chunk_idx = indices[query_idx, rank_idx]
+        #         if chunk_idx >= 0:  # 有效索引
+        #             result = self.knowledge_chunks[chunk_idx].copy()  # 避免修改原始数据
+        #             result.update({
+        #                 "score": float(1 - distances[query_idx, rank_idx]),
+        #                 "keyword": queries[query_idx],  # 记录来源query
+        #                 "rank": rank_idx + 1
+        #             })
+                    # query_results.append(result)
+            # all_results.append(query_results)
+
+        return all_results
 # 7. 使用示例与全局复用（单例）
 _GLOBAL_RETRIEVER = None
 
@@ -237,14 +324,15 @@ def get_retriever() -> KnowledgeRetriever:
     global _GLOBAL_RETRIEVER
     if _GLOBAL_RETRIEVER is None:
         _GLOBAL_RETRIEVER = KnowledgeRetriever()
-        # 首次初始化时尝试构建或加载
-        _GLOBAL_RETRIEVER.build_index(knowledge_base, force_rebuild=False)
+        # 首次初始化时强制重建索引以确保一致性
+        _GLOBAL_RETRIEVER.build_index(knowledge_base, force_rebuild=True)
     return _GLOBAL_RETRIEVER
 
 
 if __name__ == "__main__":
     retriever = get_retriever()
-    query = ['MTD', 'sales', 'achievement', 'China', 'FP']
-    results = retriever.retrieve(query, k=1)
+    # query = ['MTD', 'sales', 'achievement', 'China', 'FP']
+    query = "what is the MTD sales achievement for China FP?"
+    results = retriever.retrieve(query, k=5)
     print(results)
   
