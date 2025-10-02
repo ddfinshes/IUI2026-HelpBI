@@ -6,6 +6,12 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000 | cat
 # 测试语句
 curl -s -X POST 'http://127.0.0.1:8000/api/query?query=what%20is%20the%20MTD%20sales%20achievement%20for%20China%20FP%3F'
 
+curl -s -X POST 'http://127.0.0.1:8000/api/query?query=WTD%/%MTD%/%QTD%/%YTD%sales%vs%Target?'
+
+curl -X POST "http://127.0.0.1:8000/api/helpbi" \
+  -H "Content-Type: application/json" \
+  --data-binary @payload.json
+  
 # API接口
 主函数main.py中：
 - /api/query：接收用户query返回右视图（树状图需要的json数据）

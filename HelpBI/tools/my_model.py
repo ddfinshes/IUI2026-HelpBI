@@ -23,7 +23,7 @@ class ChatModel:
             base_url=self.base_url,
         )
     
-    def chat(self,  messages: List[Dict[str, Any]], model: str="qwen3-235b-a22b",
+    def chat(self,  messages: List[Dict[str, Any]], model: str="qwen3-235b-a22b-instruct-2507", # qwen3-235b-a22b-instruct-2507 qwen3-235b-a22b
              enable_thinking: bool = False, **kwargs) -> str:
         """
         调用大模型进行聊天

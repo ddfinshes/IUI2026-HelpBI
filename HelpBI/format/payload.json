@@ -1,0 +1,104 @@
+{
+  "user_query": "WTD%/%MTD%/%QTD%/%YTD%sales%vs%Target?",
+  "rewrite_query": "Calculate the actual sales and sales targets for WTD, MTD, QTD, and YTD in 2025.",
+  "knownledge_retriever": [
+    {
+      "id": "k2",
+      "type": "Keyword",
+      "score": 0.14107340574264526,
+      "keyword": "Week-to-Date (WTD)",
+      "NL": "Week-to-Date (WTD): The date range from the first day (Sunday) of the current week to yesterday",
+      "Table": {},
+      "operation": {
+        "type": "Keyword",
+        "condition": [
+          "Week-to-Date (WTD)"
+        ],
+        "activate_edges": [
+          "edge1",
+          "edge_k_2"
+        ]
+      }
+    },
+    {
+      "id": "k6",
+      "type": "Keyword",
+      "score": 0.05766552686691284,
+      "keyword": "Calendar Year-to-Date (C-YTD)",
+      "NL": "Calendar Year-to-Date (C-YTD): Alias for YTD (From the first day of this year to yesterday)",
+      "Table": {},
+      "operation": {
+        "type": "Keyword",
+        "condition": [
+          "Calendar Year-to-Date (C-YTD)"
+        ],
+        "activate_edges": [
+          "edge1",
+          "edge_k_6"
+        ]
+      }
+    },
+    {
+      "id": "k10",
+      "type": "Keyword",
+      "score": 0.03328949213027954,
+      "keyword": "Fiscal Year 2025 (FY25)",
+      "NL": "Fiscal Year 2025 (FY25): The period from April 1, 2024, to March 31, 2025",
+      "Table": {},
+      "operation": {
+        "type": "Keyword",
+        "condition": [
+          "Fiscal Year 2025 (FY25)"
+        ],
+        "activate_edges": [
+          "edge1",
+          "edge_k_10"
+        ]
+      }
+    },
+    {
+      "id": "k13",
+      "type": "Keyword",
+      "score": 0.028693318367004395,
+      "keyword": "Week ID",
+      "NL": "Week ID: {'description': \"A six-digit identifier in the 'yyyyww' format (e.g., '202505' for the 5th week of 2025)\", 'Rule for Year Assignment': ['If the current date is between April 1st and December 31st, use the current year + 1', 'If the current date is between January 1st and March 31st, use the current year'], 'SQL': 'SELECT week_id FROM chatbi_dim_calendar WHERE date_code = CURRENT_DATE'}",
+      "Table": {},
+      "operation": {
+        "type": "Keyword",
+        "condition": [
+          "Week ID"
+        ],
+        "activate_edges": [
+          "edge1",
+          "edge_k_13"
+        ]
+      }
+    },
+    {
+      "id": "k5",
+      "type": "Keyword",
+      "score": 0.024955272674560547,
+      "keyword": "Year-to-Date (YTD)",
+      "NL": "Year-to-Date (YTD): The date range from the first day of the current calendar year to yesterday",
+      "Table": {},
+      "operation": {
+        "type": "Keyword",
+        "condition": [
+          "Year-to-Date (YTD)"
+        ],
+        "activate_edges": [
+          "edge1",
+          "edge_k_5"
+        ]
+      }
+    }
+  ],
+  "sql_examples": [
+    {
+      "sql_examples": "**question sample**:\n-WTD / MTD / QTD / YTD sales vs Target?\n-what is the MTD sales achievement for China FP?\n-WTD / MTD / QTD / YTD sales vs F1 (target)? Means the target use the f1 target.\n\n**SQL query sample**:\n SELECT \n 'WTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between {1st of this week} AND CURRENT_DATE - INTERVAL '1 day'\n UNION ALL \n\n SELECT \n 'MTD'  as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day'  \n\n UNION ALL \n\n SELECT \n 'QTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC(QUARTER', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' \n \n UNION ALL \n\n SELECT \n 'YTD' as period,\n SUM(amt_notax) as withouttax_amount,\n SUM(amt_notax_target) as target_amount,\n    case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement  \n FROM \n    dm_fact_sales_chatbi \n WHERE \n    date_code Between TO_CHAR(DATE_TRUNC('YEAR', CURRENT_DATE), 'YYYY-MM-DD') AND CURRENT_DATE - INTERVAL '1 day' \n;",
+      "score": 0.6892914772033691
+    }
+  ],
+  "analyzed_query": "Calculate the actual sales (amt_notax) and sales targets (amt_notax_target) for the time periods Week-to-Date (WTD), Month-to-Date (MTD), Quarter-to-Date (QTD), and Year-to-Date (YTD) in the year 2025. The analysis should be based on the data in the dm_fact_sales_chatbi table, filtered for the specific date ranges corresponding to each period. The current date is statically set to February 13, 2025, for the calculation.",
+  "sql": "SELECT \n    'WTD' AS period,\n    SUM(amt_notax) AS actual_sales,\n    SUM(amt_notax_target) AS target_sales\nFROM \n    dm_fact_sales_chatbi\nWHERE \n    date_code BETWEEN '2025-02-10' AND '2025-02-12' -- WTD: Sunday (Feb 9) to yesterday (Feb 12)\n\nUNION ALL\n\nSELECT \n    'MTD' AS period,\n    SUM(amt_notax) AS actual_sales,\n    SUM(amt_notax_target) AS target_sales\nFROM \n    dm_fact_sales_chatbi\nWHERE \n    date_code BETWEEN '2025-02-01' AND '2025-02-12' -- MTD: First day of February to yesterday\n\nUNION ALL\n\nSELECT \n    'QTD' AS period,\n    SUM(amt_notax) AS actual_sales,\n    SUM(amt_notax_target) AS target_sales\nFROM \n    dm_fact_sales_chatbi\nWHERE \n    date_code BETWEEN '2025-01-01' AND '2025-02-12' -- QTD: First day of Q1 (Jan 1) to yesterday\n\nUNION ALL\n\nSELECT \n    'YTD' AS period,\n    SUM(amt_notax) AS actual_sales,\n    SUM(amt_notax_target) AS target_sales\nFROM \n    dm_fact_sales_chatbi\nWHERE \n    date_code BETWEEN '2025-01-01' AND '2025-02-12'; -- YTD: First day of year to yesterday"
+}

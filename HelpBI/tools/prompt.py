@@ -1,3 +1,6 @@
+from re import S
+
+
 def query_write_prompt(query):
     prompt = f"""
         You are a data analysis expert. Please refine the user's natural language query into a clearer, more analytical expression. Return only the revised statement as output, with no additional content.
@@ -115,7 +118,7 @@ def keywords_extract_prompt(query):
 # """
 
 def text2sql_prompt(query, knowledges, sql_examples):
-    prompt = """
+    prompt = f"""
         #Role
 
         You are a senior data analyst skilled at translating complex business requirements into precise PostgreSQL queries.  
@@ -159,6 +162,9 @@ def text2sql_prompt(query, knowledges, sql_examples):
         
         • Ensure the output is correct and executable PostgreSQL statements.
         
+        
+    """
+    prompt1 = """
         #Output Format
 
         Output the SQL and some easy understanding explanations, comments, or Markdown formatting, but do not contain information about sql example.  
@@ -170,8 +176,9 @@ def text2sql_prompt(query, knowledges, sql_examples):
             "sql": "correct and executable PostgreSQL statements",
         }
         ```
-        
+
     """
+
     prompt2 = f"""
         #Start
 
@@ -179,7 +186,7 @@ def text2sql_prompt(query, knowledges, sql_examples):
 
         User Query: {query}
     """
-    return prompt+prompt2
+    return prompt+prompt1 + prompt2
 
 
 def sql_parse_prompt(query, sql):
@@ -408,3 +415,9 @@ def get_chart_prompt(query, data):
 
     return prompt + prompt2
     
+def rewrite_sql_prompt(sql, e):
+    prompt = f"""
+        请作为postgresql代码专家，分析该sql代码可能存在的语法错误，并根据错误信息{e}, 修正这条sql语句：{sql}。
+        请仅返回正确的sql，无其他额外内容。
+    """
+    return prompt

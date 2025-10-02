@@ -12,8 +12,8 @@ from tools.sql_example_retrival import few_shot_retriever
 
 # 配置logger
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.ERROR)  # 可以根据需要设置为DEBUG/INFO/WARNING/ERROR
-
+# logger.setLevel(logging.INFO)  # 可以根据需要设置为DEBUG/INFO/WARNING/ERROR
+logging.basicConfig(level=logging.INFO)
 # 创建控制台处理器并设置格式
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
@@ -71,17 +71,23 @@ async def text2bi(query: str):
 
     # 2. 检索知识库
     knownledge_retriever = get_retriever()
-    knownledge_retriever_results = knownledge_retriever.retrieve(rewrite_query, k=5)[0]
+    knownledge_retriever_results = knownledge_retriever.retrieve(rewrite_query, k=5)
 
     knownledges = []
+    logging.info(f"knownledge_retriever_results的类别：{type(knownledge_retriever_results)}")
+    if isinstance(knownledge_retriever_results, dict):
+        knownledge_retriever_results = [knownledge_retriever_results]
     for kn in knownledge_retriever_results:
         knownledges.append(kn['NL'])
     # 3. SQL 样例匹配
     # query和describe 以及样例做相似度匹配，返回id，然后将sql代码提出来
-    sql_examples = few_shot_retriever(rewrite_query)
+    sql_examples = few_shot_retriever(rewrite_query, k = 1)
 
     # 4. test2sql动态prompt
     # 执行sql和执行的结果
+    logging.info(f"rewrite_query: {rewrite_query}")
+    logging.info(f"knownledges: {knownledges}")
+    logging.info(f"sql_examples: {sql_examples}")
     sql_response = text2sql(rewrite_query, knownledges, sql_examples)
 
     # 对话界面返回的内容
@@ -167,7 +173,7 @@ async def helpbi(data: dict):
     # 关键词
     nodes.extend(knownledge_retriever_results)
 
-    kn_edge_ids = [f"edge_k_{i}" for i in range(knownledge_retriever_results)]
+    kn_edge_ids = [f"edge_k_{str(i)}" for i in range(len(knownledge_retriever_results))]
     node_analyzed_query = {
         "id": "a1",
         "type": "Analysis",
@@ -176,7 +182,7 @@ async def helpbi(data: dict):
         "operation": { 
             "type": "AnalysisRewrite",
             "condition": highlight_analyzed_keywords, # analyzed_query应该也有高亮词
-            "activate_edges": ["edge1"].extend(kn_edge_ids), # 激活起点和所有知识边
+            "activate_edges": ["edge1"] + kn_edge_ids, # 激活起点和所有知识边
         },
     }
     nodes.append(node_analyzed_query)

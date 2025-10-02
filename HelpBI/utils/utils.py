@@ -11,7 +11,7 @@ import numpy as np
 
 # 配置logger
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.ERROR)  # 可以根据需要设置为DEBUG/INFO/WARNING/ERROR
+logging.basicConfig(level=logging.INFO) # 可以根据需要设置为DEBUG/INFO/WARNING/ERROR
 
 # 创建控制台处理器并设置格式
 console_handler = logging.StreamHandler()
@@ -29,7 +29,7 @@ if backend_dir not in sys.path:
     sys.path.insert(0, backend_dir)
 
 from tools.my_model import ChatModel
-from tools.prompt import query_write_prompt, hightlight_extract, keywords_extract_prompt, text2sql_prompt, sql_parse_prompt, get_chart_prompt
+from tools.prompt import query_write_prompt, hightlight_extract, keywords_extract_prompt, text2sql_prompt, sql_parse_prompt, get_chart_prompt, rewrite_sql_prompt
 
 
 def query_write(query):
@@ -97,6 +97,8 @@ def excute_sql(query):
         if 'conn' in locals():
             conn.rollback()
         print(f"操作失败: {e}")
+        result = e
+        return result
     finally:
         # 4. 关闭游标和连接
         if 'cursor' in locals():
@@ -119,6 +121,14 @@ def text2sql(query, knowledges, sql_examples):
     sql = response["sql"]
     logger.info(f"文本转成的sql为: {sql}")
     excute_result = excute_sql(sql)
+    if not isinstance(excute_result, dict):
+        # 修复sql代码
+        sql_prompt = rewrite_sql_prompt(sql, excute_result)
+        sql = chat_model.chat_with_system(
+            system_prompt="You are a helpful assistant.",
+            user_message=sql_prompt
+        )
+
     # 统一将查询结果转换为 DataFrame: {"column": [...], "data": [...]} -> DataFrame
     try:
         if isinstance(excute_result, dict) and 'column' in excute_result and 'data' in excute_result:

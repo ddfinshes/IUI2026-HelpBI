@@ -287,17 +287,17 @@ class KnowledgeRetriever:
         for d, i in zip(distances, indices):
             # print(i)
             result = self.knowledge_chunks[i].copy()['metadata']
-            # print(result['metadata'])
+            # print(result)
             cur_set = {
                 "id": f"k{i}",
                 "type": "Keyword",
                 "score": float(1 - d),
                 "keyword": result['key'],
-                "NL": result['value'],
+                "NL": str(result['key']) + ": " + str(result['value']),
                 "Table": {},
                 "operation": { 
                 "type": "Keyword",
-                "condition": [result["keyword"]],
+                "condition": [result["key"]],
                 "activate_edges": ["edge1", f"edge_k_{i}"] # 起点到当前知识节点
                 }
             }

@@ -64,6 +64,6 @@ def few_shot_retriever(query, k=3):
 
 # 示例用法
 if __name__ == "__main__":
-    query = "你的查询内容"
-    results = few_shot_retriever(query, k=3)
+    query = "WTD / MTD / QTD / YTD sales vs Target?"
+    results = few_shot_retriever(query, k=1)
     print("最相近的3个数据的下标和相似度：", results)
