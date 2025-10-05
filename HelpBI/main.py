@@ -8,6 +8,10 @@ import logging
 import json
 import os
 import pandas as pd 
+from decimal import Decimal
+import numpy as np
+from datetime import datetime, date, time
+import math
 
 from utils.utils import query_write, query_hightlight, keyword_extract, text2sql, sql_parse, get_chart
 from tools.knownledge_retrival import get_retriever
@@ -95,9 +99,9 @@ async def text2bi(query: str):
 
     # 对话界面返回的内容
     # 将excute_result处理为可视化可支持模式
-    vis_data = get_chart(rewrite_query, sql_response['excute_result'])
+    # vis_data = get_chart(rewrite_query, sql_response['excute_result'])
 
-    sql_response['vis_data'] = vis_data
+    # sql_response['vis_data'] = vis_data
 
     # 左边需要传递给右边的内容
     response_dict['user_query'] = query
@@ -169,7 +173,7 @@ async def helpbi(data: dict):
          "operation": {
             "type": "Rewrite",
             "condition": highlight_keywords, # 高亮词
-            "activate_edges": [] # 头节点点击无activate边
+            "activate_edges": ['edge1'] # 头节点点击无activate边
         }
     }
     nodes.append(node_rewrite)
@@ -236,6 +240,21 @@ async def helpbi(data: dict):
             return obj.to_dict('records')
         elif isinstance(obj, pd.Series):
             return obj.tolist()
+        elif isinstance(obj, Decimal):
+            # 将 Decimal 转为 float，避免 json 序列化报错
+            return float(obj)
+        elif isinstance(obj, (datetime, date, time)):
+            return obj.isoformat()
+        elif isinstance(obj, np.generic):
+            # numpy 标量类型转为 Python 标量
+            py_val = obj.item()
+            if isinstance(py_val, float) and not math.isfinite(py_val):
+                return None
+            return py_val
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, (set, tuple)):
+            return [make_serializable(item) for item in obj]
         elif isinstance(obj, list):
             return [make_serializable(item) for item in obj]
         elif isinstance(obj, dict):
@@ -243,7 +262,12 @@ async def helpbi(data: dict):
         elif hasattr(obj, '__dict__'):
             return make_serializable(obj.__dict__)
         else:
-            return obj
+            try:
+                json.dumps(obj)
+                return obj
+            except Exception:
+                # 最后兜底：转字符串防止序列化失败
+                return str(obj)
 
     response_dict = {
         "nodes": make_serializable(nodes),
@@ -255,8 +279,4 @@ async def helpbi(data: dict):
     os.makedirs("logs", exist_ok=True)
     with open("logs/helpbi_response.json", "w", encoding="utf-8") as f:
         json.dump(response_dict, f, ensure_ascii=False, indent=2)
-
-    
-
-
     return response_dict

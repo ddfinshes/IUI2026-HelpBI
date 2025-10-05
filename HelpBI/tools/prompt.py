@@ -191,56 +191,56 @@ def text2sql_prompt(query, knowledges, sql_examples):
 
 def sql_parse_prompt(query, sql):
     prompt = """
-        # 角色定义
-        你是一位资深PostgreSQL专家，专注于零售领域数据分析。你的任务是将SQL查询拆解为可执行的步骤，并以结构化JSON格式输出，便于后续树状可视化展示。
+        # Role Definition
+        You are a senior PostgreSQL expert specializing in data analysis for the retail sector. Your task is to decompose SQL queries into executable steps and output them in a structured JSON format to facilitate subsequent tree-structured visualization.
 
-        # 任务要求
-        1. 输入处理：
-        - 接收包含query和sql两个部分的输入
-        - query：描述SQL查询的业务目的
-        - sql：需要分析的SQL代码
+        # Task Requirements
+        1. Input Processing:
+        - Accept input containing two parts: query and sql
+        - query: describes the business purpose of the SQL query
+        - sql: the SQL code to be analyzed
 
-        2. 输出规范：
-        - 返回一个列表，每个元素是字典格式的步骤描述
-        - 每个步骤必须包含以下字段：
-            * id：唯一标识符（格式：类型字母+数字, 如s1,t1等， 请不要以u, r, k, a作为类型字母）
-            * father_id：上一步骤ID列表（若无则为空列表）
-            * NL：自然语言解释（详细说明操作目的和逻辑）
-            * sql：可独立执行的SQL片段
-            * condition: 这一步操作的主要影响的列名
-            * type：原子操作类型（严格按分类标准标注）
+        2. Output Specification:
+        - Return a list, where each element is a dictionary describing a step.
+        - Each step must include the following fields:
+            * id: Unique identifier (format: type letter + number, e.g., s1, t1, etc. Do not use u, r, k, or a as type letters)
+            * father_id: List of previous step IDs (empty list if none)
+            * NL: Natural language explanation (detailed description of the operation's purpose and logic), explanations should related to the query and easy to understand.
+            * sql: Independently executable SQL fragment
+            * condition: The main column names affected by this step
+            * type: Atomic operation type (strictly follow the classification standard)
 
-        3. 拆解原则：
-        - 确保每个步骤的SQL都可独立执行
-        - 遇到UNION/UNION ALL/JOIN等并行结构时：
-            * 拆分为独立子查询链
-            * 最后添加合并步骤，其father_id指向各子链的末端节点
-        - 复杂表达式（如嵌套CASE WHEN）需分步拆解
+        3. Decomposition Principles:
+        - Ensure that the SQL of each step can be executed independently.
+        - When encountering parallel structures such as UNION/UNION ALL/JOIN:
+            * Split into independent subquery chains.
+            * Finally, add a merge step whose father_id points to the end nodes of each subchain.
+        - Complex expressions (such as nested CASE WHEN) should be decomposed step by step.
 
-        # 原子操作分类标准
-        1. Filter：WHERE/DISTINCT等条件筛选
-        2. Select：SELECT指定查询列
-        3. Aggregate：SUM/AVG/COUNT等聚合计算
-        4. GroupBy：GROUP BY/HAVING分组操作
-        5. Sort/Limit：ORDER BY/LIMIT结果排序限制
-        6. Join：JOIN/UNION等表连接操作
-        7. Transform：CASE WHEN/算术运算等数据转换
-        8. Window：窗口函数计算
+        # Atomic Operation Classification Standard
+        1. Filter: Conditional filtering such as WHERE/DISTINCT
+        2. Select: SELECT specific query columns
+        3. Aggregate: Aggregation calculations such as SUM/AVG/COUNT
+        4. GroupBy: GROUP BY/HAVING grouping operations
+        5. Sort/Limit: Result sorting and limiting such as ORDER BY/LIMIT
+        6. Join: Table join operations such as JOIN/UNION
+        7. Transform: Data transformation such as CASE WHEN/arithmetic operations
+        8. Window: Window function calculations
 
-        # 处理流程
-        1. 语法分析：识别SQL中的关键操作节点
-        2. 步骤拆分：将复合操作分解为原子操作
-        3. 依赖构建：确定步骤间的父子关系
-        4. 解释生成：为每个步骤编写业务和技术说明
-        5. 结果验证：确保所有SQL片段可独立执行
+        # Processing Steps
+        1. Syntax Analysis: Identify key operation nodes in the SQL.
+        2. Step Decomposition: Break down compound operations into atomic operations.
+        3. Dependency Construction: Determine parent-child relationships between steps.
+        4. Explanation Generation: Write business and technical explanations for each step.
+        5. Result Validation: Ensure all SQL fragments can be executed independently.
 
-        # 示例输出格式
+        # Example output format
         [
         {
             "id": "s1",
             "father_id": [],
-            "NL": "解释文本...",
-            "sql": "独立可执行的SQL",
+            "NL": "Explanation text...",
+            "sql": "Independently executable SQL",
             “condition”: ["col_name1", "col_name2", ...],
             "type": "操作类型"
         },
@@ -258,7 +258,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "s1",
                 "father_id": [],
-                "NL": "这是最基本的查询形式，从dm_fact_sales_chatbi表中选出2025年2月10日至12日的数据，显示每行的period标记为'WTD'（周至今），以及不含税金额和目标金额的原始值。",
+                "NL": "This is the most basic query form. It selects data from the dm_fact_sales_chatbi table for the period from February 10 to February 12, 2025, displaying each row with the period marked as 'WTD' (Week-to-Date), along with the original values of the untaxed amount and target amount.",
                 "sql": "SELECT 'WTD' as period, amt_notax, amt_notax_target FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["period", "amt_notax", "amt_notax_target"],
                 "type": "Select"
@@ -266,7 +266,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "s2",
                 "father_id": ["s1"],
-                "NL": "在基础查询上添加了SUM聚合函数，计算选定时间段内：\nwithouttax_amount：不含税金额总和;\ntarget_amount：目标金额总和",
+                "NL": "Added SUM aggregation function to the base query to calculate, for the selected time period:\nwithouttax_amount: total untaxed amount;\ntarget_amount: total target amount.",
                 "sql": "SELECT 'WTD' as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["withouttax_amount", "amt_notax_target"],
                 "type": "Aggregate"
@@ -274,7 +274,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "s3",
                 "father_id": ["s2"],
-                "NL": "在聚合基础上增加了除法计算，显示实际金额与目标金额的原始比率(withouttax_amount/target_amount)。使用CASE WHEN语句处理除零情况，当目标金额总和为零时返回0，避免运行时错误。",
+                "NL": "On the basis of aggregation, a division calculation is added to show the original ratio of actual amount to target amount (withouttax_amount/target_amount). The CASE WHEN statement is used to handle division by zero: if the total target amount is zero, return 0 to avoid runtime errors.",
                 "sql": "SELECT 'WTD' as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount, CASE WHEN SUM(amt_notax_target) = 0 THEN 0 ELSE SUM(amt_notax) / SUM(amt_notax_target) END as safe_ratio FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["safe_ratio"],
                 "type": "Aggregate"
@@ -282,7 +282,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "s4",
                 "father_id": ["s3"],
-                "NL": "在安全比率计算基础上减去1，得到实际达成率（如1.1表示超额10%，0.9表示差10%未达标)。公式：withouttax_amount / target_amount - 1",
+                "NL": "Subtract 1 from the safe ratio calculation to obtain the actual achievement rate (e.g., 1.1 means 10% over target, 0.9 means 10% below target). Formula: withouttax_amount / target_amount - 1",
                 "sql": "SELECT 'WTD' as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount, CASE WHEN SUM(amt_notax_target) = 0 THEN 0 ELSE SUM(amt_notax) / SUM(amt_notax_target) - 1 END as achievement FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["achievement"],
                 "type": "Aggregate"
@@ -292,7 +292,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "t1",
                 "father_id": [],
-                "NL": "这是最基本的查询形式，从dm_fact_sales_chatbi表中选出2025年2月10日至12日的数据，显示每行的period标记为'WTD'（周至今），以及不含税金额和目标金额的原始值。",
+                "NL": "This is the most basic query form. It selects data from the dm_fact_sales_chatbi table for the period from February 10 to February 12, 2025, displaying each row with the period marked as 'WTD' (Week-to-Date), along with the original values of the untaxed amount and target amount.",
                 "sql": "SELECT 'MTD' as period, amt_notax, amt_notax_target FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["period", "amt_notax", "amt_notax_target"],
                 "type": "Select"
@@ -300,7 +300,7 @@ def sql_parse_prompt(query, sql):
             {
                 "id": "t4",
                 "father_id": ["t3"],
-                "NL": "在安全比率计算基础上减去1，得到实际达成率（如1.1表示超额10%，0.9表示差10%未达标)。公式：withouttax_amount / target_amount - 1",
+                "NL": "Subtract 1 from the safe ratio calculation to obtain the actual achievement rate (e.g., 1.1 means 10\% above target, 0.9 means 10% below target). Formula: withouttax_amount / target_amount - 1",
                 "sql": "SELECT 'MTD' as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount, CASE WHEN SUM(amt_notax_target) = 0 THEN 0 ELSE SUM(amt_notax) / SUM(amt_notax_target) - 1 END as achievement FROM dm_fact_sales_chatbi WHERE date_code BETWEEN '2025-02-10' AND '2025-02-12'",
                 "condition": ["achievement"],
                 "type": "Aggregate"
@@ -309,7 +309,7 @@ def sql_parse_prompt(query, sql):
             [
                 "id": "m1",
                 "father_id": ["s4", "t4"],
-                "NL": "聚合操作...",
+                "NL": "Aggregate operation...",
                 "sql": "SELECT 'WTD' as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount, case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement FROM dm_fact_sales_chatbi WHERE  date_code Between {1st of this week} AND CURRENT_DATE - INTERVAL '1 day' UNION ALL SELECT 'MTD'  as period, SUM(amt_notax) as withouttax_amount, SUM(amt_notax_target) as target_amount, case when SUM(amt_notax_target) = 0 then 0 else SUM(amt_notax)/SUM(amt_notax_target)-1 END as achievement FROM dm_fact_sales_chatbi WHERE date_code Between TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(CURRENT_DATE - INTERVAL '1 day') ",
                 "condition": ["period", "achievement"]
                 "type": "Join"
@@ -319,17 +319,17 @@ def sql_parse_prompt(query, sql):
         
     """
     prompt2 = f"""
-        # 开始执行
-        输入:
+        # Begin Execution
+        Input:
         query: {query}
         sql: {sql}
 
-        请严格按照上述规范输出结果，确保：
-        1. 每个步骤的SQL语法正确且可执行
-        2. 父子关系准确无误
-        3. 操作类型分类正确
-        4. 解释文本清晰完整
-        5. 输出仅为json内容，无其他解释信息
+        Please strictly follow the above specifications to output the result, ensuring:
+        1. The SQL syntax of each step is correct and executable.
+        2. Parent-child relationships are accurate.
+        3. Operation types are correctly classified.
+        4. Explanatory text is clear and complete.
+        5. The output is JSON only, with no additional explanations or information.
     """
     return prompt+prompt2
 
@@ -417,7 +417,6 @@ def get_chart_prompt(query, data):
     
 def rewrite_sql_prompt(sql, e):
     prompt = f"""
-        请作为postgresql代码专家，分析该sql代码可能存在的语法错误，并根据错误信息{e}, 修正这条sql语句：{sql}。
-        请仅返回正确的sql，无其他额外内容。
+        Please analyze this SQL code "{sql}" as a PostgreSQL expert to identify potential syntax errors, and correct the statement based on the error message {e}. Only return the corrected SQL without any additional content.
     """
     return prompt
