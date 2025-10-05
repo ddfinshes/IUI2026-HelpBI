@@ -100,7 +100,7 @@ def insert_query(conn, cursor, table_name, CSV_FILE):
 if __name__ == "__main__":
     # 数据库连接配置
     DB_CONFIG = {
-        "dbname": "postgres",
+        "dbname": "mydb",
         "user": "postgres",
         "password": "123456",
         "host": "localhost",
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     # CSV文件路径
     table_name = ''
     CSV_FILE = ""
-    root_path = './data/2025-02-23'
+    root_path = './data/2025-03-04'
     dirs = os.listdir(root_path)
     i = 0
     for dir in dirs:

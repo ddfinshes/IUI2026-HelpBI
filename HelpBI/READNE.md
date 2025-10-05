@@ -23,9 +23,6 @@ curl -X POST "http://127.0.0.1:8000/api/helpbi" \
 - /api/helpbi：接收left_to_right_info，返回右视图数据
 
 
-
-
-
 # 树状图的json格式
 - format/structure.json
 

@@ -5,6 +5,9 @@ from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import ast
 import logging
+import json
+import os
+import pandas as pd 
 
 from utils.utils import query_write, query_hightlight, keyword_extract, text2sql, sql_parse, get_chart
 from tools.knownledge_retrival import get_retriever
@@ -223,10 +226,37 @@ async def helpbi(data: dict):
     edges.extend(sql_edges)
 
 
+    # response_dict = {
+    #     "nodes": nodes,
+    #     "edges": edges
+    # }
+    def make_serializable(obj):
+        """递归地将对象转换为JSON可序列化的格式"""
+        if isinstance(obj, pd.DataFrame):
+            return obj.to_dict('records')
+        elif isinstance(obj, pd.Series):
+            return obj.tolist()
+        elif isinstance(obj, list):
+            return [make_serializable(item) for item in obj]
+        elif isinstance(obj, dict):
+            return {k: make_serializable(v) for k, v in obj.items()}
+        elif hasattr(obj, '__dict__'):
+            return make_serializable(obj.__dict__)
+        else:
+            return obj
+
     response_dict = {
-        "nodes": nodes,
-        "edges": edges
+        "nodes": make_serializable(nodes),
+        "edges": make_serializable(edges)
     }
     logging.info(f"解析树总共具有{len(nodes)}个节点， {len(edges)}条边。")
+
+    # === 新增: 保存为本地 JSON 文件 ===
+    os.makedirs("logs", exist_ok=True)
+    with open("logs/helpbi_response.json", "w", encoding="utf-8") as f:
+        json.dump(response_dict, f, ensure_ascii=False, indent=2)
+
+    
+
 
     return response_dict
