@@ -71,7 +71,7 @@ def excute_sql(query):
     执行sql代码
     """
     try:
-        conn = psycopg2.connect(database="postgres", user="postgres", password="123456", host="127.0.0.1", port="5432")
+        conn = psycopg2.connect(database="mydb", user="postgres", password="123456", host="127.0.0.1", port="5432")
         cursor = conn.cursor()
         cursor.execute(query)
 

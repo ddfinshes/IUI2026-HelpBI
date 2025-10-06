@@ -13,6 +13,8 @@ from utils.utils import query_write, query_hightlight, keyword_extract, text2sql
 from tools.knownledge_retrival import get_retriever
 from tools.sql_example_retrival import few_shot_retriever
 
+from pydantic import BaseModel
+
 # 配置logger
 logger = logging.getLogger(__name__)
 # logger.setLevel(logging.INFO)  # 可以根据需要设置为DEBUG/INFO/WARNING/ERROR
@@ -23,9 +25,13 @@ console_handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)
 
+class QueryRequest(BaseModel):
+    query: str
+
 # 避免重复添加handler
 if not logger.hasHandlers():
     logger.addHandler(console_handler)
+
 
 # 初始化FastAPI应用
 app = FastAPI(
@@ -54,7 +60,7 @@ def format_knownledge_retriever_results(results):
 
 
 @app.post("/api/query")
-async def text2bi(query: str):
+async def text2bi(request: QueryRequest):
     """
         对话界面返回: 解释、sql、table、vis_data
         {
@@ -67,6 +73,7 @@ async def text2bi(query: str):
         sql_response: 左边视图需要的内容
         response_dict: 右边视图需要的内容
     """
+    query = request.query 
     response_dict = {}
     
     # 1. query改写

@@ -2,7 +2,7 @@
 https://github.com/ddfinshes/IUI2026-HelpBI/tree/helpbi-integration
 
 # 执行语句
-uvicorn main:app --reload --host 127.0.0.1 --port 8000 | cat
+uvicorn main:app --reload --host 127.0.0.1 --port 8000
 # 测试语句
 curl -s -X POST 'http://127.0.0.1:8000/api/query?query=what%20is%20the%20MTD%20sales%20achievement%20for%20China%20FP%3F'
 

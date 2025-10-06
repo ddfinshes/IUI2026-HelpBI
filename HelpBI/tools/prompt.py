@@ -118,6 +118,148 @@ def keywords_extract_prompt(query):
 # """
 
 def text2sql_prompt(query, knowledges, sql_examples):
+    """
+    "dm_dim_holiday_chatbi", "dm_fact_onhand_chatbi", "dm_fact_sales_chatbi","dm_fact_sales_sku_chatbi","dm_member_chatbi", "dm_member_sales_chatbi", "edw_dim_calendar", "edw_dim_channel", "edw_dim_store", "edw_dim_store_prod"
+    """
+    schema_info = """
+        1. dm_fact_sales_chatbi:店铺的销售汇总表，按日期存储门店每日的销售汇总数据，以及门店每日的目标销售数据，同时包含上周同日/上月同日/上年同日的销售汇总数据。
+            - date_code: String; format(YYYY-MM-DD).
+            - week_id: String; format(YYYYWW); 是财年的周ID.
+            - month_id: String; format(YYYYMM).
+            - year_id: String; format(YYYY).
+            - store_code: String; 店铺code.
+            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
+            - customer_name: String; 店铺所属经销商名.
+            - country: String; 店铺所在国家.
+            - channel: String;店铺所属渠道:EC/FP/O&O.
+            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
+            - store_type: String; 店铺类型： BH/FH.
+            - region: String; 店铺所在区域：north/south/east/west.
+            - province: String; 店铺所在省份，拼音存储.
+            - city: String; 店铺所在城市，拼音存储.
+            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
+            - cluster:String，店铺等级：AAA/A/B/C
+            - comp_flag: String; Y/N；在计算COMP店铺的销售额或者指标时，需要限制comp_flag=Y。
+            - qty_return: decimal; number of returned items.
+            - amt_return: decimal; amount of returned items; [Amount field].
+            - orig_price: decimal; 不考虑折扣的销售原价。 [Amount field].
+            - amt: decimal; datecode当天的销售额，是销售净额; [Amount field].
+            - lw_amt: decimal; 上周同日的销售额; [Amount field].
+            - lm_amt: decimal; 上月同日的销售额; [Amount field].
+            - lyd_amt: decimal; 上年同日的销售额; [Amount field].
+            - amt_target: decimal; datecode当天的目标销售金额; [Amount field].
+            - qty: decimal; datecode当天的销售数量.
+            - lw_qty: decimal;上周同日的销售数量.
+            - lm_qty: decimal;上月同日的销售数量.
+            - lyd_qty: decimal;上年同日的销售数量.
+            - qty_target:decimal;datecode当天的目标销售数量.
+            - trans: decimal;datecode当天的交易笔数.
+            - lw_trans: decimal;上周同日的交易笔数.
+            - lm_trans: decimal;上月同日的交易笔数.
+            - lyd_trans: decimal;上年同日的交易笔数.
+            - trans_target:decimal;datecode当天的目标交易笔数.
+            - traffic: decimal; datecode当天的客流traffic.
+            - lw_traffic: decimal;上周同日的traffic.
+            - lm_traffic: decimal;上月同日的traffic.
+            - lyd_traffic: decimal;上年同日的traffic.
+            - traffic_target:decimal;datecode当天的目标traffic.
+            - amt_target_f0: decimal;F0 target amount; [Amount field].
+            - amt_target_f1: decimal;F1 target amount; [Amount field].
+            - amt_target_f2: decimal;F2 target amount; [Amount field].
+            - amt_target_f3: decimal;F3 target amount; [Amount field].
+            - amt_target_f4: decimal;F4 target amount; [Amount field].
+        2. dm_fact_sales_sku_chatbi:店铺商品销售表，存储门店每日商品的销售数据。
+            - date_code: String; format(YYYY-MM-DD).
+            - week_id: String; format(YYYYWW); 是财年的周ID.
+            - month_id: String; format(YYYYMM).
+            - year_id: String; format(YYYY).
+            - store_code: String; 店铺code.
+            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
+            - customer_name: String; 店铺所属经销商名.
+            - country: String; 店铺所在国家.
+            - channel: String;店铺所属渠道:EC/FP/O&O.
+            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
+            - store_type: String; 店铺类型： BH/FH.
+            - region: String; 店铺所在区域：north/south/east/west.
+            - province: String; 店铺所在省份，拼音存储.
+            - city: String; 店铺所在城市，拼音存储.
+            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
+            - cluster:String，店铺等级：AAA/A/B/C
+            - division: Division attribute of the product; e.g., Apparel/Accessories/Footwear.
+            - enduse: enduse of the product; e.g., Training/Golf/Running.
+            - silhouette: silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
+            - fit_type: fit type of the product; e.g., Loose/Regular/Fitted.
+            - material: String; article of product; e.g., 1234567-123.
+            - SKU: String; product sku.
+            - product_name: String，商品名称，查询数据时，使用模糊查询方式。
+            - key_stories: Key category, key items of the product.查询数据时，使用模糊查询方式。
+            - product_line: String; e.g., inline/MFO.
+            - msrp: decimal; product label price.
+            - qty: decimal; number of sales items.
+            - amt: decimal; sales amount; [Amount field].
+            - season_code: String; season of the product; e.g., SS24/FW24/SS25.
+        3. dm_fact_onhand_chatbi:门店库存表，存储零售门店每天的商品库存。一般只保存每周六的库存数据。
+            - store_code: String; 店铺code.
+            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
+            - customer_name: String; 店铺所属经销商名.
+            - country: String; 店铺所在国家.
+            - channel: String;店铺所属渠道:EC/FP/O&O.
+            - store_type: String; 店铺类型： BH/FH.
+            - region: String; 店铺所在区域：north/south/east/west.
+            - province: String; 店铺所在省份，拼音存储.
+            - city: String; 店铺所在城市，拼音存储.
+            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
+            - cluster:String，店铺等级：AAA/A/B/C
+            - date_code: String; format(YYYY-MM-DD).
+            - division: Division attribute of the product; e.g., Apparel/Accessories/Footwear.
+            - enduse: enduse of the product; e.g., Training/Golf/Running.
+            - silhouette: silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
+            - fit_type: fit type of the product; e.g., Loose/Regular/Fitted.
+            - material: String; article of product; e.g., 1234567-123.
+            - product_name: String，商品名称，查询数据时，使用模糊查询方式。
+            - key_stories: Key category, key items of the product.
+            - product_line: String; e.g., inline/MFO.
+            - stock: decimal; quantity of product inventory.
+            - intransit: decimal; quantity of product in transit.
+            - stock_amt: decimal; monetary value of product inventory; [Amount field].
+            - intransit_amt: decimal; monetary value of product in transit; [Amount field].
+        4. chatbi_dim_store:店铺主档表，存储公司所有店铺的信息。
+            - country: String; 店铺所在国家.
+            - channel: String;店铺所属渠道:EC/FP/O&O.
+            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
+            - customer_name: String; 店铺所属经销商名.
+            - region: String; 店铺所在区域：north/south/east/west.
+            - province: String; 店铺所在省份，拼音存储.
+            - city: String; 店铺所在城市，拼音存储.
+            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
+            - store_type: String; 店铺类型： BH/FH.
+            - store_code: String; 店铺code.
+            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
+            - status: String; 店铺开关状态：open/closed.
+            - open_date:date；店铺开店时间。
+            - close_date:date；店铺关店时间。店铺关店时填入，开店状态时为null或者9999-12-31.
+            - cluster:String，店铺等级：AAA/A/B/C
+        5. dm_member_chatbi:会员用户表，存储会员的相关信息。
+            - birthday: String; format(YYYY-MM-DD); member's birthday date.
+            - country: String; 会员所属国家.
+            - register_date_str: date; user's membership registration date.
+            - member_code: String.会员号，是会员的唯一代码。
+            - gender: String; 性别：Male/Female.
+            - regist_channel:String.注册渠道,比如：2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail .
+            - regist_sub_channel:String.注册子渠道，比如：FP_ULEE/MA_TMALL/Wechat.
+        6. dm_member_sales_chatbi:会员交易信息表，存储会员交易信息。每条记录也有会员的基本信息，数据的粒度是按每笔交易存储的。
+            - birthday: String; format(YYYY-MM-DD); member's birthday date.
+            - register_date_str: date; user's membership registration date.
+            - country: String; 所属国家.
+            - member_code: String.会员号，是会员的唯一代码。
+            - gender: String; 性别：Male/Female.
+            - regist_channel:String.注册渠道,比如：2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail .
+            - regist_sub_channel:String.注册子渠道，比如：FP_ULEE/MA_TMALL/Wechat.
+            - transaction_date: date;交易日期.
+            - amt_total:decimal;订单金额，并非实际交易产生的金额。
+            - amt_real:decimal;实际支付金额，交易金额使用这个字段。
+            - qty_total:decimal；交易商品的数量。
+    """
     prompt = f"""
         #Role
 
@@ -125,13 +267,18 @@ def text2sql_prompt(query, knowledges, sql_examples):
 
         #Task
 
-        Based on the provided business knowledge and sample SQL, write the corresponding SQL query for the business problem.  
+        Based on the provided database schema information, business knowledge and example SQL, write the corresponding SQL query for the business problem.  
 
         #Workflow
-        1. Sample SQL: Understand the relationships between tables and fields, as well as data types.  
-        2. Understand business knowledge and problem: Parse the natural language description to determine query objectives, conditions, sorting, and grouping.  
-        3. Write SQL: Generate a syntactically correct query compliant with ANSI SQL standards.  
-        4. The Sample SQL may contain errors; therefore, the generated PostgreSQL must be checked. If any errors are found, please correct them to produce valid PostgreSQL code.
+        1. Example SQL: Understand the relationships between tables and fields, as well as data types.  
+        2. Database Schema: Understand the information of each table and its columns in the database, determine which tables and columns are needed to answer the user’s query, and do not use any tables that do not exist.
+        3. Understand business knowledge and problem: Parse the natural language description to determine query objectives, conditions, sorting, and grouping.  
+        4. Write SQL: Generate a syntactically correct query compliant with ANSI SQL standards.  
+        5. The Sample SQL may contain errors; therefore, the generated PostgreSQL must be checked. If any errors are found, please correct them to produce valid PostgreSQL code.
+
+        # Database Schema Information
+
+        {schema_info} 
 
         #Business Knowledge
 
@@ -156,6 +303,8 @@ def text2sql_prompt(query, knowledges, sql_examples):
         • Ensure string values in WHERE conditions are enclosed in single quotes.  
 
         • Avoid SELECT * unless explicitly requested.  
+
+        • Do not use any table or column elements that do not exist in the Example SQL or Database Schema.
 
         • Since the database only contains data from January 1, 2025, to March 1, 2025, statically set current_date to February 13, 2025 in the generated SQL.
             CURRENT_DATE = '2025-02-13'  
