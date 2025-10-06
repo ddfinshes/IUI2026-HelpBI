@@ -9,8 +9,8 @@ curl -s -X POST 'http://127.0.0.1:8000/api/query?query=what%20is%20the%20MTD%20s
 curl -s -X POST 'http://127.0.0.1:8000/api/query?query=WTD%/%MTD%/%QTD%/%YTD%sales%vs%Target?'
 
 curl -X POST "http://127.0.0.1:8000/api/helpbi" \
-  -H "Content-Type: application/json" \
-  --data-binary @payload.json
+-H "Content-Type: application/json" \
+--data-binary @payload.json
 
 # API接口
 主函数main.py中：

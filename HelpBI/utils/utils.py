@@ -8,6 +8,9 @@ import json
 import logging
 import pandas as pd
 import numpy as np
+from decimal import Decimal
+from datetime import datetime, date, time
+import math
 
 # 配置logger
 logger = logging.getLogger(__name__)
@@ -31,6 +34,39 @@ if backend_dir not in sys.path:
 from tools.my_model import ChatModel
 from tools.prompt import query_write_prompt, hightlight_extract, keywords_extract_prompt, text2sql_prompt, sql_parse_prompt, get_chart_prompt, rewrite_sql_prompt
 
+
+import psycopg2
+from psycopg2 import OperationalError
+import pandas as pd
+import logging
+import json
+from decimal import Decimal
+import numpy as np
+from datetime import date, datetime
+
+def _to_jsonable(obj):
+    """
+    将 PostgreSQL 返回的各种类型转换为 JSON 可序列化的类型
+    """
+    if isinstance(obj, Decimal):
+        return float(obj)
+    elif isinstance(obj, (date, datetime)):
+        return obj.isoformat()
+    elif isinstance(obj, float):
+        # 处理特殊浮点值
+        if np.isinf(obj):
+            return str(obj)  # 或者 return None
+        elif np.isnan(obj):
+            return None
+        return obj
+    elif isinstance(obj, (list, tuple)):
+        return [_to_jsonable(item) for item in obj]
+    elif isinstance(obj, dict):
+        return {k: _to_jsonable(v) for k, v in obj.items()}
+    elif obj is None:
+        return None
+    else:
+        return str(obj)
 
 def query_write(query):
     chat_model = ChatModel()
@@ -66,9 +102,73 @@ def keyword_extract(query):
         response = [str(response)]
     return response
 
+def convert_value(value):
+    """转换单个值为 JSON 兼容格式"""
+    if value is None:
+        return None
+    
+    try:
+        # 先尝试转换为float，处理Decimal和数字字符串
+        float_val = float(value)
+        
+        # 检查特殊浮点值
+        if np.isinf(float_val):
+            return None
+        if np.isnan(float_val):
+            return None
+        
+        # 如果是整数，返回整数类型
+        if float_val.is_integer():
+            return int(float_val)
+        return float_val
+    except (TypeError, ValueError):
+        # 如果不是数字类型，处理其他情况
+        if isinstance(value, (date, datetime)):
+            return value.isoformat()
+        return str(value)
+
+# def excute_sql(query):
+#     """
+#     执行sql代码并返回可转换为DataFrame的结果
+#     """
+#     try:
+#         conn = psycopg2.connect(database="postgres", user="postgres", 
+#                                password="123456", host="127.0.0.1", port="5432")
+#         cursor = conn.cursor()
+#         cursor.execute(query)
+
+#         # 获取列名
+#         column_names = [desc[0] for desc in cursor.description]
+
+#         # 获取数据并转换
+#         rows = cursor.fetchall()
+#         processed_rows = [_to_jsonable(r) for r in rows]
+        
+#         logging.info(f"执行sql得到{len(processed_rows)}条数据")
+        
+#         # 直接创建DataFrame，避免中间JSON转换
+#         df = pd.DataFrame(processed_rows, columns=column_names)
+        
+#         return df
+    
+#     except OperationalError as e:
+#         print(f"连接数据库失败: {e}")
+#         return None
+#     except Exception as e:
+#         if 'conn' in locals():
+#             conn.rollback()
+#         print(f"操作失败: {e}")
+#         return None
+#     finally:
+#         if 'cursor' in locals():
+#             cursor.close()
+#         if 'conn' in locals():
+#             conn.close()
+#         print("数据库连接已关闭。")
+
 def excute_sql(query):
     """
-    执行sql代码
+    执行 SQL 并返回列表格式的结果，第一行为列名，后续为数据行
     """
     try:
         conn = psycopg2.connect(database="mydb", user="postgres", password="123456", host="127.0.0.1", port="5432")
@@ -77,37 +177,28 @@ def excute_sql(query):
 
         # 获取列名
         column_names = [desc[0] for desc in cursor.description]
-
-        # 获取数据
+        
+        # 获取数据并转换
         rows = cursor.fetchall()
-        # print("数据库查询结果：")
-        # for row in rows:
-        #     print(row)
-        logging.info(f"执行sql得到{len(rows)}条数据")
-        result = {
-            "column": column_names,
-            "data": rows
-        }
-        return result
+        
+        # 构建结果列表
+        result = [column_names]  # 第一行是列名
+        
+        for row in rows:
+            # 转换每一行的值为 JSON 兼容格式
+            converted_row = [convert_value(value) for value in row]
+            result.append(converted_row)
+        
+        return {"data": result}
     
-    except OperationalError as e:
-        print(f"连接数据库失败: {e}")
     except Exception as e:
-        # 发生错误时回滚事务
-        if 'conn' in locals():
-            conn.rollback()
         print(f"操作失败: {e}")
-        result = e
-        return result
+        return {"error": str(e)}
     finally:
-        # 4. 关闭游标和连接
         if 'cursor' in locals():
             cursor.close()
         if 'conn' in locals():
             conn.close()
-        print("数据库连接已关闭。")
-
-
 
 def text2sql(query, knowledges, sql_examples):
     chat_model = ChatModel()
@@ -121,38 +212,38 @@ def text2sql(query, knowledges, sql_examples):
     sql = response["sql"]
     logger.info(f"文本转成的sql为: {sql}")
     excute_result = excute_sql(sql)
-    if not isinstance(excute_result, dict):
-        # 修复sql代码
-        sql_prompt = rewrite_sql_prompt(sql, excute_result)
-        sql = chat_model.chat_with_system(
-            system_prompt="You are a helpful assistant.",
-            user_message=sql_prompt
-        )
+    # if not isinstance(excute_result, dict):
+    #     # 修复sql代码
+    #     sql_prompt = rewrite_sql_prompt(sql, excute_result)
+    #     sql = chat_model.chat_with_system(
+    #         system_prompt="You are a helpful assistant.",
+    #         user_message=sql_prompt
+    #     )
 
-    # 统一将查询结果转换为 DataFrame: {"column": [...], "data": [...]} -> DataFrame
-    try:
-        if isinstance(excute_result, dict) and 'column' in excute_result and 'data' in excute_result:
-            df = pd.DataFrame(excute_result["data"], columns=excute_result["column"])  # 行/列对齐
-        elif isinstance(excute_result, (list, tuple)):
-            df = pd.DataFrame(excute_result)
-        else:
-            df = pd.DataFrame()
-    except Exception as e:
-        logger.error(f"结果转换为DataFrame失败: {e}，返回原始结果。")
-        df = excute_result
+    # # 统一将查询结果转换为 DataFrame: {"column": [...], "data": [...]} -> DataFrame
+    # try:
+    #     if isinstance(excute_result, dict) and 'column' in excute_result and 'data' in excute_result:
+    #         df = pd.DataFrame(excute_result["data"], columns=excute_result["column"])  # 行/列对齐
+    #     elif isinstance(excute_result, (list, tuple)):
+    #         df = pd.DataFrame(excute_result)
+    #     else:
+    #         df = pd.DataFrame()
+    # except Exception as e:
+    #     logger.error(f"结果转换为DataFrame失败: {e}，返回原始结果。")
+    #     df = excute_result
 
     # 记录行数（仅当为DataFrame时）
     try:
-        num_rows = len(df)
+        num_rows = len(excute_result)
     except Exception:
         num_rows = 0
     logger.info(f"sql的执行得到 {num_rows} 条数据")
 
     # 执行sql代码，如果报错重新执行
     # pass
-    response['excute_result'] = df
+    response['excute_result'] = excute_result
 
-    return response
+    return excute_result
 
 def json_format(response):
     # 去除markdown包裹
@@ -247,31 +338,22 @@ def sql_parse(query, knowledges, sql):
             except Exception as e:
                 logging.error(f"sql 解析出错，错误信息：{e}, 返回信息为{r}")
             excute_result = excute_sql(sql)
+            logging.info(f"执行step {k}得到：{excute_result}")
             # 统一结果为 DataFrame
-            try:
-                if isinstance(excute_result, dict) and 'column' in excute_result and 'data' in excute_result:
-                    df_result = pd.DataFrame(excute_result["data"], columns=excute_result["column"])  # 正确构造
-                elif isinstance(excute_result, (list, tuple)):
-                    df_result = pd.DataFrame(excute_result)
-                else:
-                    df_result = pd.DataFrame()
-                r['Table'] = df_result
-            except Exception as e:
-                logger.error(f"结果转换为DataFrame失败: {e}，返回原始结果。")
-                r['Table'] = excute_result
+            r['Table'] = excute_result
             
             # 可视化模式
             # 判断数据行数，超过15行则不进行可视化
-            try:
-                row_count = len(r['Table']) if isinstance(r['Table'], pd.DataFrame) else len(excute_result.get('data', []))
-            except Exception:
-                row_count = 0
-            if row_count > 15:
-                r['vis_data'] = ""
-            else:
-                vis_data = get_chart(query, r['Table'])
-                vis_data = json_format(vis_data)
-                r['vis_data'] = vis_data
+            # try:
+            #     row_count = len(r['Table']) if isinstance(r['Table'], pd.DataFrame) else len(excute_result.get('data', []))
+            # except Exception:
+            #     row_count = 0
+            # if row_count > 15:
+            #     r['vis_data'] = ""
+            # else:
+            #     vis_data = get_chart(query, r['Table'])
+            #     vis_data = json_format(vis_data)
+            #     r['vis_data'] = vis_data
             
             # 向量化 r['NL'] 与 kn_emds 计算相似度
             nl_text = str(r.get('NL', ''))
