@@ -122,143 +122,143 @@ def text2sql_prompt(query, knowledges, sql_examples):
     "dm_dim_holiday_chatbi", "dm_fact_onhand_chatbi", "dm_fact_sales_chatbi","dm_fact_sales_sku_chatbi","dm_member_chatbi", "dm_member_sales_chatbi", "edw_dim_calendar", "edw_dim_channel", "edw_dim_store", "edw_dim_store_prod"
     """
     schema_info = """
-        1. dm_fact_sales_chatbi:店铺的销售汇总表，按日期存储门店每日的销售汇总数据，以及门店每日的目标销售数据，同时包含上周同日/上月同日/上年同日的销售汇总数据。
+        1. dm_fact_sales_chatbi: Store sales summary table, stores daily sales summary data for each store by date, as well as daily target sales data for each store, and also includes sales summary data for the same day last week/last month/last year.
             - date_code: String; format(YYYY-MM-DD).
-            - week_id: String; format(YYYYWW); 是财年的周ID.
+            - week_id: String; format(YYYYWW); fiscal year week ID.
             - month_id: String; format(YYYYMM).
             - year_id: String; format(YYYY).
-            - store_code: String; 店铺code.
-            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
-            - customer_name: String; 店铺所属经销商名.
-            - country: String; 店铺所在国家.
-            - channel: String;店铺所属渠道:EC/FP/O&O.
-            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
-            - store_type: String; 店铺类型： BH/FH.
-            - region: String; 店铺所在区域：north/south/east/west.
-            - province: String; 店铺所在省份，拼音存储.
-            - city: String; 店铺所在城市，拼音存储.
-            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
-            - cluster:String，店铺等级：AAA/A/B/C
-            - comp_flag: String; Y/N；在计算COMP店铺的销售额或者指标时，需要限制comp_flag=Y。
+            - store_code: String; store code.
+            - store_name: String; store name. When querying by store name, use fuzzy search: store_name like '%?%'.
+            - customer_name: String; distributor name to which the store belongs.
+            - country: String; country where the store is located.
+            - channel: String; store channel: EC/FP/O&O.
+            - sub_channel: String; store sub-channel: EC/BH/FH/UA.com/others.
+            - store_type: String; store type: BH/FH.
+            - region: String; store region: north/south/east/west.
+            - province: String; province where the store is located, stored in pinyin.
+            - city: String; city where the store is located, stored in pinyin.
+            - area: decimal; store area, only physical retail stores have area data.
+            - cluster: String; store level: AAA/A/B/C.
+            - comp_flag: String; Y/N; when calculating COMP store sales or metrics, need to filter comp_flag=Y.
             - qty_return: decimal; number of returned items.
             - amt_return: decimal; amount of returned items; [Amount field].
-            - orig_price: decimal; 不考虑折扣的销售原价。 [Amount field].
-            - amt: decimal; datecode当天的销售额，是销售净额; [Amount field].
-            - lw_amt: decimal; 上周同日的销售额; [Amount field].
-            - lm_amt: decimal; 上月同日的销售额; [Amount field].
-            - lyd_amt: decimal; 上年同日的销售额; [Amount field].
-            - amt_target: decimal; datecode当天的目标销售金额; [Amount field].
-            - qty: decimal; datecode当天的销售数量.
-            - lw_qty: decimal;上周同日的销售数量.
-            - lm_qty: decimal;上月同日的销售数量.
-            - lyd_qty: decimal;上年同日的销售数量.
-            - qty_target:decimal;datecode当天的目标销售数量.
-            - trans: decimal;datecode当天的交易笔数.
-            - lw_trans: decimal;上周同日的交易笔数.
-            - lm_trans: decimal;上月同日的交易笔数.
-            - lyd_trans: decimal;上年同日的交易笔数.
-            - trans_target:decimal;datecode当天的目标交易笔数.
-            - traffic: decimal; datecode当天的客流traffic.
-            - lw_traffic: decimal;上周同日的traffic.
-            - lm_traffic: decimal;上月同日的traffic.
-            - lyd_traffic: decimal;上年同日的traffic.
-            - traffic_target:decimal;datecode当天的目标traffic.
-            - amt_target_f0: decimal;F0 target amount; [Amount field].
-            - amt_target_f1: decimal;F1 target amount; [Amount field].
-            - amt_target_f2: decimal;F2 target amount; [Amount field].
-            - amt_target_f3: decimal;F3 target amount; [Amount field].
-            - amt_target_f4: decimal;F4 target amount; [Amount field].
-        2. dm_fact_sales_sku_chatbi:店铺商品销售表，存储门店每日商品的销售数据。
+            - orig_price: decimal; original sales price without discount. [Amount field].
+            - amt: decimal; sales amount on date_code, net sales; [Amount field].
+            - lw_amt: decimal; sales amount on the same day last week; [Amount field].
+            - lm_amt: decimal; sales amount on the same day last month; [Amount field].
+            - lyd_amt: decimal; sales amount on the same day last year; [Amount field].
+            - amt_target: decimal; target sales amount on date_code; [Amount field].
+            - qty: decimal; sales quantity on date_code.
+            - lw_qty: decimal; sales quantity on the same day last week.
+            - lm_qty: decimal; sales quantity on the same day last month.
+            - lyd_qty: decimal; sales quantity on the same day last year.
+            - qty_target: decimal; target sales quantity on date_code.
+            - trans: decimal; number of transactions on date_code.
+            - lw_trans: decimal; number of transactions on the same day last week.
+            - lm_trans: decimal; number of transactions on the same day last month.
+            - lyd_trans: decimal; number of transactions on the same day last year.
+            - trans_target: decimal; target number of transactions on date_code.
+            - traffic: decimal; customer traffic on date_code.
+            - lw_traffic: decimal; customer traffic on the same day last week.
+            - lm_traffic: decimal; customer traffic on the same day last month.
+            - lyd_traffic: decimal; customer traffic on the same day last year.
+            - traffic_target: decimal; target customer traffic on date_code.
+            - amt_target_f0: decimal; F0 target amount; [Amount field].
+            - amt_target_f1: decimal; F1 target amount; [Amount field].
+            - amt_target_f2: decimal; F2 target amount; [Amount field].
+            - amt_target_f3: decimal; F3 target amount; [Amount field].
+            - amt_target_f4: decimal; F4 target amount; [Amount field].
+        2. dm_fact_sales_sku_chatbi: Store product sales table, stores daily product sales data for each store.
             - date_code: String; format(YYYY-MM-DD).
-            - week_id: String; format(YYYYWW); 是财年的周ID.
+            - week_id: String; format(YYYYWW); fiscal year week ID.
             - month_id: String; format(YYYYMM).
             - year_id: String; format(YYYY).
-            - store_code: String; 店铺code.
-            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
-            - customer_name: String; 店铺所属经销商名.
-            - country: String; 店铺所在国家.
-            - channel: String;店铺所属渠道:EC/FP/O&O.
-            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
-            - store_type: String; 店铺类型： BH/FH.
-            - region: String; 店铺所在区域：north/south/east/west.
-            - province: String; 店铺所在省份，拼音存储.
-            - city: String; 店铺所在城市，拼音存储.
-            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
-            - cluster:String，店铺等级：AAA/A/B/C
+            - store_code: String; store code.
+            - store_name: String; store name. When querying by store name, use fuzzy search: store_name like '%?%'.
+            - customer_name: String; distributor name to which the store belongs.
+            - country: String; country where the store is located.
+            - channel: String; store channel: EC/FP/O&O.
+            - sub_channel: String; store sub-channel: EC/BH/FH/UA.com/others.
+            - store_type: String; store type: BH/FH.
+            - region: String; store region: north/south/east/west.
+            - province: String; province where the store is located, stored in pinyin.
+            - city: String; city where the store is located, stored in pinyin.
+            - area: decimal; store area, only physical retail stores have area data.
+            - cluster: String; store level: AAA/A/B/C.
             - division: Division attribute of the product; e.g., Apparel/Accessories/Footwear.
-            - enduse: enduse of the product; e.g., Training/Golf/Running.
-            - silhouette: silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
-            - fit_type: fit type of the product; e.g., Loose/Regular/Fitted.
+            - enduse: End use of the product; e.g., Training/Golf/Running.
+            - silhouette: Silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
+            - fit_type: Fit type of the product; e.g., Loose/Regular/Fitted.
             - material: String; article of product; e.g., 1234567-123.
-            - SKU: String; product sku.
-            - product_name: String，商品名称，查询数据时，使用模糊查询方式。
-            - key_stories: Key category, key items of the product.查询数据时，使用模糊查询方式。
+            - SKU: String; product SKU.
+            - product_name: String; product name, use fuzzy search when querying.
+            - key_stories: Key category, key items of the product. Use fuzzy search when querying.
             - product_line: String; e.g., inline/MFO.
             - msrp: decimal; product label price.
             - qty: decimal; number of sales items.
             - amt: decimal; sales amount; [Amount field].
             - season_code: String; season of the product; e.g., SS24/FW24/SS25.
-        3. dm_fact_onhand_chatbi:门店库存表，存储零售门店每天的商品库存。一般只保存每周六的库存数据。
-            - store_code: String; 店铺code.
-            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
-            - customer_name: String; 店铺所属经销商名.
-            - country: String; 店铺所在国家.
-            - channel: String;店铺所属渠道:EC/FP/O&O.
-            - store_type: String; 店铺类型： BH/FH.
-            - region: String; 店铺所在区域：north/south/east/west.
-            - province: String; 店铺所在省份，拼音存储.
-            - city: String; 店铺所在城市，拼音存储.
-            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
-            - cluster:String，店铺等级：AAA/A/B/C
+        3. dm_fact_onhand_chatbi: Store inventory table, stores daily product inventory for retail stores. Usually only keeps inventory data for Saturdays.
+            - store_code: String; store code.
+            - store_name: String; store name. When querying by store name, use fuzzy search: store_name like '%?%'.
+            - customer_name: String; distributor name to which the store belongs.
+            - country: String; country where the store is located.
+            - channel: String; store channel: EC/FP/O&O.
+            - store_type: String; store type: BH/FH.
+            - region: String; store region: north/south/east/west.
+            - province: String; province where the store is located, stored in pinyin.
+            - city: String; city where the store is located, stored in pinyin.
+            - area: decimal; store area, only physical retail stores have area data.
+            - cluster: String; store level: AAA/A/B/C.
             - date_code: String; format(YYYY-MM-DD).
             - division: Division attribute of the product; e.g., Apparel/Accessories/Footwear.
-            - enduse: enduse of the product; e.g., Training/Golf/Running.
-            - silhouette: silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
-            - fit_type: fit type of the product; e.g., Loose/Regular/Fitted.
+            - enduse: End use of the product; e.g., Training/Golf/Running.
+            - silhouette: Silhouette of the product; e.g., Short Sleeve/Warmup Tops/Slides.
+            - fit_type: Fit type of the product; e.g., Loose/Regular/Fitted.
             - material: String; article of product; e.g., 1234567-123.
-            - product_name: String，商品名称，查询数据时，使用模糊查询方式。
+            - product_name: String; product name, use fuzzy search when querying.
             - key_stories: Key category, key items of the product.
             - product_line: String; e.g., inline/MFO.
             - stock: decimal; quantity of product inventory.
             - intransit: decimal; quantity of product in transit.
             - stock_amt: decimal; monetary value of product inventory; [Amount field].
             - intransit_amt: decimal; monetary value of product in transit; [Amount field].
-        4. chatbi_dim_store:店铺主档表，存储公司所有店铺的信息。
-            - country: String; 店铺所在国家.
-            - channel: String;店铺所属渠道:EC/FP/O&O.
-            - sub_channel: String;店铺所属子渠道：EC/BH/FH/UA.com/others.
-            - customer_name: String; 店铺所属经销商名.
-            - region: String; 店铺所在区域：north/south/east/west.
-            - province: String; 店铺所在省份，拼音存储.
-            - city: String; 店铺所在城市，拼音存储.
-            - area: decimal; 店铺面积，零售实体店铺有店铺面积的数据.
-            - store_type: String; 店铺类型： BH/FH.
-            - store_code: String; 店铺code.
-            - store_name: String; 店铺名称.用店铺名称查询数据时，使用模糊查询方式：store_name like '%?%'.
-            - status: String; 店铺开关状态：open/closed.
-            - open_date:date；店铺开店时间。
-            - close_date:date；店铺关店时间。店铺关店时填入，开店状态时为null或者9999-12-31.
-            - cluster:String，店铺等级：AAA/A/B/C
-        5. dm_member_chatbi:会员用户表，存储会员的相关信息。
+        4. chatbi_dim_store: Store master data table, stores information of all stores in the company.
+            - country: String; country where the store is located.
+            - channel: String; store channel: EC/FP/O&O.
+            - sub_channel: String; store sub-channel: EC/BH/FH/UA.com/others.
+            - customer_name: String; distributor name to which the store belongs.
+            - region: String; store region: north/south/east/west.
+            - province: String; province where the store is located, stored in pinyin.
+            - city: String; city where the store is located, stored in pinyin.
+            - area: decimal; store area, only physical retail stores have area data.
+            - store_type: String; store type: BH/FH.
+            - store_code: String; store code.
+            - store_name: String; store name. When querying by store name, use fuzzy search: store_name like '%?%'.
+            - status: String; store open/close status: open/closed.
+            - open_date: date; store opening date.
+            - close_date: date; store closing date. Fill in when the store is closed, for open stores it is null or 9999-12-31.
+            - cluster: String; store level: AAA/A/B/C.
+        5. dm_member_chatbi: Member user table, stores member-related information.
             - birthday: String; format(YYYY-MM-DD); member's birthday date.
-            - country: String; 会员所属国家.
+            - country: String; country to which the member belongs.
             - register_date_str: date; user's membership registration date.
-            - member_code: String.会员号，是会员的唯一代码。
-            - gender: String; 性别：Male/Female.
-            - regist_channel:String.注册渠道,比如：2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail .
-            - regist_sub_channel:String.注册子渠道，比如：FP_ULEE/MA_TMALL/Wechat.
-        6. dm_member_sales_chatbi:会员交易信息表，存储会员交易信息。每条记录也有会员的基本信息，数据的粒度是按每笔交易存储的。
+            - member_code: String; member number, the unique code of the member.
+            - gender: String; gender: Male/Female.
+            - regist_channel: String; registration channel, e.g., 2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail.
+            - regist_sub_channel: String; registration sub-channel, e.g., FP_ULEE/MA_TMALL/Wechat.
+        6. dm_member_sales_chatbi: Member transaction information table, stores member transaction information. Each record also contains basic member information, and the data granularity is stored by transaction.
             - birthday: String; format(YYYY-MM-DD); member's birthday date.
             - register_date_str: date; user's membership registration date.
-            - country: String; 所属国家.
-            - member_code: String.会员号，是会员的唯一代码。
-            - gender: String; 性别：Male/Female.
-            - regist_channel:String.注册渠道,比如：2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail .
-            - regist_sub_channel:String.注册子渠道，比如：FP_ULEE/MA_TMALL/Wechat.
-            - transaction_date: date;交易日期.
-            - amt_total:decimal;订单金额，并非实际交易产生的金额。
-            - amt_real:decimal;实际支付金额，交易金额使用这个字段。
-            - qty_total:decimal；交易商品的数量。
+            - country: String; country.
+            - member_code: String; member number, the unique code of the member.
+            - gender: String; gender: Male/Female.
+            - regist_channel: String; registration channel, e.g., 2-UA_CN/3-TMALL/7-DOUYIN/9-Campaign/8-WeChat/6-FP/4-WMS/5-JD/1-Retail.
+            - regist_sub_channel: String; registration sub-channel, e.g., FP_ULEE/MA_TMALL/Wechat.
+            - transaction_date: date; transaction date.
+            - amt_total: decimal; order amount, not the actual transaction amount.
+            - amt_real: decimal; actual payment amount, use this field for transaction amount.
+            - qty_total: decimal; quantity of goods in the transaction.
     """
     prompt = f"""
         #Role
@@ -355,7 +355,7 @@ def sql_parse_prompt(query, sql):
             * id: Unique identifier (format: type letter + number, e.g., s1, t1, etc. Do not use u, r, k, or a as type letters)
             * father_id: List of previous step IDs (empty list if none)
             * NL: Natural language explanation (detailed description of the operation's purpose and logic), explanations should related to the query and easy to understand.
-            * sql: Independently executable SQL fragment
+            * sql: Independently executable SQL fragment. Additionally, to mitigate the risk of excessive resource consumption and performance degradation, intermediate SQL statements shall incorporate a row limitation clause, such as LIMIT 100, at appropriate stages of query execution.
             * condition: The main column names affected by this step
             * type: Atomic operation type (strictly follow the classification standard)
 
