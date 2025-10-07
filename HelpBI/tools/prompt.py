@@ -309,14 +309,25 @@ def text2sql_prompt(query, knowledges, sql_examples):
         • Since the database only contains data from January 1, 2025, to March 1, 2025, statically set current_date to February 13, 2025 in the generated SQL.
             CURRENT_DATE = '2025-02-13'  
         
-        • Ensure the output is correct and executable PostgreSQL statements.
+        • Ensure the output is correct and executable PostgreSQL statements. The generated SQL should be checked for correct syntax, type casting, and time range. For example, ensure proper date type conversion such as:
+
+            ```sql
+            WHERE date_code::date BETWEEN (
+                SELECT DATE_TRUNC('week', current_date)::DATE
+                FROM current_date_override
+            ) AND (
+                SELECT current_date - INTERVAL '1 day'
+                FROM current_date_override
+            )
+            ```
+
         
         
     """
     prompt1 = """
         #Output Format
 
-        Output the SQL and some easy understanding explanations, comments, or Markdown formatting, but do not contain information about sql example.  
+        Output analyzed_query, SQL and some easy understanding explanations, comments, or Markdown formatting, but do not contain information about sql example.  
         Output format is Json:
         ```json
         {
@@ -331,9 +342,11 @@ def text2sql_prompt(query, knowledges, sql_examples):
     prompt2 = f"""
         #Start
 
-        Now, generate the SQL for the following problem:  
+        Now, generate the SQL and other information for the following problem:  
 
         User Query: {query}
+
+        Note: Strictly follow the Output Format requirements when generating the output.
     """
     return prompt+prompt1 + prompt2
 

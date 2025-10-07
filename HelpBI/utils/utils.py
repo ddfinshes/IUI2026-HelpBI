@@ -211,6 +211,7 @@ def text2sql(query, knowledges, sql_examples):
 
     sql = response["sql"]
     logger.info(f"文本转成的sql为: {sql}")
+    logger.info(f"text2sql返回的keys: {response.keys()}")
     excute_result = excute_sql(sql)
     # if not isinstance(excute_result, dict):
     #     # 修复sql代码
@@ -243,7 +244,7 @@ def text2sql(query, knowledges, sql_examples):
     # pass
     response['excute_result'] = excute_result
 
-    return excute_result
+    return response
 
 def json_format(response):
     # 去除markdown包裹
