@@ -375,7 +375,7 @@ def sql_parse(query, knowledges, sql):
             #  { "from": "step1", "to": "step2", "operation": { "type": "Filter", "condition": "province='四川省' AND year=2022" } },
             temp_edges = {
                 "edge_id": f"edge_s_{k}",
-                "from": r["father_id"],
+                "from": r["father_id"] if r.get("father_id") else "a1",
                 "to": r["id"],
             }
             edges.append(temp_edges)
