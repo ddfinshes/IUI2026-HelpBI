@@ -377,7 +377,7 @@ def sql_parse(query, knowledges, sql):
             # 处理边的关系
             #  { "from": "step1", "to": "step2", "operation": { "type": "Filter", "condition": "province='四川省' AND year=2022" } },
             if r.get("father_id"):
-                if type(r.get("father_id"), list):
+                if isinstance(r.get("father_id"), list):
                     f_ids = r.get("father_id")
                     for f_id in f_ids:
                         temp_edges = {
