@@ -227,7 +227,7 @@ async def helpbi(data: dict):
             },
         r_edges.append(edge_rewrite)
         edge_analyzed =  { 
-            "edge_id": f"edge_k_{i}",
+            "edge_id": f"edge_k{i}",
             "from": f"k{i}", 
             "to": "a1", 
             }

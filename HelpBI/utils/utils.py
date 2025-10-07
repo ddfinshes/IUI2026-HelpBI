@@ -1,3 +1,4 @@
+from msilib import type_localizable
 import sys
 import os
 import ast
@@ -329,10 +330,12 @@ def sql_parse(query, knowledges, sql):
     new_response = []
     edges = []
     k = 0
+
     for res in response:
         # 字典不进行遍历
         if isinstance(res, dict):
             res = [res]
+        father_edge_ids = []
         for r in res:
             try:
                 sql = r['sql']
@@ -362,23 +365,46 @@ def sql_parse(query, knowledges, sql):
             nl_vec = nl_vec[0] if len(nl_vec.shape) == 2 else nl_vec
             sims = cosine_similarity(kn_emds, nl_vec)
             sims_index = np.where(sims > 0.3)[0]
-            related_kn = [knowledges[i]['id'] for i in sims_index]
+            related_kn = ["edge_"+str(knowledges[i]['id']) for i in sims_index]
             # r['activate_edges'] = related_kn
             r['operation'] = {
                 "type": r["type"],
                 "condition": r["condition"],
-                "activate_edges": related_kn
+                "activate_edges": related_kn+father_edge_ids
             }
 
             new_response.append(r)
             # 处理边的关系
             #  { "from": "step1", "to": "step2", "operation": { "type": "Filter", "condition": "province='四川省' AND year=2022" } },
-            temp_edges = {
-                "edge_id": f"edge_s_{k}",
-                "from": r["father_id"] if r.get("father_id") else "a1",
-                "to": r["id"],
-            }
-            edges.append(temp_edges)
+            if r.get("father_id"):
+                if type(r.get("father_id"), list):
+                    f_ids = r.get("father_id")
+                    for f_id in f_ids:
+                        temp_edges = {
+                            "edge_id": f"edge_s_{k}",
+                            "from": f_id,
+                            "to": r["id"],
+                        }
+                        edges.append(temp_edges)
+                        father_edge_ids.append(temp_edges["edge_id"])
+                        k += 1
+                else:
+                    temp_edges = {
+                        "edge_id": f"edge_s_{k}",
+                        "from": r.get("father_id"),
+                        "to": r["id"],
+                        }
+                    edges.append(temp_edges)
+                    father_edge_ids.append(temp_edges["edge_id"])
+            else:
+                temp_edges = {
+                    "edge_id": f"edge_s_{k}",
+                    "from": "a1",
+                    "to": r["id"],
+                }
+                edges.append(temp_edges)
+                father_edge_ids.append(temp_edges["edge_id"])
+
             k += 1
 
     return new_response, edges
