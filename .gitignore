@@ -52,7 +52,6 @@ Thumbs.db
 logs/
 
 # Database
-*.db
 *.sqlite
 *.sqlite3
 
@@ -85,3 +84,4 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.temp
+
