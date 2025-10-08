@@ -1,0 +1,684 @@
+{
+  "nodes": [
+    {
+      "id": "u1",
+      "type": "Initial Query",
+      "NL": "Original User Query: Query 2022 Sichuan Province sales data, select store and sales fields, keep only records with sales greater than 500, convert sales to high/low sales categories, join with customer table, group by store to calculate average sales and order count, finally take top 5 stores and rank them.",
+      "operation": {
+        "type": "Input",
+        "condition": ["2022 Sichuan Province sales data"],
+        "activate_edges": []
+      },
+      "Table": {
+        "desc": "",
+        "data": []
+      }
+    },
+    {
+      "id": "r1",
+      "type": "Rewrite Query",
+      "NL": "Rewritten Query: Filter 2022 Sichuan Province records in sales_table, select store and sales, filter sales>500, convert to category labels, join with customer_orders table, aggregate by store, calculate average sales and order count, sort by average sales, take top 5 and rank.",
+      "operation": {
+        "type": "Rewrite",
+        "condition": [
+          "sales_table",
+          "customer_orders"
+        ],
+        "activate_edges": [
+          "1"
+        ]
+      },
+      "Table": {
+        "desc": "",
+        "data": []
+      }
+    },
+    {
+      "id": "a1",
+      "type": "Analysis Query",
+      "NL": "Analysis Rewrite: Filter 2022 Sichuan Province data in sales_table, select fields store, sales, filter sales>500, convert sales to category labels (high/low sales), join with customer_orders, group by store, calculate AVG(sales), COUNT(order_id), sort by AVG(sales), take top 5, use RANK() for ranking.",
+      "operation": {
+        "type": "Analysis",
+        "condition": ["sales_table","sales>500","AVG(sales)", "COUNT(order_id)"],
+        "activate_edges": [
+          "14"
+        ]
+      },
+      "Table": {
+        "desc": "",
+        "data": []
+      }
+    },
+    {
+      "id": "k1",
+      "type": "Keyword",
+      "NL": "Keyword: Time=2022",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Time=2022"],
+        "activate_edges": [
+          "3"
+        ]
+      },
+      "Table": {
+        "desc": "Filter year=2022",
+        "data": []
+      }
+    },
+    {
+      "id": "k2",
+      "type": "Keyword",
+      "NL": "Keyword: Province=Sichuan Province",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Province=Sichuan Province"],
+        "activate_edges": [
+          "4"
+        ]
+      },
+      "Table": {
+        "desc": "Filter province='Sichuan Province'",
+        "data": []
+      }
+    },
+    {
+      "id": "k3",
+      "type": "Keyword",
+      "NL": "Keyword: Store",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Store"],
+        "activate_edges": [
+          "5"
+        ]
+      },
+      "Table": {
+        "desc": "Select store for grouping",
+        "data": []
+      }
+    },
+    {
+      "id": "k4",
+      "type": "Keyword",
+      "NL": "Keyword: Sales",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Sales"],
+        "activate_edges": [
+          "6"
+        ]
+      },
+      "Table": {
+        "desc": "Select sales for aggregation calculation",
+        "data": []
+      }
+    },
+    {
+      "id": "k5",
+      "type": "Keyword",
+      "NL": "Keyword: >500",
+      "operation": {
+        "type": "Keyword",
+        "condition": [">500"],
+        "activate_edges": [
+          "7"
+        ]
+      },
+      "Table": {
+        "desc": "Filter sales > 500",
+        "data": []
+      }
+    },
+    {
+      "id": "k6",
+      "type": "Keyword",
+      "NL": "Keyword: High/Low Sales",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["High/Low Sales"],
+        "activate_edges": [
+          "8"
+        ]
+      },
+      "Table": {
+        "desc": "Convert CASE WHEN sales>1000 THEN 'High Sales' ELSE 'Low Sales'",
+        "data": []
+      }
+    },
+    {
+      "id": "k7",
+      "type": "Keyword",
+      "NL": "Keyword: Customer Table",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Customer Table"],
+        "activate_edges": [
+          "9"
+        ]
+      },
+      "Table": {
+        "desc": "Join customer_orders",
+        "data": []
+      }
+    },
+    {
+      "id": "k8",
+      "type": "Keyword",
+      "NL": "Keyword: Average Sales",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Average Sales"],
+        "activate_edges": [
+          "10"
+        ]
+      },
+      "Table": {
+        "desc": "Aggregate AVG(sales)",
+        "data": []
+      }
+    },
+    {
+      "id": "k9",
+      "type": "Keyword",
+      "NL": "Keyword: Order Count",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Order Count"],
+        "activate_edges": [
+          "11"
+        ]
+      },
+      "Table": {
+        "desc": "Aggregate COUNT(order_id)",
+        "data": []
+      }
+    },
+    {
+      "id": "k10",
+      "type": "Keyword",
+      "NL": "Keyword: Top 5",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Top 5"],
+        "activate_edges": [
+          "12"
+        ]
+      },
+      "Table": {
+        "desc": "Limit LIMIT 5",
+        "data": []
+      }
+    },
+    {
+      "id": "k11",
+      "type": "Keyword",
+      "NL": "Keyword: Ranking",
+      "operation": {
+        "type": "Keyword",
+        "condition": ["Ranking"],
+        "activate_edges": [
+          "13"
+        ]
+      },
+      "Table": {
+        "desc": "Window function RANK()",
+        "data": []
+      }
+    },
+    {
+      "id": "step1",
+      "type": "Filter",
+      "NL": "Filter: 2022 Sichuan Province data",
+      "operation": {
+        "type": "Filter",
+        "condition": [
+          "year",
+          "province"
+        ],
+        "activate_edges": [
+          "14"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT * FROM sales_table WHERE province='Sichuan Province' AND EXTRACT(YEAR FROM date)=2022;",
+        "data": [
+          [
+            "date",
+            "province",
+            "store",
+            "order_id",
+            "sales"
+          ],
+          [
+            "2022-01-01",
+            "Sichuan Province",
+            "Store A",
+            "o001",
+            1200
+          ],
+          [
+            "2022-01-01",
+            "Sichuan Province",
+            "Store B",
+            "o002",
+            600
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step2",
+      "type": "Select",
+      "NL": "Select fields: store, sales, order_id",
+      "operation": {
+        "type": "Select",
+        "condition": [
+          "store",
+          "sales",
+          "order_id"
+        ],
+        "activate_edges": [
+          "15"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT store, sales, order_id FROM filtered_sales;",
+        "data": [
+          [
+            "store",
+            "sales",
+            "order_id"
+          ],
+          [
+            "Store A",
+            1200,
+            "o001"
+          ],
+          [
+            "Store B",
+            600,
+            "o002"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step3",
+      "type": "Filter",
+      "NL": "Filter: sales > 500",
+      "operation": {
+        "type": "Filter",
+        "condition": [
+          "sales"
+        ],
+        "activate_edges": [
+          "16"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT * FROM selected_sales WHERE sales > 500;",
+        "data": [
+          [
+            "store",
+            "sales",
+            "order_id"
+          ],
+          [
+            "Store A",
+            1200,
+            "o001"
+          ],
+          [
+            "Store B",
+            600,
+            "o002"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step4",
+      "type": "Transform",
+      "NL": "Convert sales to categories: High/Low Sales",
+      "operation": {
+        "type": "Transform",
+        "condition": [
+          "sales"
+        ],
+        "activate_edges": [
+          "17"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT *, CASE WHEN sales>1000 THEN 'High Sales' ELSE 'Low Sales' END AS sales_level FROM filtered_sales;",
+        "data": [
+          [
+            "store",
+            "sales",
+            "order_id",
+            "sales_level"
+          ],
+          [
+            "Store A",
+            1200,
+            "o001",
+            "High Sales"
+          ],
+          [
+            "Store B",
+            600,
+            "o002",
+            "Low Sales"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step5",
+      "type": "Join",
+      "NL": "Join customer_orders table (by order_id)",
+      "operation": {
+        "type": "Join",
+        "condition": [
+          "order_id",
+          "customer_id"
+        ],
+        "activate_edges": [
+          "18"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT a.*, b.customer_id FROM transformed_sales a INNER JOIN customer_orders b ON a.order_id=b.order_id;",
+        "data": [
+          [
+            "store",
+            "sales",
+            "order_id",
+            "sales_level",
+            "customer_id"
+          ],
+          [
+            "Store A",
+            1200,
+            "o001",
+            "High Sales",
+            "c101"
+          ],
+          [
+            "Store B",
+            600,
+            "o002",
+            "Low Sales",
+            "c102"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step6",
+      "type": "Aggregate",
+      "NL": "Aggregate by store, sales_level: AVG(sales), COUNT(order_id)",
+      "operation": {
+        "type": "Aggregate",
+        "condition": [
+          "store",
+          "sales_level",
+          "sales",
+          "order_id"
+        ],
+        "activate_edges": [
+          "19"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT store, sales_level, AVG(sales) AS avg_sales, COUNT(order_id) AS order_count FROM joined_sales GROUP BY store, sales_level;",
+        "data": [
+          [
+            "store",
+            "sales_level",
+            "avg_sales",
+            "order_count"
+          ],
+          [
+            "Store A",
+            "High Sales",
+            1200,
+            1
+          ],
+          [
+            "Store B",
+            "Low Sales",
+            600,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step7",
+      "type": "Order/Limit",
+      "NL": "Sort by avg_sales in descending order",
+      "operation": {
+        "type": "Order/Limit",
+        "condition": [
+          "avg_sales"
+        ],
+        "activate_edges": [
+          "20"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT * FROM aggregated_sales ORDER BY avg_sales DESC;",
+        "data": [
+          [
+            "store",
+            "sales_level",
+            "avg_sales",
+            "order_count"
+          ],
+          [
+            "Store A",
+            "High Sales",
+            1200,
+            1
+          ],
+          [
+            "Store B",
+            "Low Sales",
+            600,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step8",
+      "type": "Order/Limit",
+      "NL": "Take top 5 stores",
+      "operation": {
+        "type": "Order/Limit",
+        "condition": [
+          "avg_sales"
+        ],
+        "activate_edges": [
+          "21"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT * FROM ordered_sales LIMIT 5;",
+        "data": [
+          [
+            "store",
+            "sales_level",
+            "avg_sales",
+            "order_count"
+          ],
+          [
+            "Store A",
+            "High Sales",
+            1200,
+            1
+          ],
+          [
+            "Store B",
+            "Low Sales",
+            600,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "step9",
+      "type": "Window",
+      "NL": "Window function: Rank by avg_sales",
+      "operation": {
+        "type": "Window",
+        "condition": [
+          "avg_sales"
+        ],
+        "activate_edges": [
+          "22"
+        ]
+      },
+      "Table": {
+        "desc": "SELECT *, RANK() OVER (ORDER BY avg_sales DESC) AS rank FROM limited_sales;",
+        "data": [
+          [
+            "store",
+            "sales_level",
+            "avg_sales",
+            "order_count",
+            "rank"
+          ],
+          [
+            "Store A",
+            "High Sales",
+            1200,
+            1,
+            1
+          ],
+          [
+            "Store B",
+            "Low Sales",
+            600,
+            1,
+            2
+          ]
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "1",
+      "from": "u1",
+      "to": "r1"
+    },
+    {
+      "edge_id": "2",
+      "from": "r1",
+      "to": "a1"
+    },
+    {
+      "edge_id": "3",
+      "from": "r1",
+      "to": "k1"
+    },
+    {
+      "edge_id": "4",
+      "from": "r1",
+      "to": "k2"
+    },
+    {
+      "edge_id": "5",
+      "from": "r1",
+      "to": "k3"
+    },
+    {
+      "edge_id": "6",
+      "from": "r1",
+      "to": "k4"
+    },
+    {
+      "edge_id": "7",
+      "from": "r1",
+      "to": "k5"
+    },
+    {
+      "edge_id": "8",
+      "from": "r1",
+      "to": "k6"
+    },
+    {
+      "edge_id": "9",
+      "from": "r1",
+      "to": "k7"
+    },
+    {
+      "edge_id": "10",
+      "from": "r1",
+      "to": "k8"
+    },
+    {
+      "edge_id": "11",
+      "from": "r1",
+      "to": "k9"
+    },
+    {
+      "edge_id": "12",
+      "from": "r1",
+      "to": "k10"
+    },
+    {
+      "edge_id": "13",
+      "from": "r1",
+      "to": "k11"
+    },
+    {
+      "edge_id": "14",
+      "from": "a1",
+      "to": "step1"
+    },
+    {
+      "edge_id": "15",
+      "from": "step1",
+      "to": "step2"
+    },
+    {
+      "edge_id": "16",
+      "from": "step2",
+      "to": "step3"
+    },
+    {
+      "edge_id": "17",
+      "from": "step3",
+      "to": "step4"
+    },
+    {
+      "edge_id": "18",
+      "from": "step4",
+      "to": "step5"
+    },
+    {
+      "edge_id": "19",
+      "from": "step5",
+      "to": "step6"
+    },
+    {
+      "edge_id": "20",
+      "from": "step6",
+      "to": "step7"
+    },
+    {
+      "edge_id": "21",
+      "from": "step7",
+      "to": "step8"
+    },
+    {
+      "edge_id": "22",
+      "from": "step8",
+      "to": "step9"
+    }
+  ]
+}

@@ -368,7 +368,7 @@ def sql_parse_prompt(query, sql):
             * id: Unique identifier (format: type letter + number, e.g., s1, t1, etc. Do not use u, r, k, or a as type letters)
             * father_id: List of previous step IDs (empty list if none)
             * NL: Natural language explanation (detailed description of the operation's purpose and logic), explanations should related to the query and easy to understand.
-            * sql: Independently executable SQL fragment. Additionally, to mitigate the risk of excessive resource consumption and performance degradation, intermediate SQL statements shall incorporate a row limitation clause, such as LIMIT 100, at appropriate stages of query execution.
+            * sql: Independently executable SQL fragment. Additionally, to mitigate the risk of excessive resource consumption and performance degradation, intermediate SQL statements shall incorporate a row limitation clause, such as LIMIT 30, at appropriate stages of query execution.
             * condition: The main column names affected by this step
             * type: Atomic operation type (strictly follow the classification standard)
 
